@@ -1,0 +1,223 @@
+.level-right {
+    width: 400px;
+    height: 58px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.level-right img {
+    width: 450px;
+    height: 66px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.level-right h2 {
+    font-family: Roboto;
+    font-size: 30px;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(rgb(255, 255, 255) 18.57%, rgb(255, 201, 97) 54.51%, rgb(255, 153, 0) 87.14%) text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+
+.level-right span {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-weight: 500;
+    font-family: Roboto;
+    position: relative;
+    z-index: 1;
+}
+
+.has-drop {
+    font-size: 22px !important;
+    font-weight: 600;
+    line-height: 42px;
+    color: #fff;
+    position: absolute;
+    bottom: 165px;
+    left: 95px;
+    z-index: 100;
+    text-shadow: 0px 5.12464px 0px rgba(0, 0, 0, 0.25);
+}
+
+.dropped-text-dd.drop-text-1 {
+    top: 150px !important;
+    right: 135px !important;
+    left: inherit;
+}
+
+.dropped-text-dd.drop-text-2 {
+    top: 260px !important;
+    right: 135px !important;
+    left: inherit;
+}
+
+.dropped-text-dd.drop-text-3 {
+    right: 134px !important;
+    top: 369px !important;
+    left: inherit;
+}
+
+.dropped-text-dd.drop-text-4 {
+    right: 134px !important;
+    top: 478px !important;
+    left: inherit;
+}
+
+.dropped-text-dd.drop-text-5 {
+    right: 134px !important;
+    top: 587px !important;
+    left: inherit;
+}
+
+.dropped-text-dd.drop-text-6 {
+    right: 134px !important;
+    top: 696px !important;
+    left: inherit;
+}
+
+.vd_dd {
+    top: -331px !important;
+}
+
+.deal-custom-username {
+    left: 19px !important;
+    top: inherit !important;
+    bottom: 258px !important;
+}
+
+
+.ddright-txt.drop-text-1 {
+    top: 148px !important;
+}
+
+.ddright-txt.drop-text-2 {
+    top: 258px !important;
+}
+
+.ddright-txt.drop-text-3 {
+    top: 366px !important;
+}
+
+.ddright-txt.drop-text-4 {
+    top: 478px !important;
+}
+
+.ddright-txt.drop-text-5 {
+    top: 588px !important;
+}
+
+.ddright-txt.drop-text-6 {
+    top: 696px !important;
+}
+
+.tracking-in-contract-chips-deal {
+    margin-left: 0;
+    left: -15px !important;
+    bottom: -6px !important;
+}
+
+.dealbg-res {
+    display: none;
+}
+
+.has-drop-dd {
+    left: 50px !important;
+    bottom: 245px !important;
+    font-weight: 400 !important;
+    font-size: 36px !important;
+}
+
+
+@media only screen and (max-width: 960px) {
+
+    .level-right,
+    .rightsection-deal,
+    .deck-holder-deal,
+    .logodiv,
+    .perfect_sort_cards,
+    .pstext,
+    .best-points-deal,
+    .perfect_sort_list {
+        display: none;
+    }
+
+    .slide-in-left-deal-bg-img-deal {
+        width: 100% !important;
+    }
+
+    .tracking-in-contract-chips-deal {
+        font-size: 32px;
+        left: 110px !important;
+        bottom: 52px !important;
+    }
+
+    .deal-custom-username {
+        left: 82px !important;
+        bottom: 164px !important;
+        font-size: 24px;
+    }
+
+    .slide-in-left-deal-bg-img-deal {
+        display: none;
+    }
+
+    .dealbg-res {
+        width: 100%;
+        max-width: 800px;
+        display: block;
+    }
+
+    .bgdivdealdeal {
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .usercardsdiv {
+        bottom: 73px !important;
+        left: 232px;
+        width: auto !important;
+    }
+
+    .usercarddeal {
+        width: 58px;
+        height: 84px;
+    }
+
+    .dropped-cards-div .usercarddeal {
+        width: 50px;
+        height: 72px;
+        top: -12px;
+    }
+
+    .has-drop-dd {
+        left: 105px !important;
+        bottom: 165px !important;
+        font-weight: 400 !important;
+        font-size: 24px !important;
+    }
+
+    .hd-dd {
+        left: 95px !important;
+        bottom: 125px !important;
+        font-weight: 400 !important;
+        font-size: 22px !important;
+    }
+
+    .vd_dd {
+        top: -245px !important;
+        left: 71px;
+    }
+
+}

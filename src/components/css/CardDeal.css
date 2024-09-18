@@ -1,0 +1,1010 @@
+.dealcounttop {
+    color: #FFDC00;
+}
+
+.dealcountimg {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 85px;
+    width: 300px;
+    display: none;
+}
+
+.dealcount {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 36px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    z-index: 100;
+    text-shadow: 1.91913px 2.6292px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (min-width: 1920px) {
+    .dealcountimg {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 110px;
+        width: 300px;
+    }
+
+    .dealcount {
+        position: absolute;
+        top: 2.5%;
+        left: 50.2%;
+    }
+}
+
+
+
+.carddealbgblack {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+    position: absolute;
+    width: 850px;
+    height: 1080px;
+    left: calc(50% - 850px/2);
+    top: 0px;
+    mix-blend-mode: multiply;
+    opacity: 0.81 !important;
+}
+
+.carddealbgimgdeal {
+    width: 300px;
+    height: auto !important;
+    position: relative;
+    top: 0;
+}
+
+.cduser {
+    position: absolute;
+    left: -15%;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 115px;
+    height: 100px;
+    top: -25%;
+}
+
+.cdusername {
+    position: absolute;
+    left: 22%;
+    top: 34%;
+    z-index: 10000;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 36px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    text-shadow: 1.91913px 2.6292px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cdchips {
+    position: absolute;
+    left: 21%;
+    z-index: 10000;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    top: 85%;
+    color: #FFFFFF;
+    text-shadow: 0px 2.24503px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.cdchip {
+    filter: drop-shadow(0px 2.21423px 0px rgba(0, 0, 0, 0.3));
+    width: 27.68px;
+    height: 27.68px;
+}
+
+.cardan {
+    position: absolute;
+    left: 28%;
+    z-index: 1000;
+}
+
+@media only screen and (min-width: 1920px) {
+    .carddealbgblack {
+        width: 1200px !important;
+        height: 1080px;
+        left: 20% !important;
+        top: 0px;
+    }
+
+    .carddealbgimgdeal {
+        width: 423px !important;
+        height: 89px !important;
+        margin-left: 0;
+        position: absolute;
+        z-index: 1;
+
+    }
+
+    .cduser {
+        left: -33px;
+        width: 140px;
+        height: 125px;
+        top: -36px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    /* .cardan1 {
+        top: 11% !important;
+    }
+
+    .cardan2 {
+        top: 25% !important;
+    }
+
+    .cardan3 {
+        top: 39% !important;
+    }
+
+    .cardan4 {
+        top: 53% !important;
+    }
+
+    .cardan5 {
+        top: 67% !important;
+    }
+
+    .cardan6 {
+        top: 81% !important;
+    } */
+
+    .cdusername {
+        left: 106px;
+        top: 0;
+        font-weight: 600;
+        font-size: 31px;
+        line-height: normal;
+        position: relative;
+    }
+
+    .cdchips {
+        left: 100px;
+        margin-top: 4px;
+        font-weight: 700;
+        font-size: 29.11px;
+        line-height: normal;
+        top: 0;
+        position: relative;
+        display: block;
+    }
+
+    .cdchip {
+        width: 37px;
+        height: 37px;
+    }
+
+    .cardan {
+        position: absolute;
+        left: 397px;
+        background: transparent;
+        width: 1132px;
+    }
+
+    /* Card 1 */
+
+    /* .cdcard1 {
+        width: 75.66px;
+        height: 125.01px;
+        top: -22%;
+        margin-left: -22.5%;
+    } */
+
+    /* .cdcard11 {
+        left:65%;
+    }
+    
+    .cdcard12 {
+        left: 78%;
+    }
+    
+    .cdcard13 {
+        left: 91%;
+    }
+    
+    .cdcard14 {
+        left: 104%;
+    }
+    
+    .cdcard15 {
+        left: 117%;
+    }
+    
+    .cdcard16 {
+        left: 130%;
+    }
+    
+    .cdcard17 {
+        left: 143%;
+    }
+    
+    .cdcard18 {
+        left: 156%;
+    }
+    
+    .cdcard19 {
+        left: 169%;
+    }
+    
+    .cdcard110 {
+        left: 182%;
+    }
+    
+    .cdcard111 {
+        left: 195%;
+    }
+    
+    .cdcard112 {
+        left: 208%;
+    }
+    
+    .cdcard113 {
+        left: 221%;
+    } */
+
+
+
+    /* Card 2 */
+    /*.cdcard2 {
+    width: 75.66px;
+    height: 125.01px;
+    top: -15%;
+    margin-left: -22.5%;
+
+}
+
+    .cdcard21 {
+        left:65%;
+    }
+    
+    .cdcard22 {
+        left: 78%;
+    }
+    
+    .cdcard23 {
+        left: 91%;
+    }
+    
+    .cdcard24 {
+        left: 104%;
+    }
+    
+    .cdcard25 {
+        left: 117%;
+    }
+    
+    .cdcard26 {
+        left: 130%;
+    }
+    
+    .cdcard27 {
+        left: 143%;
+    }
+    
+    .cdcard28 {
+        left: 156%;
+    }
+    
+    .cdcard29 {
+        left: 169%;
+    }
+    
+    .cdcard210 {
+        left: 182%;
+    }
+    
+    .cdcard211 {
+        left: 195%;
+    }
+    
+    .cdcard212 {
+        left: 208%;
+    }
+    
+    .cdcard213 {
+        left: 221%;
+    }*/
+
+    /* Card 3 */
+
+    /*.cdcard3 {
+    width: 75.66px;
+    height: 125.01px;
+    top: -7.5%;
+    margin-left: -22.5%;
+
+}
+
+.cdcard31 {
+    left:65%;
+}
+
+.cdcard32 {
+    left: 78%;
+}
+
+.cdcard33 {
+    left: 91%;
+}
+
+.cdcard34 {
+    left: 104%;
+}
+
+.cdcard35 {
+    left: 117%;
+}
+
+.cdcard36 {
+    left: 130%;
+}
+
+.cdcard37 {
+    left: 143%;
+}
+
+.cdcard38 {
+    left: 156%;
+}
+
+.cdcard39 {
+    left: 169%;
+}
+
+.cdcard310 {
+    left: 182%;
+}
+
+.cdcard311 {
+    left: 195%;
+}
+
+.cdcard312 {
+    left: 208%;
+}
+
+.cdcard313 {
+    left: 221%;
+}*/
+
+    /* card 4 */
+    /*.cdcard4 {
+    width: 75.66px;
+    height: 125.01px;
+    top: 0%;
+    margin-left: -22.5%;
+
+}
+
+.cdcard41 {
+    left:65%;
+}
+
+.cdcard42 {
+    left: 78%;
+}
+
+.cdcard43 {
+    left: 91%;
+}
+
+.cdcard44 {
+    left: 104%;
+}
+
+.cdcard45 {
+    left: 117%;
+}
+
+.cdcard46 {
+    left: 130%;
+}
+
+.cdcard47 {
+    left: 143%;
+}
+
+.cdcard48 {
+    left: 156%;
+}
+
+.cdcard49 {
+    left: 169%;
+}
+
+.cdcard410 {
+    left: 182%;
+}
+
+.cdcard411 {
+    left: 195%;
+}
+
+.cdcard412 {
+    left: 208%;
+}
+
+.cdcard413 {
+    left: 221%;
+}
+*/
+    /* card 5 */
+
+    /*.cdcard5 {
+    width: 75.66px;
+    height: 125.01px;
+    top: 7.5%;
+    margin-left: -22.5%;
+
+}
+
+.cdcard51 {
+    left:65%;
+}
+
+.cdcard52 {
+    left: 78%;
+}
+
+.cdcard53 {
+    left: 91%;
+}
+
+.cdcard54 {
+    left: 104%;
+}
+
+.cdcard55 {
+    left: 117%;
+}
+
+.cdcard56 {
+    left: 130%;
+}
+
+.cdcard57 {
+    left: 143%;
+}
+
+.cdcard58 {
+    left: 156%;
+}
+
+.cdcard59 {
+    left: 169%;
+}
+
+.cdcard510 {
+    left: 182%;
+}
+
+.cdcard511 {
+    left: 195%;
+}
+
+.cdcard512 {
+    left: 208%;
+}
+
+.cdcard513 {
+    left: 221%;
+}
+*/
+    /* card 6 */
+    /*.cdcard6 {
+    width: 75.66px;
+    height: 125.01px;
+    top: 15%;
+    margin-left: -22.5%;
+
+}
+
+.cdcard61 {
+    left:65%;
+}
+
+.cdcard62 {
+    left: 78%;
+}
+
+.cdcard63 {
+    left: 91%;
+}
+
+.cdcard64 {
+    left: 104%;
+}
+
+.cdcard65 {
+    left: 117%;
+}
+
+.cdcard66 {
+    left: 130%;
+}
+
+.cdcard67 {
+    left: 143%;
+}
+
+.cdcard68 {
+    left: 156%;
+}
+
+.cdcard69 {
+    left: 169%;
+}
+
+.cdcard610 {
+    left: 182%;
+}
+
+.cdcard611 {
+    left: 195%;
+}
+
+.cdcard612 {
+    left: 208%;
+}
+
+.cdcard613 {
+    left: 221%;
+}
+*/
+}
+
+
+
+
+
+.cardan1 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.5s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.5s both;
+    top: 95px;
+}
+
+.cardan2 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.6s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.6s both;
+    top: 249px;
+}
+
+.cardan3 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.7s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.7s both;
+    top: 402px;
+}
+
+.cardan4 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.8s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.8s both;
+    top: 555px;
+}
+
+.cardan5 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.9s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.9s both;
+    top: 707px;
+}
+
+.cardan6 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 1s both;
+    animation: flip-in-hor-top 0.5s ease-in 1s both;
+    top: 860px;
+}
+
+@-webkit-keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+
+.allcards {
+    position: absolute;
+    right: 11px;
+    top: -17px;
+    z-index: 2;
+    /* background: #ff4343; */
+    z-index: 1000;
+    width: 746px;
+    height: 125px;
+    /* display: flex;*/
+}
+
+.userdetail {
+    background: transparent;
+    width: 423px;
+    height: 89px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+}
+
+/*.allcards img {
+    animation: flipdiv 1s;
+    
+} 
+
+.flipdiv {
+    animation: flipdiv 1s;
+}*/
+
+.flipdiv {
+    animation: flipdiv 0.4s 0.2s;
+    transform: rotateY(0deg);
+    position: absolute;
+    width: 58px;
+    left: 0;
+    top: 0;
+}
+
+.flipdiv::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg);
+
+    top: 0;
+    left: 0;
+}
+
+.flipdiv .resultcard {
+    transform: rotateY(180deg);
+    opacity: 1;
+    transition: 0.5s;
+    width: 58px;
+    z-index: 2;
+}
+
+.flipdiv img {
+    width: 58px;
+    height: 93px;
+    position: absolute;
+    left: 0;
+    transform-style: preserve-3d;
+    transition: all 1s;
+}
+
+.back-card {
+    width: 58px;
+    height: 93px;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+@keyframes flipdiv {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateY(45deg);
+    }
+
+    50% {
+        transform: rotateY(90deg);
+    }
+
+    75% {
+        transform: rotateY(135deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.allcardsback {
+    position: absolute;
+    left: 180px;
+    top: 5px;
+    z-index: 1;
+}
+
+.allcardsback .cb1 {
+    position: absolute;
+    width: 58px;
+    height: auto;
+    top: 0%;
+}
+
+
+.flipcardinner,
+.flipcardfront,
+.flipcardback {
+    width: 58px;
+    height: 93px;
+}
+
+.flipcardfront,
+.flipcardback {
+    backface-visibility: hidden;
+}
+
+.flipcardback {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.flip-card-back img {
+    width: 75px;
+    height: 125px;
+    position: relative;
+}
+
+.flip-card-inner,
+.winflip {
+    width: 75px;
+    height: 125px;
+    position: relative;
+}
+
+.cardline1 {
+    position: absolute;
+    width: 746px;
+    height: 125px;
+    left: 89px;
+    top: 0;
+    display: flex;
+}
+
+.cardline1 img {
+    width: 75px;
+    height: 125px;
+    position: relative;
+}
+
+.cardline1 .cl1 {}
+
+.cardline1 .cl2 {
+    left: -18px;
+}
+
+.cardline1 .cl3 {
+    left: -36px;
+}
+
+.cardline1 .cl4 {
+    left: -54px;
+}
+
+.cardline1 .cl5 {
+    left: -72px;
+}
+
+.cardline1 .cl6 {
+    left: -90px;
+}
+
+.cardline1 .cl7 {
+    left: -108px;
+}
+
+.cardline1 .cl8 {
+    left: -126px;
+}
+
+.cardline1 .cl9 {
+    left: -144px;
+}
+
+.cardline1 .cl10 {
+    left: -162px;
+}
+
+.cardline1 .cl11 {
+    left: -180px;
+}
+
+.cardline1 .cl12 {
+    left: -198px;
+}
+
+.cardline1 .cl13 {
+    left: -216px;
+}
+
+.flip-card-inner {
+    width: 75px !important;
+    height: 125px !important;
+}
+
+.dcard {
+    position: absolute;
+    width: 746px;
+    height: 125px;
+    left: 89px;
+    top: 0;
+    display: flex;
+}
+
+.dcard .flip-card-inner {
+    position: absolute;
+    left: 0;
+}
+
+.dcard .flip-card-inner:nth-child(2) {
+    left: 59px;
+}
+
+.dcard .flip-card-inner:nth-child(3) {
+    left: 116px;
+}
+
+.dcard .flip-card-inner:nth-child(4) {
+    left: 173px;
+}
+
+.dcard .flip-card-inner:nth-child(5) {
+    left: 229px;
+}
+
+.dcard .flip-card-inner:nth-child(6) {
+    left: 287px;
+}
+
+.dcard .flip-card-inner:nth-child(7) {
+    left: 343px;
+}
+
+.dcard .flip-card-inner:nth-child(8) {
+    left: 400px;
+}
+
+.dcard .flip-card-inner:nth-child(9) {
+    left: 458px;
+}
+
+.dcard .flip-card-inner:nth-child(10) {
+    left: 515px;
+}
+
+.dcard .flip-card-inner:nth-child(11) {
+    left: 572px;
+}
+
+.dcard .flip-card-inner:nth-child(12) {
+    left: 628px;
+}
+
+.dcard .flip-card-inner:nth-child(13) {
+    left: 681px;
+}
+
+.flip-card-front img {
+    width: 75px;
+    height: 125px;
+}
+
+.flipnew {
+    animation: rotatevert 1s cubic-bezier(0.455, 0.455, 0.455, 0.455) both;
+}
+
+@keyframes rotatevert {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    25% {
+        transform: rotateY(45deg);
+    }
+
+    50% {
+        transform: rotateY(90deg);
+    }
+
+    75% {
+        transform: rotateY(135deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.levelintrobg {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: 440px;
+    bottom: 0;
+    right: 0;
+}
+
+.levelintro-top {
+position: absolute;
+    left: 50px;
+    right: 0;
+    top: 450px;
+    color: #FFFFFF;
+    font-size: 66px;
+    text-align: center;
+}
+
+.levelintro-top span:first-child {
+position: relative;
+left: -90px;
+}
+
+.levelintro-top span:last-child {
+    position: relative;
+    left: 00px;
+}
+
+.levelintro-bottom {
+position: absolute;
+    left: 0;
+    right: 0;
+    top: 540px;
+    font-size: 33px;
+    color: #FFFFFF;
+    font-size: 66px;
+    text-align: center;
+}
+
+.levelintro-bottom span {
+font-size: 33px;
+position: relative;
+left: -30px;
+}
+
+.eliminated-drop-cd.res-drop-text-1,
+.eliminated-drop-cd.res-drop-text-2,
+.eliminated-drop-cd.res-drop-text-3,
+.eliminated-drop-cd.res-drop-text-4,
+.eliminated-drop-cd.res-drop-text-5,
+.eliminated-drop-cd.res-drop-text-6
+{
+    width: 756px !important;
+    left: 186px !important;
+    top: -16px !important;
+}

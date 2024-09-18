@@ -1,0 +1,111 @@
+.sb_level3 .sb_level3_head {
+    min-width: 410px;
+}
+
+.sb_level3.level1bg {
+    width: 414px;
+}
+
+.sb_level3.level2bg {
+width: 414px;
+left: 1030px;
+}
+
+.sb_level3.level3bg {
+    width: 414px !important;
+    left: 1454px !important;
+}
+
+.sb_level3 .sbpointbg {
+    height: 77px;
+    margin: 0 0 44px 0;
+    width: 100%;
+}
+
+.sb_level3 .l1-top-head-1 {
+    left: 138px !important;
+    width: 100%;
+}
+
+.sb_level3 .l1-top-head-2 {
+    left: 243px !important;
+    width: 100%;
+}
+
+.sb_level3 .l1-top-head-3 {
+    left: 348px !important;
+    width: 100%;
+}
+
+.sb_level3 .total-points-column9 {
+    margin-left: 229px;
+}
+
+.sb_level3 .total-points-column4 {
+    margin-left: -160px;
+}
+
+.sb_level3 .total-points-column6 {
+    margin-left: 215px;
+}
+
+.d4-l3 {
+    position: relative;
+    left: -9px;
+}
+
+.d6-l3 {
+    position: relative;
+    left: 8px;
+}
+
+.d9-l3 {
+    position: relative;
+    left: 14px;
+}
+
+.l3-elemination .level2-sb-1 {
+    width: 411px;
+    left: 780px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -69px;
+}
+
+.l3-elemination .level2-sb-1 img {
+    position: unset;
+}
+
+.l3-elemination .level2-sb-black {
+    width: 411px;
+    left: 1204px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -69px;
+    background-color: black;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    color: #EA5400 !important;
+    position: absolute;
+    z-index: 10001;
+}
+
+.l3-elemination .level2-sb-2 {
+    width: 411px;
+    left: 1204px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -69px;
+}
+
+.l3-elemination .level2-sb-2 img {
+    position: unset;
+}

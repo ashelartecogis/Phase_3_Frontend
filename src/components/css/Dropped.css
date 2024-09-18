@@ -1,0 +1,397 @@
+.drop-user-img {
+  -webkit-animation: slide-in-bottom-deal-userimg 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.6s both;
+  animation: slide-in-bottom-deal-userimg 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.6s both;
+  position: absolute !important;
+  left: 6% !important;
+  bottom: 15.5% !important;
+  z-index: 0 !important;
+}
+
+.rpbg-drop {
+  width: 240px !important;
+  height: 60px !important;
+}
+
+
+
+.usercardsdiv-dropped {
+  opacity: 1;
+  /* left: 5%; */
+}
+
+/* .user-deal{
+    position: absolute !important;
+    right: -37% !important;
+    top: -50% !important;
+  } */
+
+
+
+/* .bbg-deal{
+    -webkit-animation: fade-in 0.1s ease-in 4.9s both;
+    animation: fade-in 0.1s ease-in 4.9s both;
+    position: absolute;
+    top: 56%;
+    right: -20%;
+    height: 27px;
+  } */
+
+.drop-deal-slide {
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both, fade-in 1s ease-in 1s both;
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s both, fade-in 1s ease-in 1s both;
+  margin-top: 30% !important;
+}
+
+/* .slide-in-bottom-first-deal {
+    
+      -webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
+      animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.4s both;
+      position: absolute;
+      width: 390px;
+    height: 180px;
+    left: -10%;
+    bottom: 0px;
+    z-index: 0 !important;
+    }
+    
+    .slide-in-bottom-second-deal {
+      -webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+      animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+      position: absolute;
+    height: 160px;
+    width: 240px;
+    left: 0%;
+    bottom: 0px;
+    z-index: 10;
+    }
+    
+    .slide-in-bottom-third-deal {
+      -webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.7s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;
+      animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.7s both, fade-in 0.1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.6s both;
+      position: absolute;
+    width: 130px;
+    left: 8.7%;
+    bottom: -2px;
+    z-index: 10;
+    } */
+
+/* .dealdiv {
+      position: absolute !important;
+      left: 3.5% !important;
+      bottom: 3.3% !important;
+    } */
+
+/* .rotate-vert-center-deal-new {
+      -webkit-animation: fade-in 0.3s ease-in 0.8s both, rotate-vert-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.8s both;
+      animation: fade-in 0.3s ease-in 0.8s both, rotate-vert-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.8s both;
+      height: 110px !important;
+      opacity: 2;
+      z-index: 100 !important;
+    } */
+
+/* .tracking-in-contract-chips-deal {
+      -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      font-family: 'roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 32px;
+        line-height: 70px;
+        display: inline-block;
+        white-space: nowrap;
+        margin-left: -5%;
+        text-align: center;
+        letter-spacing: 0.02em;
+      
+        color: #FFFFFF;
+        z-index: 1000 !important;
+        text-shadow: 0px 5.12464px 0px rgba(0, 0, 0, 0.25);
+        position: absolute !important;
+      left: 36% !important;
+      bottom: 8% !important;
+        
+    } */
+
+/* .tracking-in-contract-username{
+      -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      font-family: 'roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 20px;
+        line-height: 70px;
+        display: inline-block;
+        white-space: nowrap;
+        margin-left: -5%;
+        text-align: center;
+        letter-spacing: 0.02em;
+      
+        color: #FFFFFF;
+        z-index: 1000 !important;
+        text-shadow: 0px 5.12464px 0px rgba(0, 0, 0, 0.25);
+        position: absolute !important;
+      left: 36% !important;
+      bottom: 44.5% !important;
+    } */
+
+@-webkit-keyframes slide-in-bottom-deal-userimg {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  80% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom-deal-userimg {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  80% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* .tracking-in-contract-chips-deal-pts{
+      font-family: 'roboto';
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 500;
+    } */
+
+/* .bgdivdeal {
+      position: absolute !important;
+      width: 200px !important;
+        height: 70px !important;
+      left: 15.4% !important;
+      bottom: 4% !important;
+      z-index: 100 !important;
+    } */
+
+
+
+/* .slide-in-left-deal-bg-img-deal {
+      -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both, fade-in 0.9s ease-in 1.2s both;
+      animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both, fade-in 0.9s ease-in 1.2s both;
+      width: 90% !important;
+      height: 92px !important;
+    } */
+
+
+
+@-webkit-keyframes slide-in-left-deal-bg-text-deal {
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-left-deal-bg-text-deal {
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* .usercard{
+      position: absolute;
+      left: 10%;
+      bottom: 32%;
+      height: 55px;
+    } */
+.usercarddrop1 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.6s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.6s both;
+}
+
+.usercarddrop2 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.7s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.7s both;
+  left: -0%;
+  z-index: 1;
+}
+
+.usercarddrop3 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.8s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.8s both;
+  left: -8%;
+  z-index: 2;
+}
+
+.usercarddrop4 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.9s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.9s both;
+  left: -12%;
+  z-index: 3;
+}
+
+.usercarddrop5 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
+  left: -10%;
+}
+
+.usercarddrop6 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.1s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.1s both;
+  left: -14%;
+  z-index: 2;
+}
+
+.usercarddrop7 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.2s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.2s both;
+  left: -12%;
+}
+
+.usercarddrop8 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.3s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.3s both;
+  left: -16%;
+  z-index: 2;
+}
+
+.usercarddrop9 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.4s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.4s both;
+  left: -14%;
+}
+
+.usercarddrop10 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.5s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.5s both;
+  left: -18%;
+  z-index: 2;
+}
+
+.usercarddrop11 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.6s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.6s both;
+  left: -22%;
+  z-index: 3;
+}
+
+.usercarddrop12 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.7s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.7s both;
+  left: -26%;
+  z-index: 10;
+}
+
+.usercarddrop13 {
+  -webkit-animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.8s both;
+  animation: slide-in-left-deal-bg-text-deal 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2.8s both;
+  left: -24%;
+  z-index: 9;
+
+}
+
+/* .deal-slide4{
+      -webkit-animation: scale-up-center-cur-user 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.8s both;
+      animation: scale-up-center-cur-user 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.8s both;
+    } */
+
+@-webkit-keyframes scale-up-center-cur-user {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2) translateX(-12%) translateY(6%);
+  }
+}
+
+@keyframes scale-up-center-cur-user {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+    transform: scale(1.2) translateX(-12%) translateY(6%);
+  }
+}
+
+@-webkit-keyframes slide-in-left-perfect-sort {
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  90% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-left-perfect-sort {
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  90% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.deal-slide-dropped {
+  opacity: 38% !important;
+}

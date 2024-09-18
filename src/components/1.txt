@@ -1,0 +1,25 @@
+1. If player 2 was eliminated in Deal 1 then while dealing cards for Deal 2 card distribution should start from player 3 which is going correct and for deal 3 it
+ should start from the next active player which is player 4, but here it is again distributing the first card to player 3 instead of player 4 which is incorrect
+(because same player cannot get the chance to play first consecutively ) - New
+
+7. D marker is not set to true to the last player after any player is eliminated - New
+
+8. If  player 2 is eliminated  , and lets say the game is started with player 4 , then after 1st round his dropped points should be doubled instead it is considering as first drop. - New
+
+
+
+
+2. During dealing cards drag and drop is not working in admin for correction. - Old (Working)
+
+3. Green marker should always show on the player who is currently playing , or is about to pick the card, (During ingame consider player 1 is eliminated, if player 6 discards the card then green marker
+should shift to player 2 ) currently green marker is seen on player 2 after he picks the card . - Old/New (done)
+
+5. Other player points are not updated instantly in the unique URL of a particular player, also perfect sort points are not seen instantly, here manual refresh is required to see the updated points. - Old (done)
+
+6.When main URL is showing the current active player as per green marker and at same time when player admin are doing drag drop for sorting cards then the main screen shows that player instead of current active player - Old (Working)
+
+9. If Joker is open card and Player 1 drops then Player 2 should be able to pick it. If player 2 also drops then Player 3 should also be able to pick it and so on. - Old (done)
+
+10. If PJ is joker then all ace becomes joker. In this case if Ace or PJ is discarded then it should not be picked by next player. - Old (done)
+
+4. After Deal 1 the green marker on unique URL are not seen on the current player initially , it is only seen on that player after 1 round - Old (done)

@@ -1,0 +1,170 @@
+
+  
+    /* .dealdiv {
+      position: absolute !important;
+      left: 3.5% !important;
+      bottom: 3.3% !important;
+    } */
+  
+
+    /* .tracking-in-contract-chips-deal {
+      
+      
+    } */
+
+    .tracking-in-contract-chips-deal-dec {
+      -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      font-family: 'roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 30px !important;
+        line-height: 70px;
+        display: inline-block;
+        white-space: nowrap;
+        /* margin-left: -5%; */
+        /* or 60px */
+        text-align: center;
+        letter-spacing: 0.02em;
+      
+        color: #FFFFFF;
+        z-index: 1000 !important;
+        text-shadow: 0px 5.12464px 0px rgba(0, 0, 0, 0.25);
+        position: absolute !important;
+        left: 21% !important;
+        bottom: 20% !important;
+        
+    }
+    @media only screen and (min-width: 1920px) {
+      .tracking-in-contract-chips-deal-dec {
+        left: 24px !important;
+        bottom: 106px !important;
+        font-size: 40px !important;
+      }
+
+      .hd-dd.tracking-in-contract-chips-deal-dec {
+          bottom: 199px !important;
+          font-weight: 400 !important;
+          font-size: 36px !important;
+      }
+    }
+  
+    .tracking-in-contract-declare-text {
+      -webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      animation: tracking-in-contract 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.8s, fade-in 0.8s ease-in 0.9s both;
+      font-family: 'roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 25px;
+        line-height: 70px;
+        display: inline-block;
+        white-space: nowrap;
+        margin-left: -5%;
+        /* or 60px */
+        text-align: center;
+        letter-spacing: 0.02em;
+      
+        color: #FFFFFF;
+        z-index: 1000 !important;
+        text-shadow: 0px 5.12464px 0px rgba(0, 0, 0, 0.25);
+        position: absolute !important;
+      left: 26% !important;
+      bottom: 16% !important;
+        
+    }
+  
+  
+    /* .deal-user-img{
+      left: 6% !important;
+      bottom: 10% !important;
+      z-index: 0 !important;
+    } */
+  
+    @-webkit-keyframes slide-in-bottom-deal-userimg {
+      0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+      }
+      80% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slide-in-bottom-deal-userimg {
+      0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+      }
+      80% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+      }
+      100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  
+  
+    /* .bgdivdeal {
+      position: absolute !important;
+      width: 200px !important;
+        height: 70px !important;
+      left: 15.4% !important;
+      bottom: 4% !important;
+      z-index: 100 !important;
+    } */
+
+  
+    /* .slide-in-left-deal-bg-img-deal {
+      -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both, fade-in 0.9s ease-in 1.2s both;
+      animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both, fade-in 0.9s ease-in 1.2s both;
+      width: 90% !important;
+      height: 92px !important;
+    } */
+  
+    @-webkit-keyframes slide-in-left-deal-bg-text-deal {
+      0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+    
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slide-in-left-deal-bg-text-deal {
+      0% {
+        -webkit-transform: translateX(-100px);
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+    
+      100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    .usercard{
+      position: absolute;
+      left: 10%;
+      bottom: 32%;
+      height: 55px;
+    }
+    

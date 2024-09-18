@@ -1,0 +1,952 @@
+html,
+body {
+  height: 100%;
+}
+
+.maindiv {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.intro_logo_backdrop {
+  position: absolute;
+  width: 1198px;
+  height: 573px;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 61%;
+  mix-blend-mode: screen;
+}
+
+.introrc {
+  z-index: 1000 !important;
+  width: 50%;
+}
+
+.introgrc {
+  width: 100%;
+  z-index: 500 !important;
+  filter: drop-shadow(3.57674px 2.38449px 4.76898px rgba(0, 0, 0, 0.36));
+}
+
+
+@media only screen and (min-width: 1920px) {
+  .intro_logo_backdrop {
+    width: 1820px;
+    height: 873px;
+    top: 50%;
+    left: 50%;
+  }
+
+  .introgrc {
+    width: 100%;
+  }
+
+  .introrc {
+    width: 60%;
+  }
+}
+
+
+.fade-in-banner {
+  -webkit-animation: fade-in 0.3s ease-in 1s both;
+  animation: fade-in 0.3s ease-in 1s both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out-banner {
+  -webkit-animation: fade-out 1s ease-out 10s both;
+  animation: fade-out 1s ease-out 10s both;
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+
+.backdrop {
+  position: absolute;
+  opacity: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1198px;
+  height: 684px;
+}
+
+.backdropw {
+  position: absolute;
+  opacity: 1;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1020px;
+  height: 720px;
+}
+
+.winnerimgbanner {
+  width: 100%;
+  /* z-index: 500 !important; */
+  filter: drop-shadow(3.57674px 2.38449px 4.76898px rgba(0, 0, 0, 0.36));
+}
+
+.backdropwone {
+  position: absolute;
+  opacity: 1;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 960px;
+  height: 720px;
+}
+
+.backdropwthree {
+  position: absolute;
+  opacity: 1;
+  top: 17%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1080px;
+  height: 720px;
+}
+
+.backdroponecup {
+  position: absolute;
+  opacity: 1;
+  top: 55%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 500px;
+  height: 350px;
+}
+
+.backdropsup4 {
+  position: absolute;
+  opacity: 1;
+  bottom: -18%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 400px;
+  height: 250px;
+}
+
+.backdropsup5 {
+  position: absolute;
+  opacity: 1;
+  bottom: -120px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 400px;
+  height: 250px;
+}
+
+.backdropsup6 {
+  position: absolute;
+  opacity: 1;
+  bottom: -120px;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 400px;
+  height: 250px;
+}
+
+.backdropholder4 {
+  position: absolute;
+  opacity: 1;
+  bottom:4.5%;
+  left: 245px;
+  transform: none;
+  z-index: 20 !important;
+  width: 250px;
+  height: 149px;
+}
+
+.backdropholder5 {
+  position: absolute;
+  opacity: 1;
+  bottom: -16.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20 !important;
+  width: 250px;
+  height: 250px;
+}
+
+.backdropholder6 {
+  position: absolute;
+  opacity: 1;
+  bottom: -19.5%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 20 !important;
+  width: 250px;
+  height: 250px;
+}
+
+.backdropthreecup {
+  position: absolute;
+  opacity: 1;
+  top: 472px;
+  left: 441px;
+  transform: none;
+  z-index: 100 !important;
+  width: 1025px;
+  height: 369px;
+}
+
+.backdroponeuser {
+  position: absolute;
+  opacity: 1;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 300px;
+  height: 450px;
+}
+
+.backdrop1user {
+  position: absolute;
+  opacity: 1;
+  top: 230px;
+  left: 0;
+  transform: none;
+  /* z-index: 14 !important; */
+  width: 430px;
+  height: 506px;
+  right: 0;
+}
+
+.backdrop2user {
+  position: absolute;
+  opacity: 1;
+  top: 255px;
+  left: 1104px;
+  transform: none;
+  z-index: 10 !important;
+  width: 270px;
+  height: 353px;
+}
+
+.backdrop3user {
+  position: absolute;
+  opacity: 1;
+  top: 255px;
+  left: 537px;
+  z-index: 10 !important;
+  width: 270px;
+  height: 318px;
+  transform: none;
+}
+
+.backdrop4user {
+  position: absolute;
+  opacity: 1;
+  bottom: 65px;
+  left: 295px;
+  transform: none;
+  z-index: 10 !important;
+  width: 160px;
+  height: 160px;
+}
+
+.backdrop5user {
+  position: absolute;
+  opacity: 1;
+  top: 97%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 160px;
+  height: 400px;
+}
+
+.backdrop6user {
+  position: absolute;
+  opacity: 1;
+  top: 98.4%;
+  left: 81%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 160px;
+  height: 400px;
+}
+
+.backdroponeusername {
+  position: absolute;
+  opacity: 1;
+  top: 74%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
+  width: 100%;
+  /* height: 450px; */
+}
+
+.backdroponeprize {
+  position: absolute;
+  opacity: 1;
+  top: 79.5%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
+  width: 100%;
+}
+
+.backdrop1username {
+  position: absolute;
+  opacity: 1;
+  top: 56%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop2username {
+  position: absolute;
+  opacity: 1;
+  top: 53%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop3username {
+  position: absolute;
+  opacity: 1;
+  top: 524.14px;
+  left: 540.24px;
+  transform: none;
+  z-index: 1000 !important;
+  width: 258px;
+  margin: 0 !important;
+}
+
+.backdrop4username {
+  position: absolute;
+  opacity: 1;
+  top: 92.9%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop5username {
+  position: absolute;
+  opacity: 1;
+  top: 92.9%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop6username {
+  position: absolute;
+  opacity: 1;
+  top: 92.9%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop1prize {
+  position: absolute;
+  opacity: 1;
+  top: 60%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop2prize {
+  position: absolute;
+  opacity: 1;
+  top: 57%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop3prize {
+  position: absolute;
+  opacity: 1;
+  top: 55.5%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop4price {
+  position: absolute;
+  opacity: 1;
+  bottom: 48px;
+  left: 366px;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 100%;
+}
+
+.backdrop5price {
+  position: absolute;
+  opacity: 1;
+  bottom: 48px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    z-index: 100;
+  width: 100%;
+}
+
+.backdrop6price {
+  position: absolute;
+  opacity: 1;
+  bottom: 48px;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 100%;
+}
+
+
+
+.winnername {
+  position: absolute;
+  top: 70%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto';
+  font-weight: 600;
+  font-size: 20px;
+  width: 100%;
+  z-index: 100;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.winnername-1 {
+top: 380px;
+z-index: 140;
+font-size: 36px !important;
+}
+
+.winnername-2 {
+  color: silver;
+  /* Example color for the 2nd player */
+}
+
+.winnername-3 {
+  color: bronze;
+  /* Example color for the 3rd player */
+}
+
+.winnername-4 {
+  color: #fff;
+  /* Example color for the 4th player */
+}
+
+.winnername-5 {
+  color: #fff;
+  /* Example color for the 5th player */
+}
+
+.winnername-6 {
+  color: #fff;
+  /* Example color for the 6th player */
+}
+
+.winnerslast {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+.winnerslast4 {
+  position: absolute;
+  top: 10px;
+  left: 0%;
+}
+
+.winnerslast5 {
+  position: absolute;
+  top: 10px;
+  left: 0%;
+}
+
+.winnerslast6 {
+  position: absolute;
+  top: -17px;
+  left: 0%;
+}
+.winnernamealt {
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 18px !important;
+  width: 100%;
+  /* z-index: 100000 !importa nt; */
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.winnerpricealt {
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 22px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.prize {
+  position: absolute;
+  top: 0%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 25px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #FFD953;
+}
+
+.prize strong {
+  display: block;
+}
+
+.grswinner1 {
+  width: 525.74px;
+  height: 262px;
+  top: 559px;
+  left: 0;
+  position: absolute;
+  z-index: 21;
+  right: 0;
+}
+
+.grswinner2 {
+  width: 505px;
+  height: 207px;
+  top: 462.07px;
+  left: 1019px;
+  position: absolute;
+  z-index: 11;
+}
+
+.grswinner3 {
+  width: 568.11px;
+  height: 207px;
+  top: 440px;
+  left: 432px;
+  position: absolute;
+  z-index: 11;
+}
+
+.winner-name-1 {
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 32px !important;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 65px;
+  text-align: center;
+  width: 100%;
+  left: 93px;
+  max-width: 413px;
+}
+
+.prize-div-1 {
+  color: #FFD953;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 40px !important;
+  display: block;
+  position: absolute;
+  top: 125px;
+  text-align: center;
+  width: 407px;
+  left: 93px;
+}
+
+.winner-name-2 {
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 24px !important;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 54px;
+  text-align: center;
+  width: 241px;
+  right: 114px;
+}
+
+.prize-div-2 {
+  color: #FFD953;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 27px !important;
+  display: block;
+  position: absolute;
+  top: 98px;
+  text-align: center;
+  width: 241px;
+  right: 114px;
+}
+
+.winner-name-3 {
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 24px !important;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 60px;
+  text-align: center;
+  width: 241px;
+  left: 114px;
+}
+
+.prize-div-3 {
+  color: #FFD953;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 27px !important;
+  display: block;
+  position: absolute;
+  top: 107px;
+  text-align: center;
+  width: 241px;
+  left: 110px;
+}
+
+.grswinner2 strong,
+.grswinner3 strong {
+  display: block;
+}
+
+.redbar {
+  position: absolute;
+  top: 0;
+  width: 345px;
+  margin: 0 auto;
+  display: block;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.winner-glow {
+  position: absolute;
+  top: 5%;
+  width: 65%;
+  margin: 0 auto;
+  display: block;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg)
+  }
+
+}
+
+.grc24 {
+  position: absolute;
+  top: 32px;
+  width: 537px;
+  margin: 0 auto;
+  display: block;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.hide-after-2sec {
+  animation: cssAnimation 0.5s 5s forwards;
+  font-size: 3rem;
+  transition: 0.5s ease-in-out;
+  opacity: 1;
+}
+
+@keyframes cssAnimation {
+  to {
+    transform: translate(0, 180px) !important;
+    /* top: -100%; */
+    opacity: 0;
+  }
+}
+
+
+.last-three-winner {
+  position: absolute;
+  left: 0;
+  bottom: 10vh;
+  width: 400px;
+}
+
+.last-three-w-name-1 {
+  position: absolute;
+  left: 310px;
+  bottom: 48px;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 18px !important;
+  z-index: 100000 !important;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.last-three-w-name-2 {
+  position: absolute;
+  left: 899px;
+  bottom: 48px;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 18px !important;
+  z-index: 100000 !important;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.last-three-w-name-3 {
+  position: absolute;
+  left: 1491px;
+  bottom: 48px;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-weight: 600;
+  font-size: 18px !important;
+  z-index: 100000 !important;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.last-three-w-img-1 {
+  position: absolute;
+  left: 310px;
+  bottom: 80px;
+  z-index: 10;
+}
+
+.last-three-w-img-2 {
+  position: absolute;
+  left: 910px;
+  bottom: 80px;
+  z-index: 10;
+}
+
+.last-three-w-img-3 {
+  position: absolute;
+  left: 1491px;
+  bottom: 80px;
+  z-index: 10;
+}
+
+
+.playerName{
+  color:#fff
+}
+
+.winnername-main-div {
+  z-index: 25 !important;
+  width: auto;
+  height: auto;
+  position: absolute;
+}
+
+.wmd1 {
+  width: 410px;
+  height: 55px;
+  top: 620px;
+  margin: 0 !important;
+  left: 790px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd1 h1 {
+    font-family: 'roboto' !important;
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.wmd2 {
+  width: 284px;
+  height: 50px;
+  top: 508px;
+  margin: 0 !important;
+  left: 1137px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd2 h1 {
+  font-family: 'roboto' !important;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+      font-size: 24px;
+}
+
+.wmd3 { 
+  width: 284px;
+  height: 50px;
+  top: 492px;
+  margin: 0 !important;
+  left: 518px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd3 h1 {
+  font-family: 'roboto' !important;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: 24px;
+}
+
+.wmd4 {
+  width: 216px;
+  height: 31px;
+  bottom: 71px;
+  margin: 0 !important;
+  left: 262px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd4 h1 {
+  font-family: 'roboto' !important;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.wmd5 {
+  width: 216px;
+  height: 31px;
+  bottom: 71px;
+  margin: 0 !important;
+  left: 853px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd5 h1 {
+  font-family: 'roboto' !important;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.wmd6 {
+  width: 216px;
+  height: 31px;
+  bottom: 66px;
+  margin: 0 !important;
+  left: 1429px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wmd6 h1 {
+  font-family: 'roboto' !important;
+  color: #fff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: 18px;
+}

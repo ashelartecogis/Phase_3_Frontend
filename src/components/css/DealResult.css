@@ -1,0 +1,1516 @@
+.cdusername-res {
+    position: absolute;
+    left: 6.2%;
+    top: 15%;
+    z-index: 10000;
+    /* width: 40px;
+    height: 50px; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 36px;
+
+    /* identical to box height */
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    text-shadow: 1.91913px 2.6292px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cdchips-res {
+    position: absolute;
+    left: 6%;
+    z-index: 10000;
+    /* width: 40px;
+    height: 50px; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    top: 50%;
+    color: #FFFFFF;
+
+    text-shadow: 0px 2.24503px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.cdchip-res {
+    filter: drop-shadow(0px 2.21423px 0px rgba(0, 0, 0, 0.3));
+    width: 24px;
+    height: 24px;
+}
+
+.cduser-res {
+    position: absolute;
+    left: -2.5%;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 100px;
+    height: 93px;
+    bottom: 0%;
+}
+
+.res-pts {
+    position: absolute;
+    right: 20%;
+    top: 30%;
+    z-index: 100000 !important;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 36px;
+    opacity: 100% !important;
+    word-spacing: -5px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+.res-pts-key {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 36px;
+    opacity: 100% !important;
+    /* identical to box height */
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+}
+
+.carddealbgimgres {
+    width: 85%;
+    /* left: 45% !important; */
+}
+
+.carddealtitlebg {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    position: absolute;
+    left: -1%;
+    top: -4%;
+    /* z-index: 100000; */
+    height: 300px;
+    width: 100%;
+}
+
+.carddealtitle {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    position: absolute;
+    left: 45%;
+    top: 11%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 36px;
+    z-index: 10000;
+    /* identical to box height */
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    text-shadow: 1.91913px 2.6292px 0px rgba(0, 0, 0, 0.25);
+}
+
+.carddealtitleperfect {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.1s both;
+    position: absolute;
+    left: 42%;
+    top: 11%;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 36px;
+    z-index: 10000;
+    /* identical to box height */
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    text-shadow: 1.91913px 2.6292px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cdcardres1 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 43px;
+    height: 55px;
+    top: 12.5%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres11 {
+    left: 22%;
+}
+
+.cdcardres12 {
+    left: 24%;
+}
+
+.cdcardres13 {
+    left: 26%;
+}
+
+.cdcardres14 {
+    left: 28%;
+}
+
+.cdcardres15 {
+    left: 30%;
+}
+
+.cdcardres16 {
+    left: 32%;
+}
+
+.cdcardres17 {
+    left: 34%;
+}
+
+.cdcardres18 {
+    left: 36%;
+}
+
+.cdcardres19 {
+    left: 38%;
+}
+
+.cdcardres110 {
+    left: 40%;
+}
+
+.cdcardres111 {
+    left: 42%;
+}
+
+.cdcardres112 {
+    left: 44%;
+}
+
+.cdcardres113 {
+    left: 46%;
+}
+
+.cardanres {
+    position: absolute;
+    left: 22%;
+    z-index: 1000;
+}
+
+/* Card 2 */
+.cdcardres2 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 43px;
+    height: 55px;
+    top: 12.5%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres21 {
+    left: 22%;
+}
+
+.cdcardres22 {
+    left: 24%;
+}
+
+.cdcardres23 {
+    left: 26%;
+}
+
+.cdcardres24 {
+    left: 28%;
+}
+
+.cdcardres25 {
+    left: 30%;
+}
+
+.cdcardres26 {
+    left: 32%;
+}
+
+.cdcardres27 {
+    left: 34%;
+}
+
+.cdcardres28 {
+    left: 36%;
+}
+
+.cdcardres29 {
+    left: 38%;
+}
+
+.cdcardres210 {
+    left: 40%;
+}
+
+.cdcardres211 {
+    left: 42%;
+}
+
+.cdcardres212 {
+    left: 44%;
+}
+
+.cdcardres213 {
+    left: 46%;
+}
+
+/* Card 3 */
+
+.cdcardres3 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 43px;
+    height: 55px;
+    top: 12.5%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres31 {
+    left: 22%;
+}
+
+.cdcardres32 {
+    left: 24%;
+}
+
+.cdcardres33 {
+    left: 26%;
+}
+
+.cdcardres34 {
+    left: 28%;
+}
+
+.cdcardres35 {
+    left: 30%;
+}
+
+.cdcardres36 {
+    left: 32%;
+}
+
+.cdcardres37 {
+    left: 34%;
+}
+
+.cdcardres38 {
+    left: 36%;
+}
+
+.cdcardres39 {
+    left: 38%;
+}
+
+.cdcardres310 {
+    left: 40%;
+}
+
+.cdcardres311 {
+    left: 42%;
+}
+
+.cdcardres312 {
+    left: 44%;
+}
+
+.cdcardres313 {
+    left: 46%;
+}
+
+
+/* card 4 */
+.cdcardres4 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 43px;
+    height: 55px;
+    top: 12.5%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres41 {
+    left: 22%;
+}
+
+.cdcardres42 {
+    left: 24%;
+}
+
+.cdcardres43 {
+    left: 26%;
+}
+
+.cdcardres44 {
+    left: 28%;
+}
+
+.cdcardres45 {
+    left: 30%;
+}
+
+.cdcardres46 {
+    left: 32%;
+}
+
+.cdcardres47 {
+    left: 34%;
+}
+
+.cdcardres48 {
+    left: 36%;
+}
+
+.cdcardres49 {
+    left: 38%;
+}
+
+.cdcardres410 {
+    left: 40%;
+}
+
+.cdcardres411 {
+    left: 42%;
+}
+
+.cdcardres412 {
+    left: 44%;
+}
+
+.cdcardres413 {
+    left: 46%;
+}
+
+/* card 5 */
+
+.cdcardres5 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 43px;
+    height: 55px;
+    top: 12.5%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres51 {
+    left: 22%;
+}
+
+.cdcardres52 {
+    left: 24%;
+}
+
+.cdcardres53 {
+    left: 26%;
+}
+
+.cdcardres54 {
+    left: 28%;
+}
+
+.cdcardres55 {
+    left: 30%;
+}
+
+.cdcardres56 {
+    left: 32%;
+}
+
+.cdcardres57 {
+    left: 34%;
+}
+
+.cdcardres58 {
+    left: 36%;
+}
+
+.cdcardres59 {
+    left: 38%;
+}
+
+.cdcardres510 {
+    left: 40%;
+}
+
+.cdcardres511 {
+    left: 42%;
+}
+
+.cdcardres512 {
+    left: 44%;
+}
+
+.cdcardres513 {
+    left: 4%;
+}
+
+/* card 6 */
+.cdcardres6 {
+    position: absolute;
+    /* right: 50%; */
+    z-index: 10000;
+    width: 75.65px;
+    height: 125px;
+    top: 19%;
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.cdcardres61 {
+    left: 22%;
+}
+
+.cdcardres62 {
+    left: 24%;
+}
+
+.cdcardres63 {
+    left: 26%;
+}
+
+.cdcardres64 {
+    left: 28%;
+}
+
+.cdcardres65 {
+    left: 33%;
+}
+
+.cdcardres66 {
+    left: 35%;
+}
+
+.cdcardres67 {
+    left: 40%;
+}
+
+.cdcardres68 {
+    left: 42%;
+}
+
+.cdcardres69 {
+    left: 47%;
+}
+
+.cdcardres610 {
+    left: 49%;
+}
+
+.cdcardres611 {
+    left: 51%;
+}
+
+.cdcardres612 {
+    left: 53%;
+}
+
+.cdcardres613 {
+    left: 58%;
+}
+
+.res-drop-text {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
+    position: absolute;
+    z-index: 100000 !important;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 36px;
+    /* identical to box height */
+    letter-spacing: 0.02em;
+    left: 49%;
+    color: #FFFFFF;
+}
+
+.res-drop-text-pp { 
+    position: absolute;
+    z-index: 100000 !important;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 36px;
+    /* identical to box height */
+    letter-spacing: 0.02em;
+    left: 49%;
+    color: #FFFFFF;
+}
+
+.res-drop-text-1 {
+    top: 23% !important;
+    /* not */
+}
+
+.res-drop-text-2 {
+    top: 35.5% !important;
+}
+
+.res-drop-text-3 {
+    top: 48% !important;
+    /* not */
+}
+
+.res-drop-text-4 {
+    top: 60.5% !important;
+}
+
+.res-drop-text-5 {
+    top: 73% !important;
+}
+
+.res-drop-text-6 {
+    top: 85.5% !important;
+}
+
+.allcardsbestseq {
+    position: absolute;
+    top: 87.5%;
+    left: 20%;
+    display: inline;
+    width: auto;
+    display: flex;
+}
+
+.bestseqlist1,
+.bestseqlist2,
+.bestseqlist3,
+.bestseqlist4 {
+    position: relative;
+    /* white-space: nowrap !important; */
+    width: auto !important;
+    /* margin-top: ; */
+}
+
+.bestlistimg {
+    position: relative;
+    bottom: 120%;
+    width: 35px;
+    height: 50px;
+}
+
+.cardanres1 {
+    -webkit-animation: flip-in-hor-top 0.6s ease-in 1s both;
+    animation: flip-in-hor-top 0.6s ease-in 1s both;
+    top: 12%;
+    /* right: 10%; */
+}
+
+.cardanres2 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.6s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.6s both;
+    top: 26%;
+}
+
+.cardanres3 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.7s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.7s both;
+    top: 40%;
+}
+
+.cardanres4 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.8s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.8s both;
+    top: 54%;
+}
+
+.cardanres5 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 0.9s both;
+    animation: flip-in-hor-top 0.5s ease-in 0.9s both;
+    top: 68%;
+}
+
+.cardanres6 {
+    -webkit-animation: flip-in-hor-top 0.5s ease-in 1s both;
+    animation: flip-in-hor-top 0.5s ease-in 1s both;
+    top: 82%;
+}
+
+.dropped-cardanres0 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 0.5s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 0.5s both;
+    top: 12%;
+}
+
+.dropped-cardanres1 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 0.6s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 0.6s both;
+    top: 26%;
+}
+
+.dropped-cardanres2 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 0.7s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 0.7s both;
+    top: 40%;
+}
+
+.dropped-cardanres3 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 0.8s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 0.8s both;
+    top: 54%;
+}
+
+.dropped-cardanres4 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 0.9s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 0.9s both;
+    top: 68%;
+}
+
+.dropped-cardanres5 {
+    -webkit-animation: flip-in-hor-top-drop 0.5s ease-in 1s both;
+    animation: flip-in-hor-top-drop 0.5s ease-in 1s both;
+    top: 82%;
+}
+
+@media only screen and (min-width: 1920px) {
+    .bestlistimg {
+        position: relative;
+        bottom: 140%;
+        width: 75.66px;
+        height: 124.01px;
+    }
+
+    .allcardsbestseq {
+        position: absolute;
+        left: 7.9%;
+        top: 145%;
+        display: inline;
+        width: auto;
+        display: flex;
+    }
+
+    .bestseqlist1,
+    .bestseqlist2,
+    .bestseqlist3,
+    .bestseqlist4 {
+        position: relative;
+        /* white-space: nowrap !important; */
+        width: auto !important;
+    }
+
+    .cdusername-res {
+        left: -8.5%;
+        top: 4%;
+        font-weight: 600;
+        font-size: 31px;
+        line-height: 36px;
+    }
+
+    .cdchips-res {
+        left: -110px;
+        margin-top: -1.1%;
+        font-weight: 700;
+        font-size: 29.11px;
+        line-height: 22px;
+    }
+
+    .cdchip-res {
+        width: 50.53px;
+        height: 50.53px;
+    }
+
+    .cduser-res {
+        left: -18.8%;
+        width: 125px;
+        height: 115px;
+        top: -35px;
+    }
+
+    .res-pts {
+        color: #fff !important;
+        opacity: 1 !important;
+        right: 40px;
+        top: 28%;
+        font-size: 50px;
+        font-weight: 600;
+        line-height: 36px;
+        word-spacing: -5px;
+    }
+
+    .res-pts-key {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 16px;
+    }
+
+    .carddealbgimgres {
+        height: 80px;
+        width: 1380px !important;
+        /* margin-right: 20px; */
+    }
+
+    .carddealtitlebg {
+        left: 7%;
+        top: 3%;
+        height: 300px;
+        width: 90%;
+    }
+
+    .carddealtitle {
+        left: 0%;
+        top: 47%;
+        margin-left: 55px;
+        font-size: 50px;
+        line-height: 50px;
+        z-index: -1;
+    }
+
+    .carddealtitleperfect {
+        left: -2%;
+        top: -553px;
+        font-size: 38px;
+        line-height: 36px;
+        display: flex;
+        position: relative;
+    }
+
+    .cdcardres1 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 85px;
+        height: 70px;
+        top: 16%;
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres11 {
+        left: 28%;
+    }
+
+    .cdcardres12 {
+        left: 30%;
+    }
+
+    .cdcardres13 {
+        left: 32%;
+    }
+
+    .cdcardres14 {
+        left: 34%;
+    }
+
+    .cdcardres15 {
+        left: 41%;
+    }
+
+    .cdcardres16 {
+        left: 43%;
+    }
+
+    .cdcardres17 {
+        left: 50%;
+    }
+
+    .cdcardres18 {
+        left: 52%;
+    }
+
+    .cdcardres19 {
+        left: 59%;
+    }
+
+    .cdcardres110 {
+        left: 61%;
+    }
+
+    .cdcardres111 {
+        left: 62%;
+    }
+
+    .cdcardres112 {
+        left: 64%;
+    }
+
+    .cdcardres113 {
+        left: 71%;
+    }
+
+    .cardanres {
+        position: absolute;
+        left: 25%;
+        z-index: 10000;
+    }
+
+    /* Card 2 */
+    .cdcardres2 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 55px;
+        height: 70px;
+        top: 12.5%;
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres21 {
+        left: 28%;
+    }
+
+    .cdcardres22 {
+        left: 30%;
+    }
+
+    .cdcardres23 {
+        left: 32%;
+    }
+
+    .cdcardres24 {
+        left: 34%;
+    }
+
+    .cdcardres25 {
+        left: 41%;
+    }
+
+    .cdcardres26 {
+        left: 43%;
+    }
+
+    .cdcardres27 {
+        left: 50%;
+    }
+
+    .cdcardres28 {
+        left: 52%;
+    }
+
+    .cdcardres29 {
+        left: 59%;
+    }
+
+    .cdcardres210 {
+        left: 61%;
+    }
+
+    .cdcardres211 {
+        left: 62%;
+    }
+
+    .cdcardres212 {
+        left: 64%;
+    }
+
+    .cdcardres213 {
+        left: 71%;
+    }
+
+    /* Card 3 */
+
+    .cdcardres3 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 55px;
+        height: 70px;
+        top: 12.5%;
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres31 {
+        left: 28%;
+    }
+
+    .cdcardres32 {
+        left: 30%;
+    }
+
+    .cdcardres33 {
+        left: 32%;
+    }
+
+    .cdcardres34 {
+        left: 34%;
+    }
+
+    .cdcardres35 {
+        left: 41%;
+    }
+
+    .cdcardres36 {
+        left: 43%;
+    }
+
+    .cdcardres37 {
+        left: 50%;
+    }
+
+    .cdcardres38 {
+        left: 52%;
+    }
+
+    .cdcardres39 {
+        left: 59%;
+    }
+
+    .cdcardres310 {
+        left: 61%;
+    }
+
+    .cdcardres311 {
+        left: 62%;
+    }
+
+    .cdcardres312 {
+        left: 64%;
+    }
+
+    .cdcardres313 {
+        left: 71%;
+    }
+
+
+    /* card 4 */
+    .cdcardres4 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 55px;
+        height: 70px;
+        top: 12.5%;
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres41 {
+        left: 28%;
+    }
+
+    .cdcardres42 {
+        left: 30%;
+    }
+
+    .cdcardres43 {
+        left: 32%;
+    }
+
+    .cdcardres44 {
+        left: 34%;
+    }
+
+    .cdcardres45 {
+        left: 41%;
+    }
+
+    .cdcardres46 {
+        left: 43%;
+    }
+
+    .cdcardres47 {
+        left: 50%;
+    }
+
+    .cdcardres48 {
+        left: 52%;
+    }
+
+    .cdcardres49 {
+        left: 59%;
+    }
+
+    .cdcardres410 {
+        left: 61%;
+    }
+
+    .cdcardres411 {
+        left: 62%;
+    }
+
+    .cdcardres412 {
+        left: 64%;
+    }
+
+    .cdcardres413 {
+        left: 71%;
+    }
+
+    /* card 5 */
+
+    .cdcardres5 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 55px;
+        height: 70px;
+        top: 12.5%;
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres51 {
+        left: 28%;
+    }
+
+    .cdcardres52 {
+        left: 30%;
+    }
+
+    .cdcardres53 {
+        left: 32%;
+    }
+
+    .cdcardres54 {
+        left: 34%;
+    }
+
+    .cdcardres55 {
+        left: 41%;
+    }
+
+    .cdcardres56 {
+        left: 43%;
+    }
+
+    .cdcardres57 {
+        left: 50%;
+    }
+
+    .cdcardres58 {
+        left: 52%;
+    }
+
+    .cdcardres59 {
+        left: 59%;
+    }
+
+    .cdcardres510 {
+        left: 61%;
+    }
+
+    .cdcardres511 {
+        left: 62%;
+    }
+
+    .cdcardres512 {
+        left: 64%;
+    }
+
+    .cdcardres513 {
+        left: 71%;
+    }
+
+    /* card 6 */
+    .cdcardres6 {
+        position: absolute;
+        /* right: 50%; */
+        z-index: 10000;
+        width: 85px;
+        height: 125px;
+        top: -20%;
+
+        -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+
+    .cdcardres61 {
+        left: 18%;
+    }
+
+    .cdcardres62 {
+        left: 22.5%;
+    }
+
+    .cdcardres63 {
+        left: 27%;
+    }
+
+    .cdcardres64 {
+        left: 31.5%;
+    }
+
+    .cdcardres65 {
+        left: 36%;
+    }
+
+    .cdcardres66 {
+        left: 40.5%;
+    }
+
+    .cdcardres67 {
+        left: 45%;
+    }
+
+    .cdcardres68 {
+        left: 49.5%;
+    }
+
+    .cdcardres69 {
+        left: 54%;
+    }
+
+    .cdcardres610 {
+        left: 58.5%;
+    }
+
+    .cdcardres611 {
+        left: 63%;
+    }
+
+    .cdcardres612 {
+        left: 67.5%;
+    }
+
+    .cdcardres613 {
+        left: 72%;
+    }
+
+    .res-drop-text {
+        font-size: 31px;
+        line-height: 36.33px;
+        font-weight: 400;
+        letter-spacing: 2%;
+    }
+
+    .res-drop-text-1 {
+        left: 53.2%;
+        top: 14.2% !important;
+    }
+
+    .res-drop-text-2 {
+        left: 53.2%;
+        top: 28.2% !important;
+    }
+
+    .res-drop-text-3 {
+        left: 53.2%;
+        top: 42.2% !important;
+    }
+
+    .res-drop-text-4 {
+        left: 53.2%;
+        top: 56.2% !important;
+    }
+
+    .res-drop-text-5 {
+        left: 53.2%;
+        top: 70.2% !important;
+    }
+
+    .res-drop-text-6 {
+        left: 53.2%;
+        top: 84.2% !important;
+    }
+
+
+}
+
+.carddealbgblack {
+    -webkit-animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+    animation: fade-in 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s both;
+    position: absolute;
+    width: 850px;
+    height: 1080px;
+    left: calc(50% - 850px/2);
+    top: 0px;
+    mix-blend-mode: multiply;
+    opacity: 0.81 !important;
+}
+
+
+
+
+
+
+
+@-webkit-keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes flip-in-hor-top {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes flip-in-hor-top-drop {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        /* opacity: 64%; */
+        opacity: 100%;
+    }
+}
+
+@keyframes flip-in-hor-top-drop {
+    0% {
+        -webkit-transform: rotateX(-80deg);
+        transform: rotateX(-80deg);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: rotateX(0);
+        transform: rotateX(0);
+        /* opacity: 64%; */
+        opacity: 100%;
+    }
+}
+
+.eleminited-banner {
+    width: 666px;
+    height: 164px;
+    position: absolute;
+    top: 592px;
+    left: 650px;
+    margin: auto;
+    z-index: 1003;
+}
+
+.eleminited-glow {
+    width: 712px;
+    height: 705px;
+    position: absolute;
+    top: 50px;
+    left: 610px;
+    margin: auto;
+    z-index: 998;
+}
+
+.ele-lowest-chips {
+    position: absolute;
+    top: 663px;
+    left: 821px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 37px;
+    z-index: 1004;
+    color: #FFFFFF;
+}
+
+.ele-lowest-chips-num {
+    position: absolute;
+    top: 668px;
+    left: 875px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 37px;
+    z-index: 1004;
+    color: #FFFFFF;
+}
+
+.ele-lowest-chips img {
+    width: 49px;
+}
+
+.eleminated-userpic {
+    width: 533.68px;
+    height: 533.68px;
+    position: absolute;
+    top: 270px;
+    left: 704px;
+    margin: auto;
+    z-index: 1002;
+    margin-top: -200px;
+}
+
+.eleminated-username {
+    position: absolute;
+    top: 608px;
+    left: 821px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    z-index: 1004;
+    color: #FFFFFF;
+    width: 422px;
+}
+
+.eleminited-badge {
+    width: 358px;
+    height: auto;
+    position: absolute;
+    top: 625px;
+    left: 970px;
+    z-index: 1010;
+}
+
+/* eliminated */
+.main-elimated {
+    animation: show-after-5-second 1s 2s forwards; 
+    opacity: 0;
+    z-index: 1010;
+    position: absolute;
+    top: 75px;
+}
+
+@keyframes show-after-5-second {
+    to {
+        opacity: 1;
+    }
+
+}
+
+.eliminated-bar {
+    width: 250px;
+    height: auto;
+}
+
+.eliminated-bar-position {
+    position: absolute;
+    left: 195px;
+    top: -63px;
+    width: 802px;
+    margin: 0 auto;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(2) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(3) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(4) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(5) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(6) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(7) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(8) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(9) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(10) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(11) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(12) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(13) {
+    margin-left: -20px;
+}
+
+.eliminated-bar-position .bsc-card:nth-child(14) {
+    margin-left: -20px;
+}
+
+.ele-lowest-chips-number {
+    top: 667px;
+    left: 876px;
+}
+
+.me-position {
+    position: absolute;
+    top: 100px;
+}
+
+.eliminated-img {
+    width: 185px;
+    height: auto;
+}
+
+.winnercup-dr {
+    position: absolute;
+    left: -325px;
+    top: -49px;
+    width: 180px;
+    height: 174px;
+    z-index: 100001;
+}
+
+.highlight-sets-bs {
+display: flex;
+    position: absolute;
+    top: -48px;
+    left: 7px;
+    width: calc(100% - 11px);
+    height: 7px;
+    z-index: 1;
+}
+
+.dd-worldcup {
+    left: -351px !important;
+    width: 249px !important;
+    top: -70px !important;
+}
+
+.pointzoom {
+    transform: scale(1.3);
+    transition: 0.5s ease-in-out;
+    display: inline-block;
+    position: relative;
+    left: 5px;
+}
+
+.scale-chips {
+    transform: scale(1.3);
+    transition: 0.5s ease-in-out;
+  }
+  

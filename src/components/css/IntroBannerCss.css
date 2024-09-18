@@ -1,0 +1,440 @@
+html,
+body {
+  height: 100%;
+}
+
+.maindiv {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.intro_logo_backdrop {
+  position: absolute;
+  width: 1198px;
+  height: 573px;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 61%;
+  mix-blend-mode: screen;
+}
+
+.introrc {
+  z-index: 1000 !important;
+  width: 50%;
+}
+
+.introgrc {
+  width: 100%;
+  z-index: 500 !important;
+  filter: drop-shadow(3.57674px 2.38449px 4.76898px rgba(0, 0, 0, 0.36));
+}
+
+
+@media only screen and (min-width: 1920px) {
+  .intro_logo_backdrop {
+    width: 1820px;
+    height: 873px;
+    top: 50%;
+    left: 50%;
+  }
+
+  .introgrc {
+    width: 100%;
+  }
+
+  .introrc {
+    width: 60%;
+  }
+}
+
+
+.fade-in-banner {
+  -webkit-animation: fade-in 0.3s ease-in 1s both;
+  animation: fade-in 0.3s ease-in 1s both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out-banner {
+  -webkit-animation: fade-out 1s ease-out 10s both;
+  animation: fade-out 1s ease-out 10s both;
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+
+.backdrop {
+  position: absolute;
+  opacity: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1198px;
+  height: 684px;
+}
+
+.backdropw {
+  position: absolute;
+  opacity: 1;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1020px;
+  height: 720px;
+}
+
+.winnerimgbanner {
+  width: 100%;
+  /* z-index: 500 !important; */
+  filter: drop-shadow(3.57674px 2.38449px 4.76898px rgba(0, 0, 0, 0.36));
+}
+
+.backdropwone {
+  position: absolute;
+  opacity: 1;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 960px;
+  height: 720px;
+}
+
+.backdropwthree {
+  position: absolute;
+  opacity: 1;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 1080px;
+  height: 720px;
+}
+
+.backdroponecup {
+  position: absolute;
+  opacity: 1;
+  top: 55%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 500px;
+  height: 350px;
+}
+
+.backdropthreecup {
+  position: absolute;
+  opacity: 1;
+  top: 78%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
+  width: 700px;
+  height: 350px;
+}
+
+.backdroponeuser {
+  position: absolute;
+  opacity: 1;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 300px;
+  height: 450px;
+}
+
+.backdrop1user {
+  position: absolute;
+  opacity: 1;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20 !important;
+  width: 300px;
+  height: 450px;
+}
+
+.backdrop2user {
+  position: absolute;
+  opacity: 1;
+  top: 58%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 300px;
+  height: 450px;
+}
+
+.backdrop3user {
+  position: absolute;
+  opacity: 1;
+  top: 58%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  z-index: 10 !important;
+  width: 300px;
+  height: 450px;
+}
+
+.backdroponeusername {
+  position: absolute;
+  opacity: 1;
+  top: 74%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
+  width: 100%;
+  /* height: 450px; */
+}
+
+.backdroponeprize {
+  position: absolute;
+  opacity: 1;
+  top: 79.5%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  z-index: 100 !important;
+  width: 100%;
+}
+
+.backdrop1username {
+  position: absolute;
+  opacity: 1;
+  top: 73.5%;
+  left: 38%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop2username {
+  position: absolute;
+  opacity: 1;
+  top: 69.5%;
+  left: 54.5%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop3username {
+  position: absolute;
+  opacity: 1;
+  top: 68%;
+  left: 24.5%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop1prize {
+  position: absolute;
+  opacity: 1;
+  top: 78%;
+  left: 37.5%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop2prize {
+  position: absolute;
+  opacity: 1;
+  top: 74.5%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.backdrop3prize {
+  position: absolute;
+  opacity: 1;
+  top: 73%;
+  left: 22%;
+  transform: translate(-50%, -50%);
+  z-index: 1000 !important;
+  width: 100%;
+}
+
+.winnernameone {
+  position: absolute;
+  top: 70%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 25px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.winnernamethree {
+  position: absolute;
+  top: 70%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 20px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.winnername {
+  position: absolute;
+  top: 70%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 25px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.prize {
+  position: absolute;
+  top: 0%;
+  left: 11.2%;
+  text-align: center;
+  font-family: 'roboto' !important;
+  font-style: bolder;
+  font-weight: 600;
+  font-size: 30px !important;
+  width: 100%;
+  z-index: 100000 !important;
+  /* line-height: 0px !important; */
+  letter-spacing: 0.02em;
+  color: #FFD953;
+}
+
+.prizelistimg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.level1-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1680px;
+  height: 430px;
+  position: absolute;
+  left: 125px;
+  top: 330px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.level2-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1680px;
+  height: 520px;
+  position: absolute;
+  left: 125px;
+  top: 310px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.level3-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1680px;
+  height: 720px;
+  position: absolute;
+  left: 125px;
+  top: 160px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.level4-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1585px;
+  height: 875px;
+  position: absolute;
+  left: 125px;
+  top: 100px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.level6-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1620px;
+  height: 930px;
+  position: absolute;
+  left: 125px;
+  top: 90px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+.level12-bg {
+  background: rgba(0, 0, 0, 0.85);
+  width: 1830px;
+  height: 930px;
+  position: absolute;
+  left: 30px;
+  top: 65px;
+  border-radius: 5px;
+  z-index: -1;
+}

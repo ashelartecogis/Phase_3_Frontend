@@ -1,0 +1,210 @@
+.tableRow {
+    margin-top: 5% !important;
+}
+
+.tablecol{
+    z-index: 999 !important;
+    position: absolute !important;
+    top: 10% !important;
+    left: 15% !important;
+}
+
+.cf {
+    background: radial-gradient(89.43% 100% at 55.29% 0%, rgba(94, 0, 0, 0.8) 0%, rgba(147, 3, 3, 0.8) 100%) !important;
+    /* border: 0.449455px solid #FE2020 !important; */
+    box-shadow: 0px 1.34837px 0px #540000, 0px 2.24728px 4.49455px rgba(0, 0, 0, 0.5) !important;
+}
+
+.logobox {
+    position: absolute !important;
+    top: 8% !important;
+    text-align: center !important;
+    left: 2% !important;
+    /* height: 100px !important; */
+    /* width: 30% !important; */
+}
+
+.tossstyle {
+    position: absolute !important;
+    top: 22% !important;
+    left: 5.3% !important;
+    text-align: center !important;
+    /* height: 100px !important; */
+    /* width: 30% !important; */
+}
+
+.introstyle {
+    position: absolute !important;
+    top: 20% !important;
+    left: 2% !important;
+    text-align: center !important;
+    /* height: 100px !important; */
+    /* width: 30% !important; */
+}
+
+.gameStatus {
+    position: absolute !important;
+    width: 100% !important;
+}
+
+@media only screen and (max-width: 1199px) {
+    #player1 {
+        width: 105px !important;
+        left: 20% !important;
+        top: 0% !important;
+    }
+
+    #player2 {
+        width: 105px !important;
+        left: 0% !important;
+        top: 40% !important;
+    }
+
+    #player3 {
+        width: 105px !important;
+        left: 20% !important;
+        top: 75% !important;
+    }
+
+    #player4 {
+        width: 105px !important;
+        right: 20% !important;
+        top: 75% !important;
+    }
+
+    #player5 {
+        width: 105px !important;
+        right: 0% !important;
+        top: 40% !important;
+    }
+
+    #player6 {
+        width: 105px !important;
+        right: 20% !important;
+        top: 0% !important;
+    }
+
+    #h1 {
+        top: -18% !important;
+    }
+
+    #h2 {
+        top: -18% !important;
+    }
+
+    #h3 {
+        top: -18% !important;
+    }
+
+    #h4 {
+        top: -18% !important;
+    }
+
+    #h5 {
+        top: -18% !important;
+    }
+
+    #h6 {
+        top: -18% !important;
+    }
+
+    .tablecol{
+        top: 15% !important;
+    }
+
+    p {
+        line-height: 1.1 !important;
+        font-size: 13px !important;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    #player1 {
+        width: 105px !important;
+        left: 20% !important;
+        top: 0% !important;
+    }
+
+    #player2 {
+        width: 105px !important;
+        left: 0% !important;
+        top: 32% !important;
+    }
+
+    #player3 {
+        width: 105px !important;
+        left: 20% !important;
+        top: 70% !important;
+    }
+
+    #player4 {
+        width: 105px !important;
+        right: 20% !important;
+        top: 70% !important;
+    }
+
+    #player5 {
+        width: 105px !important;
+        right: 0% !important;
+        top: 32% !important;
+    }
+
+    #player6 {
+        width: 105px !important;
+        right: 20% !important;
+        top: 0% !important;
+    }
+
+    #h1 {
+        top: -18% !important;
+    }
+
+    #h2 {
+        top: -18% !important;
+    }
+
+    #h3 {
+        top: -18% !important;
+    }
+
+    #h4 {
+        top: -18% !important;
+    }
+
+    #h5 {
+        top: -18% !important;
+    }
+
+    #h6 {
+        top: -18% !important;
+    }
+
+    .tableRow {
+        margin-top: 15% !important;
+
+    }
+
+    p {
+        line-height: 1.1 !important;
+        font-size: 13px !important;
+    }
+}
+
+@media only screen and (max-height: 860px) {
+
+    .tablecol{
+        top: 15% !important;
+    }
+}
+
+@media only screen and (max-height: 855px) {
+
+    .tablecol{
+        top: 10% !important;
+    }
+}
+
+p {
+    line-height: 1.2 !important;
+    font-weight: 500 !important;
+}
