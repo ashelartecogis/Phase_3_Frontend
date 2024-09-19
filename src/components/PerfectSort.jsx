@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import "./css/DealResult.css";
 import "./css/bestseqlist.css";
 import GRC from "../images/grc_logo_new.png";
@@ -15,9 +15,18 @@ import { base_url } from "../config";
 import perfectSort from "../images/perfectSort.png";
 import axios from "axios";
 import highlightSets from "../images/highlightSets.png";
-import eliminated from "../images/Eliminated_marker.png";
+import eliminatedBg from "../images/EliminatedBg.png";
 import baseURL from "../baseURL";
 import greenpointer from "../images/Green_pointer.png";
+import showRank from "../images/showRank.png"
+import { SocketContext } from "../services/socket";
+import {
+  levelNumber as levelNumberEndpoint,
+  getPlayerTotalChips,
+  getLatestDealNumber,
+  getLastIngame,
+  getDeals
+} from "../server/Api";
 export default function BestSeqList(props) {
   const [dealNumberCount, setDealNumberCount] = useState(1);
   const [inGame, setInGame] = useState([]);
@@ -29,13 +38,156 @@ export default function BestSeqList(props) {
   const [closeCard, setcloseCard] = useState(0);
   const [latestDealNumber, setLatestDealNumber] = useState(null);
   const [dealsData, setDealsData] = useState([]);
+  const [data, setData] = useState([]);
+  const [levelNumber, setLevelNumber] = useState(null);
+  const [rankings, setRankings] = useState([]);
+  const socket = useContext(SocketContext);
+  const getDisplayLevel = (levelNumber, eliminationLevel) => {
+    const ranges = {
+      2: { 1: [1, 6], 2: [7, 12] },
+      3: { 1: [1, 4], 2: [5, 8], 3: [9, 12] },
+      4: { 1: [1, 3], 2: [4, 6], 3: [7, 9], 4: [10, 12] },
+      6: { 1: [1, 2], 2: [3, 4], 3: [5, 6], 4: [7, 8], 5: [9, 10], 6: [11, 12] },
+      12: { 1: [1], 2: [2], 3: [3], 4: [4], 5: [5], 6: [6], 7: [7], 8: [8], 9: [9], 10: [10], 11: [11], 12: [12] },
+    };
+
+    const levelRanges = ranges[levelNumber];
+    if (levelRanges) {
+      for (const [displayLevel, range] of Object.entries(levelRanges)) {
+        if (eliminationLevel >= range[0] && eliminationLevel <= range[range.length - 1]) {
+          return displayLevel;
+        }
+      }
+    }
+
+    return eliminationLevel;
+  };
+
+  useEffect(() => {
+    if (inGame && inGame.length > 0) {
+      // Sort players by elimination status and then by totalChips
+      const sortedPlayers = [...inGame].sort((a, b) => {
+        // First, compare by elimination status
+        if (a.playerStatus === "Eliminated" && b.playerStatus !== "Eliminated") {
+          return 1; // Move eliminated players down
+        }
+        if (a.playerStatus !== "Eliminated" && b.playerStatus === "Eliminated") {
+          return -1; // Move non-eliminated players up
+        }
+  
+        // If both players are eliminated, compare by eliminationPosition
+        if (a.playerStatus === "Eliminated" && b.playerStatus === "Eliminated") {
+          return b.playerId.eliminationPosition - a.playerId.eliminationPosition;
+        }
+  
+        // If neither is eliminated, compare by totalChips in descending order
+        return b.playerId.totalChips - a.playerId.totalChips;
+      });
+  
+      // Initialize an array to hold the rank assignments
+      let updatedRankings = [];
+      let currentRank = 1;
+  
+      for (let i = 0; i < sortedPlayers.length; i++) {
+        let player = sortedPlayers[i];
+  
+        // Check if it's the start of a tie (for non-eliminated players)
+        if (
+          i > 0 &&
+          player.playerStatus !== "Eliminated" &&
+          player.playerId.totalChips === sortedPlayers[i - 1].playerId.totalChips &&
+          sortedPlayers[i - 1].playerStatus !== "Eliminated"
+        ) {
+          // Assign the same rank as the previous player
+          updatedRankings.push({
+            ...player,
+            rank: updatedRankings[i - 1].rank
+          });
+        } else {
+          // Assign the current rank and update for the next unique totalChips or eliminationPosition
+          updatedRankings.push({
+            ...player,
+            rank: currentRank
+          });
+          currentRank++;
+        }
+      }
+  
+      // Set the rankings
+      setRankings(updatedRankings);
+    }
+  }, [inGame]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dealsResponse = await axios.get(
-          `${baseURL}:8000/api/table/getDeals`
-        );
+        // Fetch player data
+        const playerResponse = await fetch(getPlayerTotalChips());
+        const playerResult = await playerResponse.json();
+        setData(playerResult);
+
+        // Fetch level number
+        const levelResponse = await axios.get(levelNumberEndpoint());
+        setLevelNumber(levelResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Fetch data immediately on component mount
+    fetchData();
+
+    // Listen for socket events
+    socket.on("setPickCard", fetchData);
+    socket.on("PickCard", fetchData);
+    socket.on("showOpenCard", fetchData);
+    socket.on("setCloseCard", fetchData);
+    socket.on("CloseCard", fetchData);
+    socket.on("PickStatus", fetchData);
+    socket.on("chance_count", fetchData);
+    socket.on("screenType", fetchData);
+    socket.on("setPlayerStatus", fetchData);
+    socket.on("dealingCard", fetchData);
+    socket.on("dealcard", fetchData);
+    socket.on("setCardSequence", fetchData);
+    socket.on("setBestSeq", fetchData);
+    socket.on("setScreenNo", fetchData);
+    socket.on("showJoker", fetchData);
+    socket.on("Joker", fetchData);
+    socket.on("Scanner", fetchData);
+
+
+
+    // Cleanup listeners on component unmount
+    return () => {
+      socket.off("setPickCard", fetchData);
+      socket.off("PickCard", fetchData);
+      socket.off("showOpenCard", fetchData);
+      socket.off("setCloseCard", fetchData);
+      socket.off("CloseCard", fetchData);
+      socket.off("PickStatus", fetchData); 
+      socket.off("chance_count", fetchData);
+      socket.off("screenType", fetchData);
+      socket.off("setPlayerStatus", fetchData);
+      socket.off("dealingCard", fetchData);
+      socket.off("dealcard", fetchData);
+      socket.off("setCardSequence", fetchData);
+      socket.off("setBestSeq", fetchData);
+      socket.off("setScreenNo", fetchData);
+      socket.off("showJoker", fetchData);
+      socket.off("Joker", fetchData);
+      socket.off("Scanner", fetchData);
+
+
+    };
+  }, [socket]); // Add socket as a dependency
+
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dealsResponse = await axios.get(getDeals());
         const dealsData = dealsResponse.data;
 
         if (dealsData.length > 0) {
@@ -54,9 +206,7 @@ export default function BestSeqList(props) {
           }
         }
 
-        const inGameResponse = await axios.get(
-          `${baseURL}:8000/api/ingame/getLastIngame`
-        );
+        const inGameResponse = await axios.get(getLastIngame());
         const inGameData = inGameResponse.data.InGameRes;
 
         setPlayerData(inGameData);
@@ -73,28 +223,60 @@ export default function BestSeqList(props) {
       }
     };
 
-    fetchData();
-
     const fetchLatestDealNumber = async () => {
       try {
-        const response = await axios.get(
-          `${baseURL}:8000/api/table/getLatestDealNumber`
-        );
-        setLatestDealNumber(response.data); // Directly use the response data
+        const response = await axios.get(getLatestDealNumber());
+        setLatestDealNumber(response.data);
       } catch (error) {
         console.error("Error fetching the latest deal number:", error);
       }
     };
 
+    // Fetch data immediately on component mount
+    fetchData();
     fetchLatestDealNumber();
 
-    const interval = setInterval(() => {
-      fetchData();
-      fetchLatestDealNumber();
-    }, 3000);
+    // Listen for socket events and fetch data accordingly
+    socket.on("setPickCard", fetchData);
+    socket.on("PickCard", fetchData);
+    socket.on("showOpenCard", fetchData);
+    socket.on("setCloseCard", fetchData);
+    socket.on("CloseCard", fetchData);
+    socket.on("PickStatus", fetchData);
+    socket.on("chance_count", fetchData);
+    socket.on("setPlayerStatus", fetchData);
+    socket.on("dealingCard", fetchData);
+    socket.on("dealcard", fetchData);
+    socket.on("setCardSequence", fetchData);
+    socket.on("setBestSeq", fetchData);
+    socket.on("screenType", fetchData);
+    socket.on("setScreenNo", fetchData);
+    socket.on("showJoker", fetchData);
+    socket.on("Joker", fetchData);
+    socket.on("Scanner", fetchData);
 
-    return () => clearInterval(interval);
-  }, [jokerNumber, chanceCount]);
+
+    // Cleanup listeners on component unmount
+    return () => {
+      socket.off("setPickCard", fetchData);
+      socket.off("PickCard", fetchData);
+      socket.off("showOpenCard", fetchData);
+      socket.off("setCloseCard", fetchData);
+      socket.off("CloseCard", fetchData);
+      socket.off("PickStatus", fetchData);
+      socket.off("chance_count", fetchData);
+      socket.off("setPlayerStatus", fetchData);
+      socket.off("dealingCard", fetchData);
+      socket.off("dealcard", fetchData);
+      socket.off("setCardSequence", fetchData);
+      socket.off("setBestSeq", fetchData);
+      socket.off("screenType", fetchData);
+      socket.off("setScreenNo", fetchData);
+      socket.off("showJoker", fetchData);
+      socket.off("Joker", fetchData);
+      socket.off("Scanner", fetchData);
+    };
+  }, [socket, jokerNumber, chanceCount]);
 
   const renderGreenPointer = (className) => {
     return <img src={greenpointer} alt="" className={className} />;
@@ -168,6 +350,11 @@ export default function BestSeqList(props) {
             return isJoker ? picked.imageURI2 : picked.imageURI;
           }),
           bestSeq5: val?.bestSequence5?.cards?.map((cval) => {
+            let picked = Cards.find((o) => o.cardUuid === cval.cardId);
+            let isJoker = isJokerCard(cval.cardId);
+            return isJoker ? picked.imageURI2 : picked.imageURI;
+          }),
+          bestSeq6: val?.bestSequence6?.cards?.map((cval) => {
             let picked = Cards.find((o) => o.cardUuid === cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             return isJoker ? picked.imageURI2 : picked.imageURI;
@@ -273,11 +460,16 @@ export default function BestSeqList(props) {
                 />
                 <span className="cdusername-res">
                   {value.playerId.name.split(" ")[0]}
+                  <img src={showRank} alt="" className="showRankBestSeq" />
+                    <h3 className="showRankTextBestSeq">
+  Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
+</h3>
                 </span>
                 {value.playerStatus !== "Eliminated" ? (
                   <span className="cdchips-res">
                     <img src={CHIP} alt="" className="cdchip-res" />
-                    {value.playerId.totalChips}
+                   {Math.max (0, value.playerId.totalChips)}
+         
                   </span>
                 ) : (
                   <span className="cdchips-res">
@@ -322,7 +514,19 @@ export default function BestSeqList(props) {
                       <span
                         className={`res-drop-text res-drop-text-${index + 1}`}
                       >
-                        <img src={eliminated} className="eliminated-img" />
+                       <img src={eliminatedBg} className="eliminated-img" />
+                        {data.map(player => {
+        if (value && player._id === value.playerId._id && player.eliminationLevel > 0) {
+          const displayLevel = getDisplayLevel(levelNumber, player.eliminationLevel);
+
+          return (
+            <h3 key={player._id} className="eliminated-text">
+              Eliminated - lvl {displayLevel}
+            </h3>
+          );
+        }
+        return null;
+      })}
                       </span>
                     )}
                     <img src={BCM} alt="" className={`bsc-card`} />
@@ -509,6 +713,28 @@ export default function BestSeqList(props) {
                             </div>
                           ))}
                       </div>
+                      {/* <div className="col-auto no-gutters p-1 ps-card-position">
+                        {value.bestSeq6 !== undefined &&
+                          value.bestSeq6.length > 0 &&
+                          value.bestSeq6.map((bval, bindex) => (
+                            <div className="ins-div">
+                              <img
+                                src={bval}
+                                alt=""
+                                className={`bestlistimg shadow ${bindex + 1}`}
+                              />
+                              {(value.bestSequence6.groupType === "1" ||
+                                value.bestSequence6.groupType === "2" ||
+                                value.bestSequence6.groupType === "3") && (
+                                <img
+                                  className="highlight-sets-bs"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </div> */}
                     </div>
                   </div>
                 )}

@@ -26,6 +26,7 @@ import { Cards } from "../constants";
 import LazyLoad from "react-lazyload";
 import { base_url } from "../config";
 import { SocketContext } from "../services/socket";
+import eliminatedBg from "../images/EliminatedBg.png";
 import dealResultImg from "../images/dealResultImg.png";
 import eliminatedPlayerBanner from "../images/eliminated-red-bar.png";
 import eliminatedPlayerGlow from "../images/eliminated-glow.png";
@@ -36,7 +37,15 @@ import axios from "axios";
 import highlightSets from "../images/highlightSets.png";
 import winnercup from "../images/ts_scorer_cup.png";
 import eliminated from "../images/Eliminated_marker.png";
+import showRank from "../images/showRank.png"
 import glowpd from "../images/glow-pd.png";
+import {
+  levelNumber as levelNumberEndpoint,
+  getPlayerTotalChips,
+  getLatestDealNumber,
+  getLastIngame,
+  getDeals
+} from "../server/Api";
 export default function DealResult(props) {
   const socket = useContext(SocketContext);
   const [dealNumberCount, setDealNumberCount] = useState(1);
@@ -73,7 +82,10 @@ export default function DealResult(props) {
   const [scoreCount, setScoreCount] = useState(false);
   const [playerArrangement, setPlayerArrangement] = useState(false);
   const [isScaling, setIsScaling] = useState(false);
+  const [data, setData] = useState([]);
+  const [levelNumber, setLevelNumber] = useState(null);
   
+  const [rankings, setRankings] = useState([]);
   const [allPlayersPoints, setAllPlayersPoints] = useState([
     { totalPoints: playerPoint1, totalChips: playerChips1, isWinner: false },
     { totalPoints: playerPoint2, totalChips: playerChips2, isWinner: false },
@@ -82,6 +94,104 @@ export default function DealResult(props) {
     { totalPoints: playerPoint5, totalChips: playerChips5, isWinner: false },
     { totalPoints: playerPoint6, totalChips: playerChips6, isWinner: false },
   ]);
+
+     
+  const getDisplayLevel = (levelNumber, eliminationLevel) => {
+    const ranges = {
+      2: { 1: [1, 6], 2: [7, 12] },
+      3: { 1: [1, 4], 2: [5, 8], 3: [9, 12] },
+      4: { 1: [1, 3], 2: [4, 6], 3: [7, 9], 4: [10, 12] },
+      6: { 1: [1, 2], 2: [3, 4], 3: [5, 6], 4: [7, 8], 5: [9, 10], 6: [11, 12] },
+      12: { 1: [1], 2: [2], 3: [3], 4: [4], 5: [5], 6: [6], 7: [7], 8: [8], 9: [9], 10: [10], 11: [11], 12: [12] },
+    };
+
+    const levelRanges = ranges[levelNumber];
+    if (levelRanges) {
+      for (const [displayLevel, range] of Object.entries(levelRanges)) {
+        if (eliminationLevel >= range[0] && eliminationLevel <= range[range.length - 1]) {
+          return displayLevel;
+        }
+      }
+    }
+
+    return eliminationLevel;
+  };
+
+  useEffect(() => {
+    if (inGame && inGame.length > 0) {
+      // Sort players by elimination status and then by totalChips
+      const sortedPlayers = [...inGame].sort((a, b) => {
+        // First, compare by elimination status
+        if (a.playerStatus === "Eliminated" && b.playerStatus !== "Eliminated") {
+          return 1; // Move eliminated players down
+        }
+        if (a.playerStatus !== "Eliminated" && b.playerStatus === "Eliminated") {
+          return -1; // Move non-eliminated players up
+        }
+  
+        // If both players are eliminated, compare by eliminationPosition
+        if (a.playerStatus === "Eliminated" && b.playerStatus === "Eliminated") {
+          return b.playerId.eliminationPosition - a.playerId.eliminationPosition;
+        }
+  
+        // If neither is eliminated, compare by totalChips in descending order
+        return b.playerId.totalChips - a.playerId.totalChips;
+      });
+  
+      // Initialize an array to hold the rank assignments
+      let updatedRankings = [];
+      let currentRank = 1;
+  
+      for (let i = 0; i < sortedPlayers.length; i++) {
+        let player = sortedPlayers[i];
+  
+        // Check if it's the start of a tie (for non-eliminated players)
+        if (
+          i > 0 &&
+          player.playerStatus !== "Eliminated" &&
+          player.playerId.totalChips === sortedPlayers[i - 1].playerId.totalChips &&
+          sortedPlayers[i - 1].playerStatus !== "Eliminated"
+        ) {
+          // Assign the same rank as the previous player
+          updatedRankings.push({
+            ...player,
+            rank: updatedRankings[i - 1].rank
+          });
+        } else {
+          // Assign the current rank and update for the next unique totalChips or eliminationPosition
+          updatedRankings.push({
+            ...player,
+            rank: currentRank
+          });
+          currentRank++;
+        }
+      }
+  
+      // Set the rankings
+      setRankings(updatedRankings);
+    }
+  }, [inGame]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch player data
+        const playerResponse = await fetch(getPlayerTotalChips());
+        const playerResult = await playerResponse.json();
+        setData(playerResult);
+
+        // Fetch level number
+        const levelResponse = await axios.get(levelNumberEndpoint());
+        setLevelNumber(levelResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Fetch data immediately on component mount
+    fetchData();
+   
+  }, ); 
 
   let setScreenTypeCallBack = useCallback(
     (data) => {
@@ -493,7 +603,7 @@ export default function DealResult(props) {
       if (val.playerStatus !== "Eliminated") {
         return {
           ...val,
-          seq1: val.cardSequence1.cards.map((cval, cindex) => {
+          seq1: val.bestSequence1.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -502,7 +612,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq2: val.cardSequence2.cards.map((cval, cindex) => {
+          seq2: val.bestSequence2.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -511,7 +621,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq3: val.cardSequence3.cards.map((cval, cindex) => {
+          seq3: val.bestSequence3.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -520,7 +630,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq4: val.cardSequence4.cards.map((cval, cindex) => {
+          seq4: val.bestSequence4.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -529,7 +639,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq5: val.cardSequence5.cards.map((cval, cindex) => {
+          seq5: val.bestSequence5.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -538,7 +648,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq6: val.cardSequence6.cards.map((cval, cindex) => {
+          seq6: val.bestSequence6.cards.map((cval, cindex) => {
             let picked = Cards.find((o) => o.cardUuid == cval.cardId);
             let isJoker = isJokerCard(cval.cardId);
             if (isJoker) {
@@ -639,8 +749,12 @@ export default function DealResult(props) {
                   alt=""
                   className="cduser-res"
                 />
-                <span className="cdusername-res">
-                  {value.playerId.name.split(" ")[0]}{" "}
+                 <span className="cdusername-res">
+                  {value.playerId.name.split(" ")[0]}
+                  <img src={showRank} alt="" className="showRankBestSeq" />
+                    <h3 className="showRankTextBestSeq">
+  Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
+</h3>
                 </span>
                 <div>
                   <img
@@ -656,15 +770,16 @@ export default function DealResult(props) {
 
                 {/* Total chip count for scoreboard */}
                 <span className="cdchips-res">
-                  <img src={CHIP} alt="" className="cdchip-res" />
-                  {/* <b className="pointzoom"> */}
-                  {value.playerStatus !== "Eliminated"
-                    ? props.playerArrangement
-                      ? value.playerId.totalChips
-                      : allPlayersPoints[index].totalChips
-                    : 0}
-                    {/* </b> */}
-                </span>
+  <img src={CHIP} alt="" className="cdchip-res" />
+  {/* <b className="pointzoom"> */}
+  {value.playerStatus !== "Eliminated"
+    ? props.playerArrangement
+      ? Math.max(0, value.playerId.totalChips)
+      : allPlayersPoints[index].totalChips
+    : 0}
+  {/* </b> */}
+</span>
+
 
                 {(value.playerStatus === "Winner" ||
                   value.playerStatus === "autoWinner") && (
@@ -680,7 +795,7 @@ export default function DealResult(props) {
 
                 {!hideChips && value.playerStatus !== "Eliminated" && (
                   <span className="res-pts">
-                    {allPlayersPoints[index].totalPoints}
+                    {value.bestPoints}
                     <span className="res-pts-key"> &nbsp; Pts</span>
                   </span>
                 )}
@@ -696,11 +811,25 @@ export default function DealResult(props) {
                         Dropped
                       </span>
                     )}
-                    {value.playerStatus === "Eliminated" && (
+                     {value.playerStatus === "Eliminated" && (
                       <span
                         className={`res-drop-text res-drop-text-${index + 1}`}
                       >
-                        <img src={eliminated} className="eliminated-img" />
+                       <img src={eliminatedBg} className="eliminated-img" />
+                        {data.map(player => {
+        if (value && player._id === value.playerId._id && player.eliminationLevel > 0) {
+          const displayLevel = getDisplayLevel(levelNumber, player.eliminationLevel);
+
+          return (
+            <h3 key={player._id} className="eliminated-text">
+              Eliminated - lvl {displayLevel}
+            </h3>
+          );
+        }
+        return null;
+      })}
+      
+      
                       </span>
                     )}
                     <img src={BCM} alt="" className={`bsc-card`} />
@@ -737,9 +866,9 @@ export default function DealResult(props) {
                                 //     width:"99px"
                                 // }}
                               />
-                              {(value.cardSequence1.seqType === "pure" ||
-                                value.cardSequence1.seqType === "impure" ||
-                                value.cardSequence1.seqType === "trio") && (
+                              {(value.bestSequence1.groupType === "1" ||
+                                value.bestSequence1.groupType === "2" ||
+                                value.bestSequence1.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
@@ -761,9 +890,9 @@ export default function DealResult(props) {
                                   vindex + 1
                                 }`}
                               />
-                              {(value.cardSequence2.seqType === "pure" ||
-                                value.cardSequence2.seqType === "impure" ||
-                                value.cardSequence2.seqType === "trio") && (
+                              {(value.bestSequence2.groupType === "1" ||
+                                value.bestSequence2.groupType === "2" ||
+                                value.bestSequence2.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
@@ -785,9 +914,9 @@ export default function DealResult(props) {
                                   vindex + 1
                                 }`}
                               />
-                              {(value.cardSequence3.seqType === "pure" ||
-                                value.cardSequence3.seqType === "impure" ||
-                                value.cardSequence3.seqType === "trio") && (
+                              {(value.bestSequence3.groupType === "1" ||
+                                value.bestSequence3.groupType === "2" ||
+                                value.bestSequence3.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
@@ -809,9 +938,9 @@ export default function DealResult(props) {
                                   vindex + 1
                                 }`}
                               />
-                              {(value.cardSequence4.seqType === "pure" ||
-                                value.cardSequence4.seqType === "impure" ||
-                                value.cardSequence4.seqType === "trio") && (
+                              {(value.bestSequence4.groupType === "1" ||
+                                value.bestSequence4.groupType === "2" ||
+                                value.bestSequence4.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
@@ -833,9 +962,9 @@ export default function DealResult(props) {
                                   vindex + 1
                                 }`}
                               />
-                              {(value.cardSequence5.seqType === "pure" ||
-                                value.cardSequence5.seqType === "impure" ||
-                                value.cardSequence5.seqType === "trio") && (
+                              {(value.bestSequence5.groupType === "1" ||
+                                value.bestSequence5.groupType === "2" ||
+                                value.bestSequence5.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
@@ -857,9 +986,9 @@ export default function DealResult(props) {
                                   vindex + 1
                                 }`}
                               />
-                              {(value.cardSequence6.seqType === "pure" ||
-                                value.cardSequence6.seqType === "impure" ||
-                                value.cardSequence6.seqType === "trio") && (
+                              {(value.bestSequence6.groupType === "1" ||
+                                value.bestSequence6.groupType === "2" ||
+                                value.bestSequence6.groupType === "3") && (
                                 <img
                                   className="highlight-sets-bs"
                                   src={highlightSets}
