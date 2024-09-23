@@ -142,7 +142,7 @@ export default function BestSeqList(props) {
 
     // Fetch data immediately on component mount
     fetchData();
-  }, ); // Add socket as a dependency
+  }, []); // Add socket as a dependency
 
   
 
@@ -352,6 +352,15 @@ export default function BestSeqList(props) {
               return picked.imageURI;
             }
           }),
+          // bestSeq6: val?.bestSequence6?.cards?.map((cval, cindex) => {
+          //   let picked = Cards.find((o) => o.cardUuid == cval.cardId);
+          //   let isJoker = isJokerCard(cval.cardId);
+          //   if (isJoker) {
+          //     return picked.imageURI2;
+          //   } else {
+          //     return picked.imageURI;
+          //   }
+          // }),
         };
       } else {
         return {
@@ -602,6 +611,28 @@ export default function BestSeqList(props) {
                             </div>
                           ))}
                       </div>
+                      {/* <div className="col-auto no-gutters p-1 ps-card-position">
+                        {value.bestSeq6 !== undefined &&
+                          value.bestSeq6.length > 0 &&
+                          value.bestSeq6.map((bval, bindex) => (
+                            <div className="ins-div">
+                              <img
+                                src={bval}
+                                alt=""
+                                className={`bestlistimg shadow ${bindex + 1}`}
+                              />
+                              {(value.bestSequence6.groupType === "1" ||
+                                value.bestSequence6.groupType === "2" ||
+                                value.bestSequence6.groupType === "3") && (
+                                <img
+                                  className="highlight-sets-bs"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </div> */}
                     </div>
                   </div>
                 )}

@@ -702,6 +702,8 @@
   50% {
     transform: translateY(0) translateX(300px);
     z-index: 1000;
+    box-shadow: 0 0 50px #39ff14, 0 0 40px #39ff14, 0 0 40px #39ff14 !important; 
+    border: 2px #ff0000 solid !important;
   }
 
   100% {

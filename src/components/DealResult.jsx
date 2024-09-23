@@ -191,7 +191,7 @@ export default function DealResult(props) {
     // Fetch data immediately on component mount
     fetchData();
    
-  }, ); 
+  },[] ); 
 
   let setScreenTypeCallBack = useCallback(
     (data) => {
@@ -648,16 +648,7 @@ export default function DealResult(props) {
               return picked.imageURI;
             }
           }),
-          seq6: val.bestSequence6.cards.map((cval, cindex) => {
-            let picked = Cards.find((o) => o.cardUuid == cval.cardId);
-            let isJoker = isJokerCard(cval.cardId);
-            if (isJoker) {
-              return picked.imageURI2;
-            } else {
-              return picked.imageURI;
-            }
-          }),
-        };
+           };
       } else {
         return {
           ...val,
@@ -974,7 +965,7 @@ export default function DealResult(props) {
                             </div>
                           ))}
                       </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
+                      {/* <div className="col-auto no-gutters p-1 ps-card-position">
                         {value.seq6 != undefined &&
                           value.seq6.length > 0 &&
                           value.seq6.map((value2, vindex) => (
@@ -997,7 +988,7 @@ export default function DealResult(props) {
                               )}
                             </div>
                           ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 )}

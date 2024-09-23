@@ -1,127 +1,103 @@
-    .allcards {
-        margin: 0 auto;
-        left: 0;
-    }
+.allcards {
+    margin: 0 auto;
+    left: 0;
+}
 
-    .ps-card-position-bs {
-        background-color: transparent;
-        width: 891px;
-        top: -26px;
-        margin: 0;
-        left: 102px;
-    }
+.ps-card-position-bs {
+    background-color: transparent;
+    width: 891px;
+    top: -26px;
+    margin: 0;
+    left: 102px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(2) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(2) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(3) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(3) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(4) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(4) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(5) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(5) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(6) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(6) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(7) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(7) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(8) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(8) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(9) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(9) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(10) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(10) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(11) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(11) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(12) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(12) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(13) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(13) {
+    margin-left: -14px;
+}
 
-    .ps-card-position-bs .bsc-card:nth-child(14) {
-        margin-left: -14px;
-    }
+.ps-card-position-bs .bsc-card:nth-child(14) {
+    margin-left: -14px;
+}
 
-    .res-drop-text-1,
-    .res-drop-text-2,
-    .res-drop-text-3,
-    .res-drop-text-4,
-    .res-drop-text-5,
-    .res-drop-text-6 {
+.res-drop-text-1,
+.res-drop-text-2,
+.res-drop-text-3,
+.res-drop-text-4,
+.res-drop-text-5,
+.res-drop-text-6 {
+    background: rgba(0, 0, 0, 0.5);
+    background: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 800px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 124px;
+    position: absolute;
+    top: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .res-declared-text-1,
+    .res-declared-text-2,
+    .res-declared-text-3,
+    .res-declared-text-4,
+    .res-declared-text-5,
+    .res-declared-text-6 {
         background: rgba(0, 0, 0, 0.5);
         background: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
+        background-size: 764px 67px;    
         background-repeat: no-repeat;
         background-position: center;
-        width: 800px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        height: 124px;
-        position: absolute;
-        top: 0 !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .res-declared-text-1,
-        .res-declared-text-2,
-        .res-declared-text-3,
-        .res-declared-text-4,
-        .res-declared-text-5,
-        .res-declared-text-6 {
-            background: rgba(0, 0, 0, 0.5);
-            background: url(../../images/Dropped-bg.png);
-            background-size: 764px 67px;    
-            background-repeat: no-repeat;
-            background-position: center;
-            color: orange;
-            width: 800px;
-            left: 800px;
-            right: 0;
-            margin: 0 auto;
-            height: 124px;
-            position: absolute;
-            top: 7px !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .res-Winner-text-1,
-        .res-Winner-text-2,
-        .res-Winner-text-3,
-        .res-Winner-text-4,
-        .res-Winner-text-5,
-        .res-Winner-text-6 {
-        background: rgba(0, 0, 0, 0.5);
-        background: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
-        color: rgb(16, 230, 16);
+        color: orange;
         width: 800px;
         left: 800px;
         right: 0;
@@ -132,181 +108,237 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        }
-
-                 
-
-    .eliminated-img-1 {
-        position: absolute;
-        top: 104px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
     }
 
-    .eliminated-img-2 {
-        position: absolute;
-        top: 256px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
+    .res-Winner-text-1,
+    .res-Winner-text-2,
+    .res-Winner-text-3,
+    .res-Winner-text-4,
+    .res-Winner-text-5,
+    .res-Winner-text-6 {
+    background: rgba(0, 0, 0, 0.5);
+    background: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: rgb(16, 230, 16);
+    width: 800px;
+    left: 800px;
+    right: 0;
+    margin: 0 auto;
+    height: 124px;
+    position: absolute;
+    top: 7px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     }
 
-    .eliminated-img-3 {
-        position: absolute;
-        top: 409px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+             
 
-    .eliminated-img-4 {
-        position: absolute;
-        top: 558px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+.eliminated-img-1 {
+    position: absolute;
+    top: 104px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-    .eliminated-img-5 {
-        position: absolute;
-        top: 709px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+.eliminated-img-2 {
+    position: absolute;
+    top: 256px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-    .eliminated-img-6 {
-        position: absolute;
-        top: 860px !important;
-        left: 0;
-        background: rgba(0, 0, 0, 0.5);
-        width: 1420px;
-        background-image: url(../../images/Dropped-bg.png);
-        background-size: 764px 67px;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
+.eliminated-img-3 {
+    position: absolute;
+    top: 409px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-    .highlight-sets-bs {
-        display: flex;
-        position: absolute;
-        top: -48px;
-        left: 7px;
-        width: calc(100% - 11px);
-        height: 7px;
-        z-index: 1;
-    }
+.eliminated-img-4 {
+    position: absolute;
+    top: 558px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
-   /* .eliminated-bar-position {
-    z-index: 1000;
-    left: 87px;
-    top: -26px;
-    width: 837px;
-   } */
+.eliminated-img-5 {
+    position: absolute;
+    top: 709px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.eliminated-img-6 {
+    position: absolute;
+    top: 860px !important;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 1420px;
+    background-image: url(../../images/Dropped-bg.png);
+    background-size: 764px 67px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.highlight-sets-bs {
+    display: flex;
+    position: absolute;
+    top: -48px;
+    left: 7px;
+    width: calc(100% - 11px);
+    height: 7px;
+    z-index: 1;
+}
+
+/* .eliminated-bar-position {
+z-index: 1000;
+left: 87px;
+top: -26px;
+width: 837px;
+} */
 
 
-   .cardanres-pp.cardanres1 {
-       /* -webkit-animation: flip-in-hor-top 0.6s ease-in 1s both;
-    animation: flip-in-hor-top 0.6s ease-in 1s both; */
-       animation: none !important;
-       top: 12%;
-       /* right: 10%; */
-   }
+.cardanres-pp.cardanres1 {
+   /* -webkit-animation: flip-in-hor-top 0.6s ease-in 1s both;
+animation: flip-in-hor-top 0.6s ease-in 1s both; */
+   animation: none !important;
+   top: 12%;
+   /* right: 10%; */
+}
 
-   .cardanres-pp.cardanres2 {
-       /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.6s both;
-    animation: flip-in-hor-top 0.5s ease-in 0.6s both; */
-       animation: none !important;
-       top: 26%;
-   }
+.cardanres-pp.cardanres2 {
+   /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.6s both;
+animation: flip-in-hor-top 0.5s ease-in 0.6s both; */
+   animation: none !important;
+   top: 26%;
+}
 
-   .cardanres-pp.cardanres3 {
-       /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.7s both;
-    animation: flip-in-hor-top 0.5s ease-in 0.7s both; */
-       animation: none !important;
-       top: 40%;
-   }
+.cardanres-pp.cardanres3 {
+   /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.7s both;
+animation: flip-in-hor-top 0.5s ease-in 0.7s both; */
+   animation: none !important;
+   top: 40%;
+}
 
-   .cardanres-pp.cardanres4 {
-       /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.8s both;
-    animation: flip-in-hor-top 0.5s ease-in 0.8s both; */
-       animation: none !important;
-       top: 54%;
-   }
+.cardanres-pp.cardanres4 {
+   /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.8s both;
+animation: flip-in-hor-top 0.5s ease-in 0.8s both; */
+   animation: none !important;
+   top: 54%;
+}
 
-   .cardanres-pp.cardanres5 {
-       /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.9s both;
-    animation: flip-in-hor-top 0.5s ease-in 0.9s both; */
-       animation: none !important;
-       top: 68%;
-   }
+.cardanres-pp.cardanres5 {
+   /* -webkit-animation: flip-in-hor-top 0.5s ease-in 0.9s both;
+animation: flip-in-hor-top 0.5s ease-in 0.9s both; */
+   animation: none !important;
+   top: 68%;
+}
 
-   .cardanres-pp.cardanres6 {
-       /* -webkit-animation: flip-in-hor-top 0.5s ease-in 1s both;
-    animation: flip-in-hor-top 0.5s ease-in 1s both; */
-       animation: none !important;
-       top: 82%;
-   }
+.cardanres-pp.cardanres6 {
+   /* -webkit-animation: flip-in-hor-top 0.5s ease-in 1s both;
+animation: flip-in-hor-top 0.5s ease-in 1s both; */
+   animation: none !important;
+   top: 82%;
+}
 
-   .greenpointer1 {
-       position: absolute;
-       left: 229px;
-       top: 140px;
-   }
+.greenpointer1 {
+   position: absolute;
+   left: 229px;
+   top: 140px;
+}
 
-   .greenpointer2 {
-       position: absolute;
-       left: 229px;
-       top: 290px;
-   }
+.greenpointer2 {
+   position: absolute;
+   left: 229px;
+   top: 290px;
+}
 
-   .greenpointer3 {
-       position: absolute;
-       left: 229px;
-       top: 440px;
-   }
+.greenpointer3 {
+   position: absolute;
+   left: 229px;
+   top: 440px;
+}
 
-   .greenpointer4 {
-       position: absolute;
-       left: 229px;
-       top: 590px;
-   }
+.greenpointer4 {
+   position: absolute;
+   left: 229px;
+   top: 590px;
+}
 
-   .greenpointer5 {
-       position: absolute;
-       left: 229px;
-       top: 740px;
-   }
+.greenpointer5 {
+   position: absolute;
+   left: 229px;
+   top: 740px;
+}
 
-   .greenpointer6 {
-       position: absolute;
-       left: 229px;
-       top: 890px;
-   }
+.greenpointer6 {
+   position: absolute;
+   left: 229px;
+   top: 890px;
+}
 
-   /* .perfectSort{
+/* .perfectSort{
 
-              margin-top: 100px;
-                z-Index: "-1";
-   } */
+          margin-top: 100px;
+            z-Index: "-1";
+} */
+
+.showRankBestSeq{
+display: flex;
+position: absolute;
+left: -145px;
+top: 70px;
+height: 90%;
+}
+
+.showRankTextBestSeq {
+display: flex;
+position: absolute;
+font-family: 'Roboto';
+left: -102px;
+top: 77px;
+font-size: 22px;
+font-weight: 900;
+color: #FFC961;
+/* background: linear-gradient(to bottom, #FFC961 0%, #FFC961 0%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent; */
+}
+
+.rank-number {
+display: flex;
+position: absolute;
+left: -45px;
+top: 40px;
+font-size: 22px;
+font-weight: bold;
+color: #FFC961; /* Or any color you prefer */
+}

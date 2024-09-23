@@ -638,6 +638,7 @@ export default function Deal(props) {
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  isbestSeq6,
                 });
                 localStorage.setItem(
                   "ActivePlayer",
@@ -664,6 +665,7 @@ export default function Deal(props) {
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
+                    isbestSeq6,
                   })
                 );
               }, 1000);
@@ -691,6 +693,7 @@ export default function Deal(props) {
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -952,6 +955,7 @@ export default function Deal(props) {
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",

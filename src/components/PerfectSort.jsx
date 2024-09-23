@@ -354,12 +354,7 @@ export default function BestSeqList(props) {
             let isJoker = isJokerCard(cval.cardId);
             return isJoker ? picked.imageURI2 : picked.imageURI;
           }),
-          bestSeq6: val?.bestSequence6?.cards?.map((cval) => {
-            let picked = Cards.find((o) => o.cardUuid === cval.cardId);
-            let isJoker = isJokerCard(cval.cardId);
-            return isJoker ? picked.imageURI2 : picked.imageURI;
-          }),
-        };
+              };
       } else {
         return { ...val };
       }
