@@ -312,22 +312,22 @@ animation: flip-in-hor-top 0.5s ease-in 1s both; */
 } */
 
 .showRankBestSeq{
-display: flex;
-position: absolute;
-left: -145px;
-top: 70px;
-height: 90%;
+    display: flex;
+    position: absolute;
+    left: -155px;
+    top: 64px;
+    height: 121%;
 }
 
 .showRankTextBestSeq {
-display: flex;
-position: absolute;
-font-family: 'Roboto';
-left: -102px;
-top: 77px;
-font-size: 22px;
-font-weight: 900;
-color: #FFC961;
+    display: flex;
+    position: absolute;
+    font-family: 'Roboto';
+    left: -102px;
+    top: 72px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #FFC961;
 /* background: linear-gradient(to bottom, #FFC961 0%, #FFC961 0%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent; */
