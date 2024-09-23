@@ -7,55 +7,22 @@ import React, {
 } from "react";
 import "./css/Deal.css";
 import GRC from "../images/grc_logo_new.png";
-import TITLEBOX from "../images/titlebox.png";
-import RC from "../images/rc.svg";
-import JOKER from "../images/joker.png";
-import JOKERTITLE from "../images/jokertitle.png";
-import RAYS from "../images/rays.png";
 import back_card_min from "../images/back_card_min.png";
-import joker_card_min from "../images/cards/1h-min.png";
-import joker_card_holder from "../images/joker_card_holder.png";
 import open_card_holder from "../images/open_card_holder.png";
 import close_deck from "../images/close_deck.png";
 import close_deck_back_card from "../images/close_deck_back_card.png";
 import joker_min_on_card from "../images/joker-min-on-card.png";
-import BACKCARD from "../images/cards/back_card_single_row.png";
-import valid_declaration from "../images/valid_declaration.png";
-import validation_under_progress from "../images/validation_under_progress.png";
-import invalid_declaration from "../images/invalid_declaration.png";
 import levelTopRight from "../images/levelTopRight2.png";
-import droppedBanner from "../images/droppedBanner.png";
-import samplecard from "../images/sample-card.png";
+import DEALBGIMG from "../images/dealbgimgnew.png";
 import dealbgimgnew_declaration from "../images/dealbgimgnew_declaration.png";
 import axios from "axios";
-import per10 from "../images/10per.png";
-import per20 from "../images/20per.png";
-import per50 from "../images/50per.png";
-import per60 from "../images/60per.png";
-import perbg from "../images/perbg.png";
-import win_meter from "../images/win_meter.png";
 import DIMG from "../images/d.png";
 import auto_declare from "../images/auto_declare.png";
 import highlightSets from "../images/highlightSets.png";
-import highlightCards from "../images/highlightCards.png";
-import highlightCardsRed from "../images/highlightCardsRed.png";
-import UP from "../images/up.png";
-import DOWN from "../images/down.png";
 import RPBG from "../images/rightplayerbg.png";
-import DCBB from "../images/dealchipblackbg.png";
-import STAR from "../images/star.png";
-import CHIP from "../images/chip.svg";
 import LazyLoad from "react-lazyload";
-import FIRST from "../images/first.svg";
-import SECOND from "../images/second.svg";
-import THIRD from "../images/third.svg";
-import DEALBG from "../images/dealbgplayerdetails.png";
-import DEALBGIMG from "../images/dealbgimgnew.png";
-import prob_rect from "../images/prob_rect.png";
-import prob_active from "../images/prob_active.png";
 import { Cards } from "../constants";
 import PERFECT_SORT_LIST from "../images/perfect_sort_list.png";
-import PERFECT_SORT from "../images/perfect_sort.png";
 import tsdealbg from "../images/ts-deal-bg.png";
 import ts_deal_username from "../images/ts-deal-username.png";
 import ts_deal_bg_bg from "../images/ts-deal-bg-bg.png";
@@ -638,7 +605,6 @@ export default function Deal(props) {
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
-                  isbestSeq6,
                 });
                 localStorage.setItem(
                   "ActivePlayer",
@@ -665,7 +631,6 @@ export default function Deal(props) {
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
-                    isbestSeq6,
                   })
                 );
               }, 1000);
@@ -693,7 +658,6 @@ export default function Deal(props) {
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
-                isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -955,7 +919,6 @@ export default function Deal(props) {
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
-                isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -2562,22 +2525,35 @@ export default function Deal(props) {
                 </>
               )}
               {bestSeq.length > 0 &&
-                activePlayerData.playerStatus === "Active" &&
-                dealProb != true && (
+                (activePlayerData.playerStatus === "Active" ||
+                  activePlayerData.playerStatus === "Declared" ||
+                  activePlayerData.playerStatus === "Winner" ||
+                  activePlayerData.playerStatus === "validDeclaration"
+                ) && dealProb == true &&  
+                 (
                   <>
-                    <span className="pstext">Perfect Sort</span>
-                    {(isPick === "false" || isPick === false) && (
-                      <span className="best-points-deal">
-                        {activePlayerData.bestPoints}{" "}
-                        <span className="tracking-in-contract-chips-deal-pts">
-                          Pts
+                    <span className="pstext">Hand Sort</span>
+              
+                    <div className="best-points-deal hand-sort-point">
+                        {activePlayerData.totalPoints / currentBoosterValue}
+                        {/* bottom left perfect sort points  */}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
                         </span>
-                      </span>
-                    )}
+                       
+                      </div>
+               
                   </>
                 )}
-              {activePlayerData.playerStatus === "Active" &&
-                dealProb != true && (
+
+{/* Perfect sort cards  */}
+                    {!(showImage || dealShowImage) && 
+            (activePlayerData.playerStatus === "Active"||
+            activePlayerData.playerStatus === "Declared" ||
+            activePlayerData.playerStatus === "validDeclaration" ||
+            activePlayerData.playerStatus === "Winner" 
+            ) &&
+                 (
                   <>
                     <div className="perfect_sort_cards">
                       <div className="row">
@@ -2723,6 +2699,14 @@ export default function Deal(props) {
                         </div>
                       </div>
                     </div>
+                    {(activePlayerData.playerStatus === "Active" ||
+                activePlayerData.playerStatus === "Declared" ||
+                activePlayerData.playerStatus === "Winner" ||
+               
+                activePlayerData.playerStatus === "validDeclaration") &&
+                dealProb == true && (
+                  <>
+                    <div className="perfect_sort_cards"></div>
                     {bestSeq.length > 0 && (
                       <>
                         {/* <img
@@ -2739,6 +2723,8 @@ export default function Deal(props) {
                     )}
                   </>
                 )}
+                  </>
+                )}
               {(activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared") && (
                 <span className="plstext d-none">Player's Sort</span>
@@ -2752,29 +2738,26 @@ export default function Deal(props) {
                                 /> */}
                 </LazyLoad>
                 {!(showImage || dealShowImage) &&
-                  (activePlayerData.playerStatus === "Declared" ||
-                  activePlayerData.playerStatus === "Rejected" ||
-                  activePlayerData.playerStatus === "Winner" ? (
+                  (activePlayerData.playerStatus === "Winner" ||
+                  activePlayerData.playerStatus === "validDeclaration" ? (
                     <span
                       style={{
                         marginLeft: "1px",
                         marginTop: "-15px",
                         fontSize: "40px",
                         fontWeight: "500",
+                       fontWeight: "bold",
                       }}
                       className="tracking-in-contract-username"
                     >
-                      {activePlayerData.name.split(" ")[0]}
-                      {(activePlayerData.playerStatus === "Declared" ||
-                        activePlayerData.playerStatus === "Rejected" ||
-                        activePlayerData.playerStatus === "Winner") && (
-                        <span
-                          style={{
-                            fontWeight: "500",
-                          }}
-                        >
-                          {" "}
-                          has declared
+                     
+                      {(activePlayerData.playerStatus === "Winner" ||
+                        activePlayerData.playerStatus ===
+                          "validDeclaration") && (
+                        <span className="mark-valid">
+                           <b>{activePlayerData.name.split(" ")[0]}'s Declaration is </b> <b className="green-color">
+                              Valid
+                            </b>{" "}
                         </span>
                       )}
                     </span>
@@ -2800,15 +2783,55 @@ export default function Deal(props) {
                         marginBottom: "-13px",
                       }}
                       className="tracking-in-contract-username"
-                    >
-                      {activePlayerData.name.split(" ")[0]}'s Sort
-                    </span>
+                    ></span>
                   ))}
 
-                {(activePlayerData.playerStatus === "Active" ||
-                  activePlayerData.playerStatus === "Dropped") && (
-                  <>
-                    {activePlayerData.playerStatus !== "Dropped" && (
+                {activePlayerData.playerStatus === "Active" && (
+                  <span
+                    style={{
+                      marginBottom: "-13px",
+                    }}
+                    className="tracking-in-contract-username"
+                  >
+                    {activePlayerData.name.split(" ")[0]} (Perfect Sort)
+                  </span>
+                )}
+
+{!(showImage || dealShowImage) &&
+                  (activePlayerData.playerStatus === "Declared" ? (
+                    <span
+                      style={{
+                        marginLeft: "1px",
+                        marginTop: "-15px",
+                        fontSize: "40px",
+                        fontWeight: "500",
+                      }}
+                      className="tracking-in-contract-username validation-under-progress"
+                    >
+                      {activePlayerData.playerStatus === "Declared" && (
+                        <>
+                          <span className=""
+                            style={{
+                              fontWeight: "500",
+                              color: "#FFC961",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {" "}
+                            {activePlayerData.name.split(" ")[0]}'s card validation under progress <span className="loader-validation"></span>
+                          </span>
+                          
+                        </>
+                      )}
+                    </span>
+                  ) : activePlayerData.playerStatus ===
+                    "Dropped" ? null : activePlayerData.playerStatus ===
+                    "autoWinner" ? (
+                    <>
+                      <span className="tracking-in-contract-username">
+                        {activePlayerData.name.split(" ")[0]} is{" "}
+                        <b className="green-color">Auto Winner</b>
+                      </span>
                       <span className="tracking-in-contract-chips-deal">
                         {activePlayerData.totalPoints}
                         <span className="tracking-in-contract-chips-deal-pts">
@@ -2816,9 +2839,32 @@ export default function Deal(props) {
                           Pts
                         </span>
                       </span>
+                    </>
+                  ) : (
+                    <span
+                      style={{
+                        marginBottom: "-13px",
+                      }}
+                      className="tracking-in-contract-username"
+                    ></span>
+                  ))}
+
+                {(activePlayerData.playerStatus === "Active" ||
+                  activePlayerData.playerStatus === "Dropped") && (
+                  <>
+                    {activePlayerData.playerStatus !== "Dropped" && (
+                      <div className="tracking-in-contract-chips-deal">
+                        {activePlayerData.bestPoints / currentBoosterValue}
+                        {/* bottom left perfect sort points  */}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
+                        </span>
+                       
+                      </div>
                     )}
                   </>
-                )}
+                )}  
+
 
                 {!(showImage || dealShowImage) &&
                   !(
@@ -2837,97 +2883,26 @@ export default function Deal(props) {
                     </>
                   )}
 
-                {activePlayerData.playerStatus === "Declared" && (
-                  <img
-                    src={validation_under_progress}
-                    alt=""
-                    className="validation_div"
-                    style={{
-                      marginBottom: "252px",
-                    }}
-                  />
-                )}
-                {activePlayerData.playerStatus === "Rejected" && (
-                  <img
-                    src={invalid_declaration}
-                    alt=""
-                    className="validation_div"
-                    style={{
-                      marginBottom: "252px",
-                    }}
-                  />
-                )}
-
-                <div>
-                  {!(showImage || dealShowImage) &&
-                    activePlayerData.playerStatus === "Winner" && (
-                      <img
-                        src={valid_declaration}
-                        alt=""
-                        className="validation_div"
-                        style={{ marginBottom: "252px" }}
-                      />
-                    )}
-                </div>
-                {/* showing points   changes are made here */}
-                {!(showImage || dealShowImage) &&
+      
+            
+{/* Showing totalPoints after declaration  */}
+                {!(showImage || dealShowImage) && 
                   (activePlayerData.playerStatus === "Declared" ||
-                    activePlayerData.playerStatus === "Rejected" ||
                     activePlayerData.playerStatus === "Winner" ||
                     activePlayerData.playerStatus === "validDeclaration") && (
                     <>
-                      <span className="tracking-in-contract-chips-deal">
-                        {activePlayerData.totalPoints}
-                        <span className="tracking-in-contract-chips-deal-pts">
-                          {" "}
-                          Pts
+                         <div className="tracking-in-contract-chips-deal">
+                        {activePlayerData.totalPoints / currentBoosterValue}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Ptss</span> <strong>({currentBoosterValue}x)</strong>
                         </span>
-                      </span>
+                       
+                      </div>
                     </>
                   )}
 
-                {activePlayerData.playerStatus === "Declared" && (
-                  <img
-                    src={validation_under_progress}
-                    alt=""
-                    className="validation_div"
-                    style={{
-                      marginBottom: "252px",
-                    }}
-                  />
-                )}
-                {activePlayerData.playerStatus === "validDeclaration" && (
-                  <img
-                    src={valid_declaration}
-                    alt=""
-                    className="validation_div"
-                    style={{
-                      marginBottom: "252px",
-                    }}
-                  />
-                )}
-                {activePlayerData.playerStatus === "Rejected" && (
-                  <img
-                    src={invalid_declaration}
-                    alt=""
-                    className="validation_div"
-                    style={{
-                      marginBottom: "252px",
-                    }}
-                  />
-                )}
-
-                <div>
-                  {!(showImage || dealShowImage) &&
-                    activePlayerData.playerStatus === "Winner" && (
-                      <img
-                        src={valid_declaration}
-                        alt=""
-                        className="validation_div"
-                        style={{ marginBottom: "252px" }}
-                      />
-                    )}
-
+                        <div>
+      
                   {showImage && (
                     <img
                       src={auto_declare}
@@ -2959,12 +2934,11 @@ export default function Deal(props) {
               </div>
               {!(showImage || dealShowImage) && (
                 <div>
-                  {activePlayerData.playerStatus !== "Dropped" && (
+                  {(activePlayerData.playerStatus !== "Dropped" || activePlayerData.playerStatus !== "Rejected") && (
                     <div className="bgdivdealdeal">
                       <LazyLoad height={"100%"}>
                         {activePlayerData.playerStatus === "Declared" ||
                         activePlayerData.playerStatus === "validDeclaration" ||
-                        activePlayerData.playerStatus === "Rejected" ||
                         activePlayerData.playerStatus === "Winner" ||
                         activePlayerData.playerStatus === "autoWinner" ? (
                           <img
@@ -2992,7 +2966,7 @@ export default function Deal(props) {
 
             {/* {(activePlayerData.playerStatus === 'Active' || activePlayerData.playerStatus === 'Dropped') && (<span className="tracking-in-contract-chips-deal">{activePlayerData.totalPoints}<span className="tracking-in-contract-chips-deal-pts"> Pts</span></span>)} */}
 
-            {activePlayerData.playerStatus === "Dropped" && (
+            {(activePlayerData.playerStatus === "Dropped" || activePlayerData.playerStatus === "Rejected") && (
               <div className="">
                 <img src={tsdealbg} alt="" className="tsdealbg" />
                 <img
@@ -3010,7 +2984,7 @@ export default function Deal(props) {
                 </div>
               </div>
             )}
-            {!(showImage || dealShowImage) && (
+            {!(showImage || dealShowImage) && dealProb == true && (
               <div
                 className={`usercardsdiv delay-load ${
                   (activePlayerData.playerStatus === "Dropped" ||
@@ -3303,7 +3277,7 @@ export default function Deal(props) {
                     </div>
                   </>
                 )}
-                {activePlayerData.playerStatus === "Dropped" && <></>}
+                {(activePlayerData.playerStatus === "Dropped" || activePlayerData.playerStatus === "Rejected") && <></>}
               </div>
             )}
             {!(showImage || dealShowImage) && (
@@ -3364,7 +3338,7 @@ export default function Deal(props) {
                                   : curOpenCard
                               }
                               alt=""
-                              className={`oc shadow ${
+                              className={`oc shadow d-none ${
                                 isOpenCard === true
                                   ? activePlayerData.seq2.length === 0
                                     ? "oc2"
@@ -3470,7 +3444,7 @@ export default function Deal(props) {
                   inGame.length > 0 &&
                   inGame.map((value, index) => (
                     <>
-                      {value.playerStatus === "Dropped" && (
+                      {(value.playerStatus === "Dropped" || value.playerStatus === "Rejected") && (
                         <span className={`dropped-text drop-text-${index + 1}`}>
                           Dropped
                         </span>
@@ -3483,7 +3457,7 @@ export default function Deal(props) {
                       )}
                       <div
                         className={`deal-slide ${
-                          (value.playerStatus === "Dropped" ||
+                          (value.playerStatus === "Dropped" ||  value.playerStatus === "Rejected" ||
                             value.playerStatus === "Eliminated") &&
                           "deal-slide-dropped"
                         }`}
@@ -3668,11 +3642,37 @@ export default function Deal(props) {
                                             className="stardeal"
                                         /> */}
                           {/* <span className={`userchips user${index+1}chips`}>960</span> */}
+
+{/* Pts (bestPoints and totalPoints )shown on right hand side  */}
                           <span className="userpointsdeal">
-                            {value.isActive
-                              ? activePlayerData.totalPoints
-                              : value.totalPoints}{" "}
-                            <span className="pts">Pts</span>
+                            {activePlayerData.playerStatus === "Declared" ? (
+                              <>
+                  
+                                <div className="loader"></div>
+
+                                {value.isActive
+                                  ? activePlayerData.bestPoints
+                                  : value.bestPoints}{" "}
+                                <span className="pts">Pts</span>
+                              </>
+                            ) : activePlayerData.playerStatus ===
+                                "validDeclaration" ||
+                              activePlayerData.playerStatus === "Winner" ||
+                              activePlayerData.playerStatus === "autoWinner" ? (
+                              <>
+                                {value.isActive
+                                  ? activePlayerData.totalPoints
+                                  : value.totalPoints}{" "}
+                                <span className="pts">Pts</span>
+                              </>
+                            ) : (
+                              <>
+                                {value.isActive
+                                  ? activePlayerData.bestPoints
+                                  : value.bestPoints}{" "}
+                                <span className="pts">Pts</span>
+                              </>
+                            )}
                           </span>
                         </div>
                       </div>
