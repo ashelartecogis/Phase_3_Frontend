@@ -3014,21 +3014,6 @@ export default function Deal(props) {
     setImgCount((prevCounter) => prevCounter + 1);
   };
 
-  const getAnimationClass = () => {
-    if (activePlayerData.bseq2.length === 0) {
-      return "oc2";
-    } else if (activePlayerData.bseq3.length === 0) {
-      return "oc3";
-    } else if (activePlayerData.bseq4.length === 0) {
-      return "oc4";
-    } else if (activePlayerData.bseq5.length === 0) {
-      return "oc5";
-    } else {
-      return "oc5"; // Default case
-    }
-  };
-  
-
   if (
     activePlayerData &&
     activePlayerData.name &&
