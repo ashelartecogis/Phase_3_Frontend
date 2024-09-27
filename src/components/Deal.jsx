@@ -12,18 +12,35 @@ import open_card_holder from "../images/open_card_holder.png";
 import close_deck from "../images/close_deck.png";
 import close_deck_back_card from "../images/close_deck_back_card.png";
 import joker_min_on_card from "../images/joker-min-on-card.png";
-import invalid_declaration from "../images/invalid_declaration.png";
+import valid_declaration from "../images/valid_declaration.png";
 import levelTopRight from "../images/levelTopRight2.png";
+import droppedBanner from "../images/droppedBanner.png";
+import samplecard from "../images/sample-card.png";
 import dealbgimgnew_declaration from "../images/dealbgimgnew_declaration.png";
 import axios from "axios";
+import WGB from "../images/wgb.png";
 import DIMG from "../images/d.png";
 import auto_declare from "../images/auto_declare.png";
 import highlightSets from "../images/highlightSets.png";
+import highlightCards from "../images/highlightCards.png";
+import highlightCardsRed from "../images/highlightCardsRed.png";
+import UP from "../images/up.png";
+import DOWN from "../images/down.png";
 import RPBG from "../images/rightplayerbg.png";
+import DCBB from "../images/dealchipblackbg.png";
+import STAR from "../images/star.png";
+import CHIP from "../images/chip.svg";
 import LazyLoad from "react-lazyload";
+import FIRST from "../images/first.svg";
+import SECOND from "../images/second.svg";
+import THIRD from "../images/third.svg";
+import DEALBG from "../images/dealbgplayerdetails.png";
 import DEALBGIMG from "../images/dealbgimgnew.png";
+import prob_rect from "../images/prob_rect.png";
+import prob_active from "../images/prob_active.png";
 import { Cards } from "../constants";
 import PERFECT_SORT_LIST from "../images/perfect_sort_list.png";
+import PERFECT_SORT from "../images/perfect_sort.png";
 import tsdealbg from "../images/ts-deal-bg.png";
 import ts_deal_username from "../images/ts-deal-username.png";
 import ts_deal_bg_bg from "../images/ts-deal-bg-bg.png";
@@ -32,7 +49,6 @@ import { base_url } from "../config";
 import { SocketContext } from "../services/socket";
 import baseURL from "../baseURL";
 import dealShow from "../images/dealShow.png";
-
 import {
   boosters as boosterEndpoint,
   levelNumber as levelNumberEndpoint,
@@ -138,6 +154,8 @@ export default function Deal(props) {
     }
   }
 
+  
+
   useEffect(() => {
     const fetchLatestDeal = async () => {
       try {
@@ -188,7 +206,7 @@ export default function Deal(props) {
       return () => clearTimeout(timer);
     }
   }, [activePlayerData?.playerStatus, eliminatedCount, chanceSum]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -480,9 +498,18 @@ export default function Deal(props) {
         }
       });
 
-     
+      // let bseq6 = reqdata.bestSequence6.cards.map((pval, pin) => {
+      //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      //   let isJoker = isJokerCard(pval.cardId);
+      //   if (isJoker) {
+      //     return { img: picked.imageURI2, cardId: pval.cardId };
+      //   } else {
+      //     return { img: picked.imageURI, cardId: pval.cardId };
+      //   }
+      // });
 
-      let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6,...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
+      let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+      let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
 
       let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
       let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
@@ -513,12 +540,18 @@ export default function Deal(props) {
         isbestSeq5 = reqdata.bestSequence5.groupType;
       }
 
+      // if (reqdata.bestSequence6.cards !== undefined) {
+      //   bestSeq6 = [...reqdata.bestSequence6.cards];
+      //   isbestSeq6 = reqdata.bestSequence6.groupType;
+      // }
+
       let newBestSeq = [];
       let newBestSeq1 = [];
       let newBestSeq2 = [];
       let newBestSeq3 = [];
       let newBestSeq4 = [];
       let newBestSeq5 = [];
+      // let newBestSeq6 = [];
       if (bestSeq1 !== undefined) {
         newBestSeq.push(...bestSeq1);
         newBestSeq1 = bestSeq1.map((val, index) => {
@@ -579,6 +612,18 @@ export default function Deal(props) {
           }
         });
       }
+      // if (bestSeq6 !== undefined) {
+      //   newBestSeq.push(...bestSeq6);
+      //   newBestSeq6 = bestSeq6.map((val, index) => {
+      //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+      //     let isJoker = isJokerCard(val.cardId);
+      //     if (isJoker) {
+      //       return picked.imageURI2;
+      //     } else {
+      //       return picked.imageURI;
+      //     }
+      //   });
+      // }
       // console.log("best", newBestSeq1);
       // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
       let newBestCards = newBestSeq.map((val, index) => {
@@ -618,7 +663,7 @@ export default function Deal(props) {
                 ...val.bestSequence3.cards,
                 ...val.bestSequence4.cards,
                 ...val.bestSequence5.cards,
-
+                // ...val.bestSequence6.cards,
               ];
               let dropIndex = 0;
               oldseq.forEach((oldValue, oldIndex) => {
@@ -649,19 +694,22 @@ export default function Deal(props) {
                   bseq3,
                   bseq4,
                   bseq5,
-                  
+                  // bseq6,
+                  newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
                   newBestSeq2,
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
+                  // newBestSeq6,
                   bestPoints: reqdata.bestPoints,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  // isbestSeq6,
                 });
                 localStorage.setItem(
                   "ActivePlayer",
@@ -681,19 +729,22 @@ export default function Deal(props) {
                     bseq3,
                     bseq4,
                     bseq5,
-                
+                    // bseq6,
+                    newBSeq,
                     bestseq: newBestCards,
                     newBestSeq1,
                     newBestSeq2,
                     newBestSeq3,
                     newBestSeq4,
                     newBestSeq5,
+                    // newBestSeq6,
                     bestPoints: reqdata.bestPoints,
                     isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
+                    // isbestSeq6,
                   })
                 );
               }, 1000);
@@ -714,19 +765,22 @@ export default function Deal(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-             
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                // newBestSeq6,
                 bestPoints: reqdata.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                // isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -746,19 +800,22 @@ export default function Deal(props) {
                   bseq3,
                   bseq4,
                   bseq5,
-               
+                  // bseq6,
+                  newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
                   newBestSeq2,
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
+                  // newBestSeq6,
                   bestPoints: reqdata.bestPoints,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  // isbestSeq6,
                 })
               );
             }
@@ -920,10 +977,19 @@ export default function Deal(props) {
               }
             });
 
-         
+            // let bseq6 = data.bestSequence6.cards.map((pval, pin) => {
+            //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            //   let isJoker = isJokerCard(pval.cardId);
+            //   if (isJoker) {
+            //     return { img: picked.imageURI2, cardId: pval.cardId };
+            //   } else {
+            //     return { img: picked.imageURI, cardId: pval.cardId };
+            //   }
+            // });
 
-            let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6, ...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
-           
+
+            let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+            let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
             // newSeq.push(popped);
             let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
             let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
@@ -952,12 +1018,17 @@ export default function Deal(props) {
               bestSeq5 = [...data.bestSequence5.cards];
               isbestSeq5 = data.bestSequence5.groupType;
             }
+            // if (data.bestSequence6.cards !== undefined) {
+            //   bestSeq6 = [...data.bestSequence6.cards];
+            //   isbestSeq6 = data.bestSequence6.groupType;
+            // }
             let newBestSeq = [];
             let newBestSeq1 = [];
             let newBestSeq2 = [];
             let newBestSeq3 = [];
             let newBestSeq4 = [];
             let newBestSeq5 = [];
+            // let newBestSeq6 = [];
             if (bestSeq1 !== undefined) {
               newBestSeq.push(...bestSeq1);
               newBestSeq1 = bestSeq1.map((val, index) => {
@@ -1018,6 +1089,18 @@ export default function Deal(props) {
                 }
               });
             }
+            // if (bestSeq6 !== undefined) {
+            //   newBestSeq.push(...bestSeq6);
+            //   newBestSeq6 = bestSeq6.map((val, index) => {
+            //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+            //     let isJoker = isJokerCard(val.cardId);
+            //     if (isJoker) {
+            //       return picked.imageURI2;
+            //     } else {
+            //       return picked.imageURI;
+            //     }
+            //   });
+            // }
 
             // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
             let newBestCards = newBestSeq.map((val, index) => {
@@ -1041,20 +1124,22 @@ export default function Deal(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-                
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                // newBestSeq6,
                 bestPoints: data.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
-           
+                // isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -1074,21 +1159,22 @@ export default function Deal(props) {
                   bseq3,
                   bseq4,
                   bseq5,
-              
+                  // bseq6,
+                  newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
                   newBestSeq2,
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
-                 
+                  // newBestSeq6,
                   bestPoints: data.bestPoints,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
-  
+                  // isbestSeq6,
                 })
               );
             }, 1000);
@@ -1109,265 +1195,340 @@ export default function Deal(props) {
     }
   }, []);
 
-    let showOpenCard = useCallback((datas) => {
-      console.log("openc", datas);
-      let data = datas.updateDealOpenCard;
-      // console.log("data.openCard", data.openCard);
+  let showOpenCard = useCallback((datas) => {
+    console.log("openc", datas);
+    let data = datas.updateDealOpenCard;
+    // console.log("data.openCard", data.openCard);
 
-      if (datas.status === "pick") {
-        setIsOpenPick(true);
-        localStorage.setItem("isOpenPick", true);
-        // setTimeout(() => {
-        setIsOpenCard(true);
-        localStorage.setItem("isOpenCard", true);
-        // }, 1000);
-        let localp = localStorage.getItem("isOpenCard");
-        // console.log("on pick", localp);
-        setIsDropCard(null);
-        localStorage.removeItem("isDropCard");
-        // setTimeout(() => {
-        //     setIsOpenPick(false);
-        //     localStorage.setItem("isOpenPick", false);
-        // }, 1000);
-      } else if (datas.status === "drop") {
-        // console.log("show drop");
-        setIsOpenPick(false);
-        localStorage.setItem("isOpenPick", false);
-        setIsOpenCard(false);
-        localStorage.setItem("isOpenCard", false);
-        setIsCloseCard(false);
-        localStorage.setItem("isCloseCard", false);
-        setIsPick(false);
-        localStorage.setItem("isPick", false);
-        let LocalScreen = localStorage.getItem("screenNo");
-        // let LocalActivePlayer = localStorage.getItem("ActivePlayer");
-        // console.log("out open card drop", LocalScreen);
-        if (LocalScreen >= 1 && LocalScreen <= 6) {
-          // console.log("in open card drop", LocalScreen);
-          let currentPlayerId = datas.playerId;
-          let InGame = JSON.parse(localStorage.getItem("InGame"));
-          InGame.forEach((val, index) => {
-            if (val.playerStatus === "Active") {
-              if (val.playerId._id.toString() === currentPlayerId.toString()) {
-                // let oldActivePlayer = JSON.parse(localStorage.getItem('ActivePlayer'));
-                // console.log("oldActivePlayer", oldActivePlayer);
-                // setActivePlayerData(oldActivePlayer);
-                // localStorage.setItem("ActivePlayer", JSON.stringify(oldActivePlayer));
-                let seq1 = val.cardSequence1.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-                // let popped = seq1.pop();
-                let seq2 = val.cardSequence2.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let seq3 = val.cardSequence3.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let seq4 = val.cardSequence4.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let seq5 = val.cardSequence5.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let seq6 = val.cardSequence6.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let bseq1 = val.bestSequence1.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-                // let popped = bseq1.pop();
-                let bseq2 = val.bestSequence2.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let bseq3 = val.bestSequence3.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let bseq4 = val.bestSequence4.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-                let bseq5 = val.bestSequence5.cards.map((pval, pin) => {
-                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                  let isJoker = isJokerCard(pval.cardId);
-                  if (isJoker) {
-                    return { img: picked.imageURI2, cardId: pval.cardId };
-                  } else {
-                    return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
-
-            
-
-                let newSeq = [
-                  ...seq1,
-                  ...seq2,
-                  ...seq3,
-                  ...seq4,
-                  ...seq5,
-                  ...seq6,
-                  ...bseq1,
-                  ...bseq2,
-                  ...bseq3,
-                  ...bseq4,
-                  ...bseq5,
-                ];
-
-                let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-                let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
-                let bestPoints = 0;
-                if (val.bestSequence1.cards !== undefined) {
-                  bestSeq1 = [...val.bestSequence1.cards];
-                  isbestSeq1 = val.bestSequence1.groupType;
+    if (datas.status === "pick") {
+      setIsOpenPick(true);
+      localStorage.setItem("isOpenPick", true);
+      // setTimeout(() => {
+      setIsOpenCard(true);
+      localStorage.setItem("isOpenCard", true);
+      // }, 1000);
+      let localp = localStorage.getItem("isOpenCard");
+      // console.log("on pick", localp);
+      setIsDropCard(null);
+      localStorage.removeItem("isDropCard");
+      // setTimeout(() => {
+      //     setIsOpenPick(false);
+      //     localStorage.setItem("isOpenPick", false);
+      // }, 1000);
+    } else if (datas.status === "drop") {
+      // console.log("show drop");
+      setIsOpenPick(false);
+      localStorage.setItem("isOpenPick", false);
+      setIsOpenCard(false);
+      localStorage.setItem("isOpenCard", false);
+      setIsCloseCard(false);
+      localStorage.setItem("isCloseCard", false);
+      setIsPick(false);
+      localStorage.setItem("isPick", false);
+      let LocalScreen = localStorage.getItem("screenNo");
+      // let LocalActivePlayer = localStorage.getItem("ActivePlayer");
+      // console.log("out open card drop", LocalScreen);
+      if (LocalScreen >= 1 && LocalScreen <= 6) {
+        // console.log("in open card drop", LocalScreen);
+        let currentPlayerId = datas.playerId;
+        let InGame = JSON.parse(localStorage.getItem("InGame"));
+        InGame.forEach((val, index) => {
+          if (val.playerStatus === "Active") {
+            if (val.playerId._id.toString() === currentPlayerId.toString()) {
+              // let oldActivePlayer = JSON.parse(localStorage.getItem('ActivePlayer'));
+              // console.log("oldActivePlayer", oldActivePlayer);
+              // setActivePlayerData(oldActivePlayer);
+              // localStorage.setItem("ActivePlayer", JSON.stringify(oldActivePlayer));
+              let seq1 = val.cardSequence1.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
+              });
+              // let popped = seq1.pop();
+              let seq2 = val.cardSequence2.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
+                }
+              });
 
-                if (val.bestSequence2.cards !== undefined) {
-                  bestSeq2 = [...val.bestSequence2.cards];
-                  isbestSeq2 = val.bestSequence2.groupType;
+              let seq3 = val.cardSequence3.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
+              });
 
-                if (val.bestSequence3.cards !== undefined) {
-                  bestSeq3 = [...val.bestSequence3.cards];
-                  isbestSeq3 = val.bestSequence3.groupType;
+              let seq4 = val.cardSequence4.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
+              });
 
-                if (val.bestSequence4.cards !== undefined) {
-                  bestSeq4 = [...val.bestSequence4.cards];
-                  isbestSeq4 = val.bestSequence4.groupType;
+              let seq5 = val.cardSequence5.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
+              });
 
-                if (val.bestSequence5.cards !== undefined) {
-                  bestSeq5 = [...val.bestSequence5.cards];
-                  isbestSeq5 = val.bestSequence5.groupType;
+              let seq6 = val.cardSequence6.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
+              });
 
-           
-                let newBestSeq = [];
-                let newBestSeq1 = [];
-                let newBestSeq2 = [];
-                let newBestSeq3 = [];
-                let newBestSeq4 = [];
-                let newBestSeq5 = [];
-     
-                if (Array.isArray(bestSeq1) && bestSeq1.length > 0) {
-                  newBestSeq.push(...bestSeq1);
-                  newBestSeq1 = bestSeq1.map((val) => {
-                    let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                    let isJoker = isJokerCard(val.cardId);
-                    return isJoker ? picked.imageURI2 : picked.imageURI;
-                  });
+              let bseq1 = val.bestSequence1.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
-                
-                if (Array.isArray(bestSeq2) && bestSeq2.length > 0) {
-                  newBestSeq.push(...bestSeq2);
-                  newBestSeq2 = bestSeq2.map((val) => {
-                    let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                    let isJoker = isJokerCard(val.cardId);
-                    return isJoker ? picked.imageURI2 : picked.imageURI;
-                  });
+              });
+              // let popped = bseq1.pop();
+              let bseq2 = val.bestSequence2.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
-                
-                if (Array.isArray(bestSeq3) && bestSeq3.length > 0) {
-                  newBestSeq.push(...bestSeq3);
-                  newBestSeq3 = bestSeq3.map((val) => {
-                    let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                    let isJoker = isJokerCard(val.cardId);
-                    return isJoker ? picked.imageURI2 : picked.imageURI;
-                  });
+              });
+
+              let bseq3 = val.bestSequence3.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
-                
-                if (Array.isArray(bestSeq4) && bestSeq4.length > 0) {
-                  newBestSeq.push(...bestSeq4);
-                  newBestSeq4 = bestSeq4.map((val) => {
-                    let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                    let isJoker = isJokerCard(val.cardId);
-                    return isJoker ? picked.imageURI2 : picked.imageURI;
-                  });
+              });
+
+              let bseq4 = val.bestSequence4.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
-                
-                if (Array.isArray(bestSeq5) && bestSeq5.length > 0) {
-                  newBestSeq.push(...bestSeq5);
-                  newBestSeq5 = bestSeq5.map((val) => {
-                    let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                    let isJoker = isJokerCard(val.cardId);
-                    return isJoker ? picked.imageURI2 : picked.imageURI;
-                  });
+              });
+
+              let bseq5 = val.bestSequence5.cards.map((pval, pin) => {
+                let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                let isJoker = isJokerCard(pval.cardId);
+                if (isJoker) {
+                  return { img: picked.imageURI2, cardId: pval.cardId };
+                } else {
+                  return { img: picked.imageURI, cardId: pval.cardId };
                 }
-                
-            
-                let newBestCards = newBestSeq.map((val, index) => {
+              });
+
+              // let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
+              //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              //   let isJoker = isJokerCard(pval.cardId);
+              //   if (isJoker) {
+              //     return { img: picked.imageURI2, cardId: pval.cardId };
+              //   } else {
+              //     return { img: picked.imageURI, cardId: pval.cardId };
+              //   }
+              // });
+
+              let newSeq = [
+                ...seq1,
+                ...seq2,
+                ...seq3,
+                ...seq4,
+                ...seq5,
+                ...seq6,
+              ];
+
+              let newBSeq = [
+                ...bseq1,
+                ...bseq2,
+                ...bseq3,
+                ...bseq4,
+                ...bseq5,
+                // ...bseq6,
+              ];
+              let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
+              let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+              let bestPoints = 0;
+              if (val.bestSequence1.cards !== undefined) {
+                bestSeq1 = [...val.bestSequence1.cards];
+                isbestSeq1 = val.bestSequence1.groupType;
+              }
+
+              if (val.bestSequence2.cards !== undefined) {
+                bestSeq2 = [...val.bestSequence2.cards];
+                isbestSeq2 = val.bestSequence2.groupType;
+              }
+
+              if (val.bestSequence3.cards !== undefined) {
+                bestSeq3 = [...val.bestSequence3.cards];
+                isbestSeq3 = val.bestSequence3.groupType;
+              }
+
+              if (val.bestSequence4.cards !== undefined) {
+                bestSeq4 = [...val.bestSequence4.cards];
+                isbestSeq4 = val.bestSequence4.groupType;
+              }
+
+              if (val.bestSequence5.cards !== undefined) {
+                bestSeq5 = [...val.bestSequence5.cards];
+                isbestSeq5 = val.bestSequence5.groupType;
+              }
+
+              // if (val.bestSequence6.cards !== undefined) {
+              //   bestSeq6 = [...val.bestSequence6.cards];
+              //   isbestSeq6 = val.bestSequence6.groupType;
+              // }
+              let newBestSeq = [];
+              let newBestSeq1 = [];
+              let newBestSeq2 = [];
+              let newBestSeq3 = [];
+              let newBestSeq4 = [];
+              let newBestSeq5 = [];
+              // let newBestSeq6 = [];
+              if (bestSeq1 !== undefined) {
+                newBestSeq.push(...bestSeq1);
+                newBestSeq1 = bestSeq1.map((val, index) => {
                   let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                  return picked.imageURI;
+                  let isJoker = isJokerCard(val.cardId);
+                  if (isJoker) {
+                    return picked.imageURI2;
+                  } else {
+                    return picked.imageURI;
+                  }
                 });
-                setTimeout(() => {
-                  // console.log("done drop");
-                  setActivePlayerData({
+              }
+              if (bestSeq2 !== undefined) {
+                newBestSeq.push(...bestSeq2);
+                newBestSeq2 = bestSeq2.map((val, index) => {
+                  let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                  let isJoker = isJokerCard(val.cardId);
+                  if (isJoker) {
+                    return picked.imageURI2;
+                  } else {
+                    return picked.imageURI;
+                  }
+                });
+              }
+              if (bestSeq3 !== undefined) {
+                newBestSeq.push(...bestSeq3);
+                newBestSeq3 = bestSeq3.map((val, index) => {
+                  let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                  let isJoker = isJokerCard(val.cardId);
+                  if (isJoker) {
+                    return picked.imageURI2;
+                  } else {
+                    return picked.imageURI;
+                  }
+                });
+              }
+              if (bestSeq4 !== undefined) {
+                newBestSeq.push(...bestSeq4);
+                newBestSeq4 = bestSeq4.map((val, index) => {
+                  let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                  let isJoker = isJokerCard(val.cardId);
+                  if (isJoker) {
+                    return picked.imageURI2;
+                  } else {
+                    return picked.imageURI;
+                  }
+                });
+              }
+              if (bestSeq5 !== undefined) {
+                newBestSeq.push(...bestSeq5);
+                newBestSeq5 = bestSeq5.map((val, index) => {
+                  let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                  let isJoker = isJokerCard(val.cardId);
+                  if (isJoker) {
+                    return picked.imageURI2;
+                  } else {
+                    return picked.imageURI;
+                  }
+                });
+              }
+              // if (bestSeq6 !== undefined) {
+              //   newBestSeq.push(...bestSeq6);
+              //   newBestSeq6 = bestSeq6.map((val, index) => {
+              //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+              //     let isJoker = isJokerCard(val.cardId);
+              //     if (isJoker) {
+              //       return picked.imageURI2;
+              //     } else {
+              //       return picked.imageURI;
+              //     }
+              //   });
+              // }
+              let newBestCards = newBestSeq.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                return picked.imageURI;
+              });
+              setTimeout(() => {
+                // console.log("done drop");
+                setActivePlayerData({
+                  ...val.playerId,
+                  totalPoints: val.totalPoints,
+                  playerStatus: val.playerStatus,
+                  seq1,
+                  seq2,
+                  seq3,
+                  seq4,
+                  seq5,
+                  seq6,
+                  newSeq,
+                  bseq1,
+                  bseq2,
+                  bseq3,
+                  bseq4,
+                  bseq5,
+                  // bseq6,
+                  newBSeq,
+                  bestseq: newBestCards,
+                  newBestSeq1,
+                  newBestSeq2,
+                  newBestSeq3,
+                  newBestSeq4,
+                  newBestSeq5,
+                  // newBestSeq6,
+                  bestPoints: val.bestPoints,
+                  isbestSeq1,
+                  isbestSeq2,
+                  isbestSeq3,
+                  isbestSeq4,
+                  isbestSeq5,
+                  // isbestSeq6,
+                });
+                localStorage.setItem(
+                  "ActivePlayer",
+                  JSON.stringify({
                     ...val.playerId,
                     totalPoints: val.totalPoints,
                     playerStatus: val.playerStatus,
@@ -1383,118 +1544,89 @@ export default function Deal(props) {
                     bseq3,
                     bseq4,
                     bseq5,
-                   
+                    // bseq6,
+                    newBSeq,
                     bestseq: newBestCards,
                     newBestSeq1,
                     newBestSeq2,
                     newBestSeq3,
                     newBestSeq4,
                     newBestSeq5,
+                    // newBestSeq6,
                     bestPoints: val.bestPoints,
                     isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
-                  });
-                  localStorage.setItem(
-                    "ActivePlayer",
-                    JSON.stringify({
-                      ...val.playerId,
-                      totalPoints: val.totalPoints,
-                      playerStatus: val.playerStatus,
-                      seq1,
-                      seq2,
-                      seq3,
-                      seq4,
-                      seq5,
-                      seq6,
-                      newSeq,
-                      bseq1,
-                      bseq2,
-                      bseq3,
-                      bseq4,
-                      bseq5,
-                   
-                      bestseq: newBestCards,
-                      newBestSeq1,
-                      newBestSeq2,
-                      newBestSeq3,
-                      newBestSeq4,
-                      newBestSeq5,
-                      bestPoints: val.bestPoints,
-                      isbestSeq1,
-                      isbestSeq2,
-                      isbestSeq3,
-                      isbestSeq4,
-                      isbestSeq5,
-                    })
-                  );
-                }, 1000);
-              }
+                    // isbestSeq6,
+                  })
+                );
+              }, 1000);
             }
-          });
+          }
+        });
 
-          let LocalActivePlayer = JSON.parse(
-            localStorage.getItem("ActivePlayer")
-          );
-          // console.log("LocalActivePlayer", LocalActivePlayer);
-          // console.log("currentPlayerId", currentPlayerId);
-          let newInGame = InGame.map((val, index) => {
-            if (
-              val.playerId._id.toString() === LocalActivePlayer._id.toString()
-            ) {
-              if (val.playerStatus === "Active") {
-                return { ...val, isActive: 1 };
-              } else {
-                return { ...val, isActive: 0 };
-              }
+        let LocalActivePlayer = JSON.parse(
+          localStorage.getItem("ActivePlayer")
+        );
+        // console.log("LocalActivePlayer", LocalActivePlayer);
+        // console.log("currentPlayerId", currentPlayerId);
+        let newInGame = InGame.map((val, index) => {
+          if (
+            val.playerId._id.toString() === LocalActivePlayer._id.toString()
+          ) {
+            if (val.playerStatus === "Active") {
+              return { ...val, isActive: 1 };
             } else {
               return { ...val, isActive: 0 };
             }
-          });
-          localStorage.setItem("InGame", JSON.stringify(newInGame));
-          setInGame(newInGame);
-        }
-      } else {
-        setIsOpenDrop(false);
-        localStorage.setItem("isOpenDrop", false);
-        setIsOpenPick(false);
-        localStorage.setItem("isOpenPick", false);
-        setIsOpenCard(false);
-        localStorage.setItem("isOpenCard", false);
+          } else {
+            return { ...val, isActive: 0 };
+          }
+        });
+        localStorage.setItem("InGame", JSON.stringify(newInGame));
+        setInGame(newInGame);
       }
+    } else {
+      setIsOpenDrop(false);
+      localStorage.setItem("isOpenDrop", false);
+      setIsOpenPick(false);
+      localStorage.setItem("isOpenPick", false);
+      setIsOpenCard(false);
+      localStorage.setItem("isOpenCard", false);
+    }
 
-      if (data.openCard !== undefined && data.openCard.length > 0) {
-        // console.log("isd rop", isDropCard);
-        //   setTimeout(()=>{
-        let picked = Cards.find(
-          (o) => o.cardUuid == data.openCard[data.openCard.length - 1].cardId
-        );
-        // console.log("picked", picked)
-        setOpenCard(picked.imageURI);
-        localStorage.setItem("openCard", picked.imageURI);
-        if (datas.status === "pick") {
-          setTimeout(() => {
-            setCurOpenCard(picked.imageURI);
-            localStorage.setItem("curOpenCard", picked.imageURI);
-          }, 1000);
-        } else if (datas.status === "drop") {
+    if (data.openCard !== undefined && data.openCard.length > 0) {
+      // console.log("isd rop", isDropCard);
+      //   setTimeout(()=>{
+      let picked = Cards.find(
+        (o) => o.cardUuid == data.openCard[data.openCard.length - 1].cardId
+      );
+      // console.log("picked", picked)
+      setOpenCard(picked.imageURI);
+      localStorage.setItem("openCard", picked.imageURI);
+      if (datas.status === "pick") {
+        setTimeout(() => {
           setCurOpenCard(picked.imageURI);
           localStorage.setItem("curOpenCard", picked.imageURI);
-        }
-
-        // setScreen(2);
-
-        //   }, 1000);
-      } else {
-        // console.log('empty');
-        setTimeout(() => {
-          setOpenCard(null);
-          localStorage.removeItem("openCard");
         }, 1000);
+      } else if (datas.status === "drop") {
+        setCurOpenCard(picked.imageURI);
+        localStorage.setItem("curOpenCard", picked.imageURI);
       }
-    }, []);
+
+      // setScreen(2);
+
+      //   }, 1000);
+    } else {
+      // console.log('empty');
+      setTimeout(() => {
+        setOpenCard(null);
+        localStorage.removeItem("openCard");
+      }, 1000);
+    }
+  }, []);
 
   let setClosedCard = useCallback((datas) => {
     let data1 = datas.closeResult;
@@ -1512,7 +1644,10 @@ export default function Deal(props) {
         setCloseCard(null);
         localStorage.removeItem("closeCard");
       }, 1000);
-    } 
+    } else {
+      setCloseCard(null);
+      localStorage.removeItem("closeCard");
+    }
     // console.log("cc:", closeCard);
   }, []);
 
@@ -1646,10 +1781,18 @@ export default function Deal(props) {
               }
             });
 
-        
+            // let bseq6 = data.bestSequence6.cards.map((pval, pin) => {
+            //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            //   let isJoker = isJokerCard(pval.cardId);
+            //   if (isJoker) {
+            //     return { img: picked.imageURI2, cardId: pval.cardId };
+            //   } else {
+            //     return { img: picked.imageURI, cardId: pval.cardId };
+            //   }
+            // });
 
-            let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6, ...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
-          
+            let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+            let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
 
             let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
             let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
@@ -1680,13 +1823,18 @@ export default function Deal(props) {
               isbestSeq5 = data.bestSequence5.groupType;
             }
 
+            // if (data.bestSequence6.cards !== undefined) {
+            //   bestSeq6 = [...data.bestSequence6.cards];
+            //   isbestSeq6 = data.bestSequence6.groupType;
+            // }
+
             let newBestSeq = [];
             let newBestSeq1 = [];
             let newBestSeq2 = [];
             let newBestSeq3 = [];
             let newBestSeq4 = [];
             let newBestSeq5 = [];
-
+            // let newBestSeq6 = [];
             if (bestSeq1 !== undefined) {
               newBestSeq.push(...bestSeq1);
               newBestSeq1 = bestSeq1.map((val, index) => {
@@ -1748,6 +1896,19 @@ export default function Deal(props) {
               });
             }
 
+            // if (bestSeq6 !== undefined) {
+            //   newBestSeq.push(...bestSeq6);
+            //   newBestSeq6 = bestSeq6.map((val, index) => {
+            //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+            //     let isJoker = isJokerCard(val.cardId);
+            //     if (isJoker) {
+            //       return picked.imageURI2;
+            //     } else {
+            //       return picked.imageURI;
+            //     }
+            //   });
+            // }
+
             let newBestCards = newBestSeq.map((val, index) => {
               let picked = Cards.find((o) => o.cardUuid == val.cardId);
               return picked.imageURI;
@@ -1769,19 +1930,22 @@ export default function Deal(props) {
               bseq3,
               bseq4,
               bseq5,
-           
+              // bseq6,
+              newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
               newBestSeq2,
               newBestSeq3,
               newBestSeq4,
               newBestSeq5,
+              // newBestSeq6,
               bestPoints: data.bestPoints,
               isbestSeq1,
               isbestSeq2,
               isbestSeq3,
               isbestSeq4,
               isbestSeq5,
+              // isbestSeq6,
             });
             localStorage.setItem(
               "ActivePlayer",
@@ -1801,19 +1965,22 @@ export default function Deal(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-            
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                // newBestSeq6,
                 bestPoints: data.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                // isbestSeq6,
               })
             );
 
@@ -2209,7 +2376,15 @@ export default function Deal(props) {
                   }
                 });
 
-             
+                // let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
+                //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                //   let isJoker = isJokerCard(pval.cardId);
+                //   if (isJoker) {
+                //     return { img: picked.imageURI2, cardId: pval.cardId };
+                //   } else {
+                //     return { img: picked.imageURI, cardId: pval.cardId };
+                //   }
+                // });
 
                 let newSeq = [
                   ...seq1,
@@ -2218,19 +2393,18 @@ export default function Deal(props) {
                   ...seq4,
                   ...seq5,
                   ...seq6,
+                ];
+
+                let newBSeq = [
                   ...bseq1,
                   ...bseq2,
                   ...bseq3,
                   ...bseq4,
                   ...bseq5,
+                  // ...bseq6,
                 ];
-
-                let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-                let isbestSeq1,
-                  isbestSeq2,
-                  isbestSeq3,
-                  isbestSeq4,
-                  isbestSeq5;
+                let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
+                let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
                 let bestPoints = 0;
                 if (val.bestSequence1.cards !== undefined) {
                   bestSeq1 = [...val.bestSequence1.cards];
@@ -2257,13 +2431,17 @@ export default function Deal(props) {
                   isbestSeq5 = val.bestSequence5.groupType;
                 }
 
-               
+                // if (val.bestSequence6.cards !== undefined) {
+                //   bestSeq6 = [...val.bestSequence6.cards];
+                //   isbestSeq6 = val.bestSequence6.groupType;
+                // }
                 let newBestSeq = [];
                 let newBestSeq1 = [];
                 let newBestSeq2 = [];
                 let newBestSeq3 = [];
                 let newBestSeq4 = [];
                 let newBestSeq5 = [];
+                // let newBestSeq6 = [];
                 if (bestSeq1 !== undefined) {
                   newBestSeq.push(...bestSeq1);
                   newBestSeq1 = bestSeq1.map((val, index) => {
@@ -2325,7 +2503,18 @@ export default function Deal(props) {
                   });
                 }
 
-                    
+                //       if (bestSeq6 !== undefined) {
+                //   newBestSeq.push(...bestSeq6);
+                //   newBestSeq6 = bestSeq6.map((val, index) => {
+                //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                //     let isJoker = isJokerCard(val.cardId);
+                //     if (isJoker) {
+                //       return picked.imageURI2;
+                //     } else {
+                //       return picked.imageURI;
+                //     }
+                //   });
+                // }
                 let newBestCards = newBestSeq.map((val, index) => {
                   let picked = Cards.find((o) => o.cardUuid == val.cardId);
                   return picked.imageURI;
@@ -2342,24 +2531,27 @@ export default function Deal(props) {
                   seq5,
                   seq6,
                   newSeq,
-                  bseq1,
+                  bseq1,  
                   bseq2,
                   bseq3,
                   bseq4,
                   bseq5,
-                 
+                  // bseq6,
+                  newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
                   newBestSeq2,
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
+                  // newBestSeq6,
                   bestPoints: val.bestPoints,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  // isbestSeq6,
                 });
                 localStorage.setItem(
                   "ActivePlayer",
@@ -2379,19 +2571,22 @@ export default function Deal(props) {
                     bseq3,
                     bseq4,
                     bseq5,
-                  
+                    // bseq6,
+                    newBSeq,
                     bestseq: newBestCards,
                     newBestSeq1,
                     newBestSeq2,
                     newBestSeq3,
                     newBestSeq4,
                     newBestSeq5,
+                    // newBestSeq6,
                     bestPoints: val.bestPoints,
                     isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
+                    // isbestSeq6,
                   })
                 );
               }
@@ -2485,14 +2680,17 @@ export default function Deal(props) {
             isbestSeq5 = data.InGameRes.bestSequence5.groupType;
           }
 
-        
+          // if (data.InGameRes.bestSequence6.cards !== undefined) {
+          //   bestSeq6 = [...data.InGameRes.bestSequence6.cards];
+          //   isbestSeq6 = data.InGameRes.bestSequence6.groupType;
+          // }
           let newBestSeq = [];
           let newBestSeq1 = [];
           let newBestSeq2 = [];
           let newBestSeq3 = [];
           let newBestSeq4 = [];
           let newBestSeq5 = [];
-
+          // let newBestSeq6 = [];
           if (bestSeq1 !== undefined) {
             newBestSeq.push(...bestSeq1);
             newBestSeq1 = bestSeq1.map((val, index) => {
@@ -2553,7 +2751,18 @@ export default function Deal(props) {
               }
             });
           }
-       
+          // if (bestSeq6 !== undefined) {
+          //   newBestSeq.push(...bestSeq6);
+          //   newBestSeq6 = bestSeq6.map((val, index) => {
+          //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
+          //     let isJoker = isJokerCard(val.cardId);
+          //     if (isJoker) {
+          //       return picked.imageURI2;
+          //     } else {
+          //       return picked.imageURI;
+          //     }
+          //   });
+          // }
 
           if (val._id === data.InGameRes._id) {
             // console.log("id:", data.InGameRes._id, val._id)
@@ -2574,11 +2783,13 @@ export default function Deal(props) {
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                // newBestSeq6,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                // isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -2591,11 +2802,13 @@ export default function Deal(props) {
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
+                  // newBestSeq6,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  // isbestSeq6,
                 })
               );
               return {
@@ -2801,6 +3014,21 @@ export default function Deal(props) {
     setImgCount((prevCounter) => prevCounter + 1);
   };
 
+  const getAnimationClass = () => {
+    if (activePlayerData.bseq2.length === 0) {
+      return "oc2";
+    } else if (activePlayerData.bseq3.length === 0) {
+      return "oc3";
+    } else if (activePlayerData.bseq4.length === 0) {
+      return "oc4";
+    } else if (activePlayerData.bseq5.length === 0) {
+      return "oc5";
+    } else {
+      return "oc5"; // Default case
+    }
+  };
+  
+
   if (
     activePlayerData &&
     activePlayerData.name &&
@@ -2875,6 +3103,8 @@ export default function Deal(props) {
                   {/* <span className="winperdiv"><span className="winpercount">{activeWinProb}</span>%</span> */}
                 </>
               )}
+
+              {/* this is where points are hidden when card is picked or when a player has 14 cards  */}
               {bestSeq.length > 0 &&
                 (activePlayerData.playerStatus === "Active" ||
                   activePlayerData.playerStatus === "Declared" ||
@@ -2896,160 +3126,6 @@ export default function Deal(props) {
                
                   </>
                 )}
-
-{/* Perfect sort cards  */}
-                    {!(showImage || dealShowImage) && 
-            (activePlayerData.playerStatus === "Active"||
-            activePlayerData.playerStatus === "Declared" ||
-            activePlayerData.playerStatus === "validDeclaration" ||
-            activePlayerData.playerStatus === "Winner" 
-            ) &&
-                 (
-                  <>
-                    <div className="perfect_sort_cards">
-                      <div className="row">
-                        <div
-                          className={`col-auto no-gutters p-1 ps-card-position-sm ${
-                            parseInt(activePlayerData.isbestSeq2) > 0 && ""
-                          }`}
-                        >
-                          {activePlayerData.newBestSeq1 !== undefined &&
-                            activePlayerData.newBestSeq1.length > 0 &&
-                            activePlayerData.newBestSeq1.map((bval, bindex) => (
-                              <div className="ins-div">
-                                <img
-                                  src={bval}
-                                  alt=""
-                                  className={`bestimg shadow bestimg${
-                                    bindex + 1
-                                  }`}
-                                />
-                                {(activePlayerData.isbestSeq1 === "1" ||
-                                  activePlayerData.isbestSeq1 === "2" ||
-                                  activePlayerData.isbestSeq1 === "3") && (
-                                  <img
-                                    className="highlight-sets"
-                                    src={highlightSets}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                        <div
-                          className={`col-auto no-gutters p-1 ps-card-position-sm ${
-                            parseInt(activePlayerData.isbestSeq2) > 0 && ""
-                          }`}
-                        >
-                          {activePlayerData.newBestSeq2 !== undefined &&
-                            activePlayerData.newBestSeq2.length > 0 &&
-                            activePlayerData.newBestSeq2.map((bval, bindex) => (
-                              <div className="ins-div">
-                                <img
-                                  src={bval}
-                                  alt=""
-                                  className={`bestimg shadow bestimg${
-                                    bindex + 1
-                                  }`}
-                                />
-                                {(activePlayerData.isbestSeq2 === "1" ||
-                                  activePlayerData.isbestSeq2 === "2" ||
-                                  activePlayerData.isbestSeq2 === "3") && (
-                                  <img
-                                    className="highlight-sets"
-                                    src={highlightSets}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                        <div
-                          className={`col-auto no-gutters p-1 ps-card-position-sm ${
-                            parseInt(activePlayerData.isbestSeq3) > 0 && ""
-                          }`}
-                        >
-                          {activePlayerData.newBestSeq3 !== undefined &&
-                            activePlayerData.newBestSeq3.length > 0 &&
-                            activePlayerData.newBestSeq3.map((bval, bindex) => (
-                              <div className="ins-div">
-                                <img
-                                  src={bval}
-                                  alt=""
-                                  className={`bestimg shadow bestimg${
-                                    bindex + 1
-                                  }`}
-                                />
-                                {(activePlayerData.isbestSeq3 === "1" ||
-                                  activePlayerData.isbestSeq3 === "2" ||
-                                  activePlayerData.isbestSeq3 === "3") && (
-                                  <img
-                                    className="highlight-sets"
-                                    src={highlightSets}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                        <div
-                          className={`col-auto no-gutters p-1 ps-card-position-sm ${
-                            parseInt(activePlayerData.isbestSeq4) > 0 && ""
-                          }`}
-                        >
-                          {activePlayerData.newBestSeq4 !== undefined &&
-                            activePlayerData.newBestSeq4.length > 0 &&
-                            activePlayerData.newBestSeq4.map((bval, bindex) => (
-                              <div className="ins-div">
-                                <img
-                                  src={bval}
-                                  alt=""
-                                  className={`bestimg shadow bestimg${
-                                    bindex + 1
-                                  }`}
-                                />
-                                {(activePlayerData.isbestSeq4 === "1" ||
-                                  activePlayerData.isbestSeq4 === "2" ||
-                                  activePlayerData.isbestSeq4 === "3") && (
-                                  <img
-                                    className="highlight-sets"
-                                    src={highlightSets}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                        <div
-                          className={`col-auto no-gutters p-1 ps-card-position-sm ${
-                            parseInt(activePlayerData.isbestSeq5) > 0 && ""
-                          }`}
-                        >
-                          {activePlayerData.newBestSeq5 !== undefined &&
-                            activePlayerData.newBestSeq5.length > 0 &&
-                            activePlayerData.newBestSeq5.map((bval, bindex) => (
-                              <div className="ins-div">
-                                <img
-                                  src={bval}
-                                  alt=""
-                                  className={`bestimg shadow bestimg${
-                                    bindex + 1
-                                  }`}
-                                />
-                                {(activePlayerData.isbestSeq5 === "1" ||
-                                  activePlayerData.isbestSeq5 === "2" ||
-                                  activePlayerData.isbestSeq5 === "3") && (
-                                  <img
-                                    className="highlight-sets"
-                                    src={highlightSets}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                      </div>
-                    </div>
                     {(activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared" ||
                 activePlayerData.playerStatus === "Winner" ||
@@ -3072,8 +3148,6 @@ export default function Deal(props) {
                         />
                       </>
                     )}
-                  </>
-                )}
                   </>
                 )}
               {(activePlayerData.playerStatus === "Active" ||
@@ -3116,7 +3190,7 @@ export default function Deal(props) {
                     "Dropped" ? null : activePlayerData.playerStatus ===
                     "autoWinner" ? (
                     <>
-                      <span className="tracking-in-contract-username">
+                      <span className="tracking-in-contract-username auto-winner">
                         {activePlayerData.name.split(" ")[0]} is{" "}
                         <b className="green-color">Auto Winner</b>
                       </span>
@@ -3161,11 +3235,12 @@ export default function Deal(props) {
                     >
                       {activePlayerData.playerStatus === "Declared" && (
                         <>
-                          <span className=""
+                          <span className="valdiation_under_progress"
                             style={{
                               fontWeight: "500",
                               color: "#FFC961",
                               fontWeight: "bold",
+                              top
                             }}
                           >
                             {" "}
@@ -3179,7 +3254,7 @@ export default function Deal(props) {
                     "Dropped" ? null : activePlayerData.playerStatus ===
                     "autoWinner" ? (
                     <>
-                      <span className="tracking-in-contract-username">
+                      <span className="tracking-in-contract-username auto-winner">
                         {activePlayerData.name.split(" ")[0]} is{" "}
                         <b className="green-color">Auto Winner</b>
                       </span>
@@ -3217,7 +3292,6 @@ export default function Deal(props) {
                   </>
                 )}  
 
-
                 {!(showImage || dealShowImage) &&
                   !(
                     activePlayerData.playerStatus === "Declared" ||
@@ -3235,9 +3309,8 @@ export default function Deal(props) {
                     </>
                   )}
 
-      
-            
-{/* Showing totalPoints after declaration  */}
+              
+                {/* showing total points for hand sort */}
                 {!(showImage || dealShowImage) && 
                   (
                     activePlayerData.playerStatus === "Winner" ||
@@ -3252,9 +3325,9 @@ export default function Deal(props) {
                       </div>
                     </>
                   )}
+                <div>
+                 
 
-                        <div>
-      
                   {showImage && (
                     <img
                       src={auto_declare}
@@ -3286,11 +3359,12 @@ export default function Deal(props) {
               </div>
               {!(showImage || dealShowImage) && (
                 <div>
-                  {(activePlayerData.playerStatus !== "Dropped" || activePlayerData.playerStatus !== "Rejected") && (
+                  {(activePlayerData.playerStatus !== "Dropped" && activePlayerData.playerStatus !== "Rejected") && (
                     <div className="bgdivdealdeal">
                       <LazyLoad height={"100%"}>
                         {activePlayerData.playerStatus === "Declared" ||
                         activePlayerData.playerStatus === "validDeclaration" ||
+                        activePlayerData.playerStatus === "Rejected" ||
                         activePlayerData.playerStatus === "Winner" ||
                         activePlayerData.playerStatus === "autoWinner" ? (
                           <img
@@ -3336,7 +3410,9 @@ export default function Deal(props) {
                 </div>
               </div>
             )}
-            {!(showImage || dealShowImage) && dealProb == true && (
+
+    {/* Players sort or hand sort cards  */}
+    {!(showImage || dealShowImage) && dealProb == true && (
               <div
                 className={`usercardsdiv delay-load ${
                   (activePlayerData.playerStatus === "Dropped" ||
@@ -3344,292 +3420,380 @@ export default function Deal(props) {
                   "usercardsdiv-dropped"
                 }`}
               >
-                {activePlayerData.playerStatus !== "Dropped" && (
-                  <>
-               <div className="row">
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {activePlayerData.bseq1.length > 0 &&
-                          activePlayerData.bseq1.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.bseq2.length === 0 &&
-                              activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.bseq1.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight `
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                    animateOnce && `discard${index + 1} blue-highlight `
-                                  } ${
-                                    animateOnce && `usercard${index + 1}`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {activePlayerData.bseq2.length > 0 &&
-                          activePlayerData.bseq2.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.bseq3.length === 0 &&
-                              activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.bseq2.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight `
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                    `discard${
-                                      activePlayerData.bseq1.length + index + 1
-                                    } blue-highlight `
-                                  } ${
-                                    animateOnce &&
-                                    `usercard${
-                                      activePlayerData.bseq1.length + index + 1
-                                    }`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {activePlayerData.bseq3.length > 0 &&
-                          activePlayerData.bseq3.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.bseq4.length === 0 &&
-                              activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.bseq3.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight `
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                    `discard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      index +
-                                      1
-                                    } blue-highlight `
-                                  } ${
-                                    animateOnce &&
-                                    `usercard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      index +
-                                      1
-                                    }`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {activePlayerData.bseq4.length > 0 &&
-                          activePlayerData.bseq4.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.bseq4.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight `
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                    `discard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      activePlayerData.bseq3.length +
-                                      index +
-                                      1
-                                    } blue-highlight `
-                                  } ${
-                                    animateOnce &&
-                                    `usercard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      activePlayerData.bseq3.length +
-                                      index +
-                                      1
-                                    }`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {activePlayerData.bseq5.length > 0 &&
-                          activePlayerData.bseq5.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.bseq5.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight `
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                     `discard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      activePlayerData.bseq3.length +
-                                      activePlayerData.bseq4.length +
-                                      index +
-                                      1
-                                    } blue-highlight `
-                                  } ${
-                                    animateOnce &&
-                                    `usercard${
-                                      activePlayerData.bseq1.length +
-                                      activePlayerData.bseq2.length +
-                                      activePlayerData.bseq3.length +
-                                      activePlayerData.bseq4.length +
-                                      index +
-                                      1
-                                    }`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters ps-card-position p-1">
-                        {activePlayerData.seq6.length > 0 &&
-                          activePlayerData.seq6.map((value, index) => (
-                            <div className="ins-div">
-                              {activePlayerData.newSeq.length === 14 &&
-                              activePlayerData.seq6.length - 1 == index ? (
-                                <div className="roll-in-last-card">
-                                  {console.log(
-                                    "isDropCard",
-                                    isDropCard,
-                                    value.cardId
-                                  )}
-                                  <img
-                                    src={value.img}
-                                    alt=""
-                                    className={`usercarddeal ${
-                                      isDropCard !== null &&
-                                      isDropCard == value.cardId &&
-                                      `discard14 blue-highlight`
-                                    } usercard14 shadow usercarddeal1${
-                                      index + 1
-                                    }`}
-                                  />
-                                </div>
-                              ) : (
-                                <img
-                                  src={value.img}
-                                  alt=""
-                                  className={`usercarddeal ${
-                                    isDropCard !== null &&
-                                    isDropCard == value.cardId &&
-                                    `discard${
-                                      activePlayerData.seq1.length +
-                                      activePlayerData.seq2.length +
-                                      activePlayerData.seq3.length +
-                                      activePlayerData.seq4.length +
-                                      activePlayerData.seq5.length +
-                                      index +
-                                      1
-                                    } blue-highlight `
-                                  } ${
-                                    animateOnce &&
-                                    `usercard${
-                                      activePlayerData.seq1.length +
-                                      activePlayerData.seq2.length +
-                                      activePlayerData.seq3.length +
-                                      activePlayerData.seq4.length +
-                                      activePlayerData.seq5.length +
-                                      index +
-                                      1
-                                    }`
-                                  } shadow usercarddeal1${index + 1}`}
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                    </div>
+                {!(
+                  activePlayerData.playerStatus === "Dropped" ||
+                  activePlayerData.playerStatus === "Rejected"
+                ) &&
+                  dealProb == true &&
+                  (activePlayerData.playerStatus === "Active" ||
+                    activePlayerData.playerStatus === "Declared" ||
+                    activePlayerData.playerStatus === "Winner" ||
+                    activePlayerData.playerStatus === "validDeclaration" 
+                  ) && (
+                    <>
+                 <div className="row">
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq1.length > 0 &&
+      activePlayerData.seq1.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq2.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq1.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq2.length > 0 &&
+      activePlayerData.seq2.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq3.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq2.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq3.length > 0 &&
+      activePlayerData.seq3.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq4.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq3.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq4.length > 0 &&
+      activePlayerData.seq4.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq4.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq5.length > 0 &&
+      activePlayerData.seq5.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq5.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters ps-card-position p-1">
+    {activePlayerData.seq6.length > 0 &&
+      activePlayerData.seq6.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq6.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+</div>
+
                   </>
                 )}
-                {(activePlayerData.playerStatus === "Dropped" || activePlayerData.playerStatus === "Rejected") && <></>}
+
+               
+                {activePlayerData.playerStatus === "Dropped" && <></>}
+              </div>
+            )}
+
+{/* Perfect sort cards  */}
+{!(showImage || dealShowImage)  && (
+              <div
+                className={`usercardsdivPs delay-load ${
+                  (activePlayerData.playerStatus === "Dropped" ||
+                    activePlayerData.playerStatus === "Rejected") &&
+                  "usercardsdiv-dropped"
+                }`}
+              >
+
+
+{( activePlayerData.playerStatus !== "Dropped" && activePlayerData.playerStatus !== "Rejected") && (
+                  <>
+                   <div className="row">
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq1.length > 0 &&
+      activePlayerData.bseq1.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq2.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq1.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14 border-fluorescent`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+                 
+                                  <img
+                                    className="highlight-sets"
+                                    src={highlightSets}
+                                    alt=""
+                                  />
+                              
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${index + 1} border-fluorescent`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq2.length > 0 &&
+      activePlayerData.bseq2.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq3.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq2.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14 border-fluorescent`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length + index + 1
+                } border-fluorescent`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq3.length > 0 &&
+      activePlayerData.bseq3.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq4.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq3.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14 border-fluorescent`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  index +
+                  1
+                } border-fluorescent`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq4.length > 0 &&
+      activePlayerData.bseq4.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq4.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14 border-fluorescent`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  activePlayerData.bseq3.length +
+                  index +
+                  1
+                } border-fluorescent`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq5.length > 0 &&
+      activePlayerData.bseq5.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq5.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14 border-fluorescent`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  activePlayerData.bseq3.length +
+                  activePlayerData.bseq4.length +
+                  index +
+                  1
+                } border-fluorescent`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+</div>
+
+                  </>
+                )}	
+
+               
+{(activePlayerData.playerStatus === "Dropped" || activePlayerData.playerStatus === "Rejected") && <></>}
               </div>
             )}
             {!(showImage || dealShowImage) && (
@@ -3677,7 +3841,7 @@ export default function Deal(props) {
                             "flipo"
                           }`}
                         >
-                          <div className="flip-open-front">
+                   <div className="flip-open-front ">
                             <img
                               src={openCard === null ? back_card_min : openCard}
                               alt=""
@@ -3690,19 +3854,17 @@ export default function Deal(props) {
                                   : curOpenCard
                               }
                               alt=""
-                              className={`oc shadow blue-highlight ${
+                              className={`oc shadow ${
                                 isOpenCard === true
                                   ? activePlayerData.bseq2.length === 0
-                                    ? "oc2 blue-highlight"
+                                    ? "oc2"
                                     : activePlayerData.bseq3.length === 0
-                                    ? "oc3 blue-highlight"
+                                    ? "oc3"
                                     : activePlayerData.bseq4.length === 0
-                                    ? "oc4 blue-highlight"
+                                    ? "oc4"
                                     : activePlayerData.bseq5.length === 0
-                                    ? "oc5 blue-highlight"
-                                    : activePlayerData.seq6.length === 0
-                                    ? "oc6 blue-highlight"
-                                    : "oc6 blue-highlight"
+                                    ? "oc5"
+                                    : "oc5"
                                   : ""
                               }`}
                             />
