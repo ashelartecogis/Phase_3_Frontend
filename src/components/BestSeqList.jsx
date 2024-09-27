@@ -425,10 +425,16 @@ export default function BestSeqList(props) {
                 />
                  <span className="cdusername-res">
                   {value.playerId.name.split(" ")[0]}
-                  <img src={showRank} alt="" className="showRankBestSeq" />
-                    <h3 className="showRankTextBestSeq">
-  Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
-</h3>
+                  
+                  { dealNumberCount !== '1' && (
+  <>
+    <img src={showRank} alt="" className="showRankBestSeq" />
+    <h3 className="showRankTextBestSeq">
+      Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
+    </h3>
+  </>
+)}
+
                 </span>
                 {value.playerStatus !== "Eliminated" ? (
                   <span className="cdchips-res">
@@ -451,7 +457,7 @@ export default function BestSeqList(props) {
                 />
                 {value.playerStatus !== "Eliminated" && (
                   <span className="res-pts">
-                    {value.bestPoints} <span className="res-pts-key">Pts</span>
+                    {value.totalPoints} <span className="res-pts-key">Pts</span>
                   </span>
                 )}
                 {(value.playerStatus === "Dropped" ||

@@ -27,6 +27,7 @@ import valid_declaration from "../images/valid_declaration.png";
 import validation_under_progress from "../images/validation_under_progress.png";
 import invalid_declaration from "../images/invalid_declaration.png";
 import levelTopRight from "../images/levelTopRight2.png";
+import DEALBGIMG from "../images/dealbgimgnew.png";
 import dealbgimgnew_declaration from "../images/dealbgimgnew_declaration.png";
 import DIMG from "../images/d.png";
 import dealbgres from "../images/dd-user-bg.png";
@@ -44,11 +45,10 @@ import DCBB from "../images/dealchipblackbg.png";
 import STAR from "../images/star.png";
 import CHIP from "../images/chip.svg";
 import LazyLoad from "react-lazyload";
-import FIRST from "../images/first.svg";
-import SECOND from "../images/second.svg";
-import THIRD from "../images/third.svg";
-import DEALBG from "../images/dealbgplayerdetails.png";
-import DEALBGIMG from "../images/dealbgimgnew.png";
+import tsdealbg from "../images/ts-deal-bg.png";
+import ts_deal_username from "../images/ts-deal-username.png";
+import ts_deal_bg_bg from "../images/ts-deal-bg-bg.png";
+import dropped_card from "../images/dropped-card.png";
 
 import prob_rect from "../images/prob_rect.png";
 import prob_active from "../images/prob_active.png";
@@ -378,7 +378,61 @@ export default function DealDynamic(props) {
       }
     });
 
+    let bseq1 = reqdata.bestSequence1.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
+    let bseq2 = reqdata.bestSequence2.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
+    let bseq3 = reqdata.bestSequence3.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
+    let bseq4 = reqdata.bestSequence4.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
+    let bseq5 = reqdata.bestSequence5.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
+    
+
     let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+    let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
+
 
     let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
     let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
@@ -510,6 +564,13 @@ export default function DealDynamic(props) {
               seq5,
               seq6,
               newSeq,
+              bseq1,
+              bseq2,
+              bseq3,
+              bseq4,
+              bseq5,
+              // bseq6,
+              newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
               newBestSeq2,
@@ -536,6 +597,13 @@ export default function DealDynamic(props) {
                 seq5,
                 seq6,
                 newSeq,
+                bseq1,
+                bseq2,
+                bseq3,
+                bseq4,
+                bseq5,
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
@@ -563,6 +631,13 @@ export default function DealDynamic(props) {
             seq5,
             seq6,
             newSeq,
+            bseq1,
+            bseq2,
+            bseq3,
+            bseq4,
+            bseq5,
+            // bseq6,
+            newBSeq,
             bestseq: newBestCards,
             newBestSeq1,
             newBestSeq2,
@@ -589,6 +664,13 @@ export default function DealDynamic(props) {
               seq5,
               seq6,
               newSeq,
+              bseq1,
+              bseq2,
+              bseq3,
+              bseq4,
+              bseq5,
+              // bseq6,
+              newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
               newBestSeq2,
@@ -725,6 +807,59 @@ export default function DealDynamic(props) {
             }
           });
 
+          let bseq1 = data.bestSequence1.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
+          // let popped = seq1.pop();
+          // console.log(seq1.length);
+          let bseq2 = data.bestSequence2.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
+
+          let bseq3 = data.bestSequence3.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
+
+          let bseq4 = data.bestSequence4.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
+
+          let bseq5 = data.bestSequence5.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
+
+        
+
           // if(seq2.length === 0){
           //   seq1.push(popped);
           // }
@@ -739,6 +874,7 @@ export default function DealDynamic(props) {
           // }
 
           let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+          let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
           // newSeq.push(popped);
           let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
           let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
@@ -851,6 +987,13 @@ export default function DealDynamic(props) {
               seq5,
               seq6,
               newSeq,
+              bseq1,
+              bseq2,
+              bseq3,
+              bseq4,
+              bseq5,
+              // bseq6,
+              newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
               newBestSeq2,
@@ -877,6 +1020,13 @@ export default function DealDynamic(props) {
                 seq5,
                 seq6,
                 newSeq,
+                bseq1,
+                bseq2,
+                bseq3,
+                bseq4,
+                bseq5,
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
@@ -1100,7 +1250,66 @@ export default function DealDynamic(props) {
               }
             });
 
+            let bseq1 = val.bestSequence1.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+            // let popped = seq1.pop();
+            let bseq2 = val.bestSequence2.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+
+            let bseq3 = val.bestSequence3.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+
+            let bseq4 = val.bestSequence4.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+
+            let bseq5 = val.bestSequence5.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+
+
             let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
+            let newBSeq = [
+              ...bseq1,
+              ...bseq2,
+              ...bseq3,
+              ...bseq4,
+              ...bseq5,
+              // ...bseq6,
+            ];
             let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
             let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
             let bestPoints = 0;
@@ -1211,6 +1420,13 @@ export default function DealDynamic(props) {
                 seq5,
                 seq6,
                 newSeq,
+                bseq1,
+                bseq2,
+                bseq3,
+                bseq4,
+                bseq5,
+                // bseq6,
+                newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
                 newBestSeq2,
@@ -1237,6 +1453,13 @@ export default function DealDynamic(props) {
                   seq5,
                   seq6,
                   newSeq,
+                  bseq1,
+                  bseq2,
+                  bseq3,
+                  bseq4,
+                  bseq5,
+                  // bseq6,
+                  newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
                   newBestSeq2,
@@ -1978,6 +2201,56 @@ export default function DealDynamic(props) {
                     }
                   });
 
+                  let bseq1 = val.bestSequence1.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+                  // let popped = seq1.pop();
+                  let bseq2 = val.bestSequence2.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+
+                  let bseq3 = val.bestSequence3.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+
+                  let bseq4 = val.bestSequence4.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+
+                  let bseq5 = val.bestSequence5.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+
                   let newSeq = [
                     ...seq1,
                     ...seq2,
@@ -1985,6 +2258,14 @@ export default function DealDynamic(props) {
                     ...seq4,
                     ...seq5,
                     ...seq6,
+                  ];
+                  let newBSeq = [
+                    ...bseq1,
+                    ...bseq2,
+                    ...bseq3,
+                    ...bseq4,
+                    ...bseq5,
+                    // ...bseq6,
                   ];
                   let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
                   let isbestSeq1,
@@ -2100,6 +2381,13 @@ export default function DealDynamic(props) {
                     seq5,
                     seq6,
                     newSeq,
+                    bseq1,
+                    bseq2,
+                    bseq3,
+                    bseq4,
+                    bseq5,
+                    // bseq6,
+                    newBSeq,
                     bestseq: newBestCards,
                     newBestSeq1,
                     newBestSeq2,
@@ -2127,6 +2415,13 @@ export default function DealDynamic(props) {
                       seq5,
                       seq6,
                       newSeq,
+                      bseq1,
+                      bseq2,
+                      bseq3,
+                      bseq4,
+                      bseq5,
+                      // bseq6,
+                      newBSeq,
                       bestseq: newBestCards,
                       newBestSeq1,
                       newBestSeq2,
@@ -2531,23 +2826,31 @@ export default function DealDynamic(props) {
             )}
             {/* {{console.log(bestSeq.length)}} */}
 
-            {activePlayerData.playerStatus === "Active" && dealProb != true && (
-              <>
-                <span className="pstext">Perfect Sort</span>
-                {(isPick === "false" || isPick === false) && (
-                  <span className="best-points-deal">
-                    {activePlayerData.bestPoints}{" "}
-                    <span className="tracking-in-contract-chips-deal-pts">
-                      Pts
-                    </span>
-                  </span>
+            {bestSeq.length > 0 &&
+                (activePlayerData.playerStatus === "Active" ||
+                  activePlayerData.playerStatus === "Declared" ||
+                  activePlayerData.playerStatus === "Winner" ||
+                  activePlayerData.playerStatus === "validDeclaration"
+                ) && dealProb == true &&  
+                 (
+                  <>
+                    <span className="pstext">Hand Sort</span>
+              
+                    <div className="best-points-deal hand-sort-point">
+                        {activePlayerData.totalPoints / currentBoosterValue}
+                        {/* bottom left perfect sort points  */}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
+                        </span>
+                       
+                      </div>
+               
+                  </>
                 )}
-              </>
-            )}
             {activePlayerData.playerStatus === "Active" && dealProb != true && (
               <>
                 <div className="perfect_sort_cards">
-                  <div className="row">
+                  {/* <div className="row">
                     <div
                       className={`col-auto no-gutters p-1 ps-card-position ${
                         parseInt(activePlayerData.isbestSeq2) > 0 && ""
@@ -2678,7 +2981,7 @@ export default function DealDynamic(props) {
                           </div>
                         ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 {/* {bestSeq.length > 0 && ( */}
                 <>
@@ -2687,20 +2990,16 @@ export default function DealDynamic(props) {
                                             alt=""
                                             className="perfect_sort"
                                         /> */}
-                  <img
+                  {/* <img
                     src={PERFECT_SORT_LIST}
                     alt=""
                     className="perfect_sort_list"
-                  />
+                  /> */}
                 </>
                 {/* )} */}
               </>
             )}
-            {activePlayerData.playerStatus === "Active" && (
-              <span className="tracking-in-contract-username deal-custom-username">
-                {activePlayerData.name.split(" ")[0]}'s Sort
-              </span>
-            )}
+          
 
             <div className="dealdiv onet">
               <LazyLoad height={"100%"}>
@@ -2710,93 +3009,193 @@ export default function DealDynamic(props) {
                                     className="rotate-vert-center-deal-new"
                                 /> */}
               </LazyLoad>
-              <span className="tracking-in-contract-username d-none">
-                {activePlayerData.name.split(" ")[0]}
-                {(activePlayerData.playerStatus === "Declared" ||
-                  activePlayerData.playerStatus === "Rejected" ||
-                  activePlayerData.playerStatus === "autoWinner" ||
-                  activePlayerData.playerStatus === "Winner") && (
-                  <span className="has-drop has-drop-dd">
-                    {activePlayerData.name.split(" ")[0]} has declared
+             
+                {(activePlayerData.playerStatus === "Declared" ? (
+                    <span
+                      style={{
+                        marginLeft: "1px",
+                        marginTop: "-15px",
+                        fontSize: "40px",
+                        fontWeight: "500",
+                      }}
+                      className="tracking-in-contract-username validation-under-progress"
+                    >
+                      {activePlayerData.playerStatus === "Declared" && (
+                        <>
+                          <span className="valdiation_under_progress"
+                            style={{
+                              fontWeight: "500",
+                              color: "#FFC961",
+                              fontWeight: "bold",
+                              top
+                            }}
+                          >
+                            {" "}
+                            {activePlayerData.name.split(" ")[0]}'s card validation under progress <span className="loader-validation"></span>
+                          </span>
+                          
+                        </>
+                      )}
+                    </span>
+                  ) : activePlayerData.playerStatus ===
+                    "Dropped" ? null : activePlayerData.playerStatus ===
+                    "autoWinner" ? (
+                    <>
+                      <span className="tracking-in-contract-username auto-winner">
+                        {activePlayerData.name.split(" ")[0]} is{" "}
+                        <b className="green-color">Auto Winner</b>
+                      </span>
+                      <div className="tracking-in-contract-chips-deal">
+                        {activePlayerData.totalPoints / currentBoosterValue}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
+                        </span>
+                       
+                      </div>
+                    </>
+                  ) : (
+                    <span
+                      style={{
+                        marginBottom: "-13px",
+                      }}
+                      className="tracking-in-contract-username"
+                    ></span>
+                  ))}
+                   
+                   
+                   {(activePlayerData.playerStatus === "Winner" ||
+                  activePlayerData.playerStatus === "validDeclaration" ? (
+                    <span
+                      style={{
+                        marginLeft: "1px",
+                        marginTop: "-15px",
+                        fontSize: "40px",
+                        fontWeight: "500",
+                       fontWeight: "bold",
+                      }}
+                      className="tracking-in-contract-username"
+                    >
+                     
+                      {(activePlayerData.playerStatus === "Winner" ||
+                        activePlayerData.playerStatus ===
+                          "validDeclaration") && (
+                        <span className="mark-valid">
+                           <b>{activePlayerData.name.split(" ")[0]}'s Declaration is </b> <b className="green-color">
+                              Valid
+                            </b>{" "}
+                        </span>
+                      )}
+                    </span>
+                  ) : activePlayerData.playerStatus ===
+                    "Dropped" ? null : activePlayerData.playerStatus ===
+                    "autoWinner" ? (
+                    <>
+                    
+                    </>
+                  ) : (
+                    <span
+                      style={{
+                        marginBottom: "-13px",
+                      }}
+                      className="tracking-in-contract-username"
+                    ></span>
+                  ))}
+
+                {activePlayerData.playerStatus === "Active" && (
+                  <span
+                    style={{
+                      marginBottom: "-13px",
+                    }}
+                    className="tracking-in-contract-username"
+                  >
+                    {activePlayerData.name.split(" ")[0]} (Perfect Sort)
                   </span>
                 )}
-              </span>
+
+
+                  {(
+                    activePlayerData.playerStatus === "Winner" ||
+                    activePlayerData.playerStatus === "autoWinner" ||
+                    activePlayerData.playerStatus === "validDeclaration") && (
+                    <>
+                         <div className="tracking-in-contract-chips-deal">
+                        {activePlayerData.totalPoints / currentBoosterValue}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
+                        </span>
+                       
+                      </div>
+                    </>
+                  )}
+
+
+                   
               {/* <span className="tracking-in-contract-chips-deal">{activePlayerData.bestPoints}</span> */}
               {(activePlayerData.playerStatus === "Active" ||
-                activePlayerData.playerStatus === "Dropped" ||
                 activePlayerData.playerStatus === "Declared" ||
-                activePlayerData.playerStatus === "autoWinner" ||
-                activePlayerData.playerStatus === "Winner" ||
-                activePlayerData.playerStatus === "validDeclaration") && (
-                <span className="tracking-in-contract-chips-deal">
-                  {activePlayerData.totalPoints}
-                  <span className="tracking-in-contract-chips-deal-pts">
-                    {" "}
-                    Pts
-                  </span>
-                </span>
-              )}
-              {(activePlayerData.playerStatus === "Declared" ||
-                activePlayerData.playerStatus === "Rejected" ||
-                activePlayerData.playerStatus === "Winner" ||
-                activePlayerData.playerStatus === "validDeclaration") && (
-                <span className="tracking-in-contract-chips-deal-dec hd-dd">
-                  {activePlayerData.name.split(" ")[0]} has Declared
-                </span>
-              )}
-
-              {activePlayerData.playerStatus === "autoWinner" && (
-                <span className="tracking-in-contract-chips-deal-dec hd-dd">
-                  {" "}
-                  {activePlayerData.name.split(" ")[0]} is{" "}
-                  <b className="green-color">Auto Winner</b>{" "}
-                </span>
-              )}
-              {activePlayerData.playerStatus === "Declared" && (
-                <img
-                  src={validation_under_progress}
-                  alt=""
-                  className="validation_div vd_dd"
-                />
-              )}
-              {activePlayerData.playerStatus === "Rejected" && (
-                <img
-                  src={invalid_declaration}
-                  alt=""
-                  className="validation_div vd_dd"
-                />
-              )}
-              {activePlayerData.playerStatus === "Winner" && (
-                <img
-                  src={valid_declaration}
-                  alt=""
-                  className="validation_div vd_dd"
-                />
-              )}
-              {activePlayerData.playerStatus === "validDeclaration" && (
-                <img
-                  src={valid_declaration}
-                  alt=""
-                  className="validation_div vd_dd"
-                />
-              )}
+                  activePlayerData.playerStatus === "Dropped") && (
+                  <>
+                    {activePlayerData.playerStatus !== "Dropped" && (
+                      <div className="tracking-in-contract-chips-deal">
+                        {activePlayerData.bestPoints / currentBoosterValue}
+                        {/* bottom left perfect sort points  */}
+                        <span className="tracking-in-contract-chips-deal-pts points-new">
+                         <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
+                        </span>
+                       
+                      </div>
+                    )}
+                  </>
+                )}  
+   
+                        
             </div>
-            <div className="bgdivdealdeal">
-              <LazyLoad height={"100%"}>
-                <img
-                  src={dealbgimgnew_declaration}
-                  alt=""
-                  className="slide-in-left-deal-bg-img-deal"
-                />
-                <img src={dealbgres} alt="" className="dealbg-res" />
-              </LazyLoad>
-            </div>
+            {(activePlayerData.playerStatus !== "Dropped" && activePlayerData.playerStatus !== "Rejected") && (
+                    <div className="bgdivdealdeal">
+                      <LazyLoad height={"100%"}>
+                        {activePlayerData.playerStatus === "Declared" ||
+                        activePlayerData.playerStatus === "validDeclaration" ||
+                        activePlayerData.playerStatus === "Rejected" ||
+                        activePlayerData.playerStatus === "Winner" ||
+                        activePlayerData.playerStatus === "autoWinner" ? (
+                          <img
+                            src={dealbgimgnew_declaration}
+                            alt=""
+                            className="dealbgimgnew_declaration"
+                            style={{
+                              marginLeft: "-150px",
+                              width: "1450px",
+                            }}
+                          />
+                        ) : (
+                          <img
+                            src={DEALBGIMG}
+                            alt=""
+                            className="slide-in-left-deal-bg-img-deal"
+                          />
+                        )}
+                      </LazyLoad>
+                    </div>
+                  )}
           </div>
-          {activePlayerData.playerStatus === "Dropped" && (
-            <span className="has-drop has-drop-dd">
-              {activePlayerData.name.split(" ")[0]} has dropped
-            </span>
-          )}
+          {(activePlayerData.playerStatus === "Dropped" || activePlayerData.playerStatus === "Rejected") && (
+              <div className="">
+                <img src={tsdealbg} alt="" className="tsdealbg" />
+                <img
+                  src={ts_deal_username}
+                  alt=""
+                  className="ts_deal_dropped"
+                />
+                <img src={ts_deal_bg_bg} alt="" className="ts_deal_bg_bg" />
+                <img src={dropped_card} alt="" className="dropped_img" />
+
+                <span className="dealwinnernotext">Deal {dealNumberCount}</span>
+
+                <div className="dropped-user-txt">
+                  {activePlayerData.name} has dropped
+                </div>
+              </div>
+            )}
           <div
             className={`usercardsdiv ${
               (activePlayerData.playerStatus === "Dropped" ||
@@ -2804,280 +3203,364 @@ export default function DealDynamic(props) {
               "usercardsdiv-dropped"
             }`}
           >
-            {activePlayerData.playerStatus !== "Dropped" && (
+
+            {/* Player sort or hand sort cards  */}
+            {/* {activePlayerData.playerStatus !== "Dropped" && (
               <>
-                <div className="row">
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq1.length > 0 &&
-                      activePlayerData.seq1.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.seq2.length === 0 &&
-                          activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq1.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${index + 1}`
-                              } ${
-                                animateOnce && `usercard${index + 1}`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq2.length > 0 &&
-                      activePlayerData.seq2.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.seq3.length === 0 &&
-                          activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq2.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${
-                                  activePlayerData.seq1.length + index + 1
-                                }`
-                              } ${
-                                animateOnce &&
-                                `usercard${
-                                  activePlayerData.seq1.length + index + 1
-                                }`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq3.length > 0 &&
-                      activePlayerData.seq3.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.seq4.length === 0 &&
-                          activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq3.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  index +
-                                  1
-                                }`
-                              } ${
-                                animateOnce &&
-                                `usercard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  index +
-                                  1
-                                }`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq4.length > 0 &&
-                      activePlayerData.seq4.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq4.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  index +
-                                  1
-                                }`
-                              } ${
-                                animateOnce &&
-                                `usercard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  index +
-                                  1
-                                }`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq5.length > 0 &&
-                      activePlayerData.seq5.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq5.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  activePlayerData.seq4.length +
-                                  index +
-                                  1
-                                }`
-                              } ${
-                                animateOnce &&
-                                `usercard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  activePlayerData.seq4.length +
-                                  index +
-                                  1
-                                }`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="col-auto no-gutters p-1 ps-card-position">
-                    {activePlayerData.seq6.length > 0 &&
-                      activePlayerData.seq6.map((value, index) => (
-                        <div className="ins-div">
-                          {activePlayerData.newSeq.length === 14 &&
-                          activePlayerData.seq6.length - 1 == index ? (
-                            <div className="roll-in-last-card">
-                              {console.log(
-                                "isDropCard",
-                                isDropCard,
-                                value.cardId
-                              )}
-                              <img
-                                src={value.img}
-                                alt=""
-                                className={`usercarddeal ${
-                                  isDropCard !== null &&
-                                  isDropCard == value.cardId &&
-                                  `discard14`
-                                } usercard14 shadow usercarddeal1${index + 1}`}
-                              />
-                            </div>
-                          ) : (
-                            <img
-                              src={value.img}
-                              alt=""
-                              className={`usercarddeal ${
-                                isDropCard !== null &&
-                                isDropCard == value.cardId &&
-                                `discard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  activePlayerData.seq4.length +
-                                  activePlayerData.seq5.length +
-                                  index +
-                                  1
-                                }`
-                              } ${
-                                animateOnce &&
-                                `usercard${
-                                  activePlayerData.seq1.length +
-                                  activePlayerData.seq2.length +
-                                  activePlayerData.seq3.length +
-                                  activePlayerData.seq4.length +
-                                  activePlayerData.seq5.length +
-                                  index +
-                                  1
-                                }`
-                              } shadow usercarddeal1${index + 1}`}
-                            />
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                </div>
+                          <div className="row">
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq1.length > 0 &&
+      activePlayerData.seq1.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq2.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq1.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq2.length > 0 &&
+      activePlayerData.seq2.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq3.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq2.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq3.length > 0 &&
+      activePlayerData.seq3.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.seq4.length === 0 &&
+          activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq3.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq4.length > 0 &&
+      activePlayerData.seq4.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq4.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.seq5.length > 0 &&
+      activePlayerData.seq5.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq5.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+
+  <div className="col-auto no-gutters ps-card-position p-1">
+    {activePlayerData.seq6.length > 0 &&
+      activePlayerData.seq6.map((value, index) => (
+        <div className="ins-div" key={index}>
+          {activePlayerData.newSeq.length === 14 &&
+          activePlayerData.seq6.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddeal shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddeal shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+</div>
               </>
-            )}
-            {activePlayerData.playerStatus === "Dropped" && (
+            )} */}
+            
+            <div
+                className={`usercardsdivPs-dd delay-load ${
+                  (activePlayerData.playerStatus === "Dropped" ||
+                    activePlayerData.playerStatus === "Rejected") &&
+                  "usercardsdiv-dropped"
+                }`}
+              >
+
+
+{(activePlayerData.playerStatus !== "Dropped" && activePlayerData.playerStatus !== "Rejected" )&& (
+                  <>
+                   <div className="row">
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq1.length > 0 &&
+      activePlayerData.bseq1.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq2.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq1.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${index + 1}`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq2.length > 0 &&
+      activePlayerData.bseq2.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq3.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq2.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length + index + 1
+                }`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq3.length > 0 &&
+      activePlayerData.bseq3.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.bseq4.length === 0 &&
+          activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq3.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  index +
+                  1
+                }`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq4.length > 0 &&
+      activePlayerData.bseq4.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq4.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  activePlayerData.bseq3.length +
+                  index +
+                  1
+                }`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq5.length > 0 &&
+      activePlayerData.bseq5.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq5.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  activePlayerData.bseq3.length +
+                  activePlayerData.bseq4.length +
+                  index +
+                  1
+                }`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+        </div>
+      ))}
+  </div>
+</div>
+
+                  </>
+                )}	
+
+               
+                {activePlayerData.playerStatus === "Dropped" && <></>}
+              </div>
+
+            
+
+            
+            {/* {activePlayerData.playerStatus === "Dropped" && (
               <>
                 <div className="dropped-cards-div">
                   <div className="seq1">
@@ -3149,7 +3632,7 @@ export default function DealDynamic(props) {
                   </div>
                 </div>
               </>
-            )}
+            )} */}
           </div>
 
           <div className="deck-holder-deal">
@@ -3464,11 +3947,37 @@ export default function DealDynamic(props) {
                                         /> */}
                       {/* <span className={`userchips user${index+1}chips`}>960</span> */}
                       <span className="userpointsdeal">
-                        {value.isActive
-                          ? activePlayerData.totalPoints
-                          : value.totalPoints}{" "}
-                        <span className="pts">Pts</span>
-                      </span>
+            {activePlayerData.playerStatus === "Declared" ? (
+              <>
+                {/* Conditionally render loader if the player is not Dropped or Eliminated */}
+                {value.playerStatus !== "Dropped" &&
+                  value.playerStatus !== "Eliminated" && (
+                    <div className="loader"></div>
+                )}
+
+                {value.isActive
+                  ? activePlayerData.bestPoints
+                  : value.bestPoints}{" "}
+                <span className="pts">Pts</span>
+              </>
+            ) : activePlayerData.playerStatus === "validDeclaration" ||
+              activePlayerData.playerStatus === "Winner" ||
+              activePlayerData.playerStatus === "autoWinner" ? (
+              <>
+                {value.isActive
+                  ? activePlayerData.totalPoints
+                  : value.totalPoints}{" "}
+                <span className="pts">Pts</span>
+              </>
+            ) : (
+              <>
+                {value.isActive
+                  ? activePlayerData.bestPoints
+                  : value.bestPoints}{" "}
+                <span className="pts">Pts</span>
+              </>
+            )}
+          </span>
                     </div>
                   </div>
                 </>

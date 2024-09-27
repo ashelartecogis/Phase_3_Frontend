@@ -3254,7 +3254,7 @@ export default function Deal(props) {
                     "Dropped" ? null : activePlayerData.playerStatus ===
                     "autoWinner" ? (
                     <>
-                      <span className="tracking-in-contract-username auto-winner">
+                      <span className="tracking-in-contract-username">
                         {activePlayerData.name.split(" ")[0]} is{" "}
                         <b className="green-color">Auto Winner</b>
                       </span>

@@ -15,8 +15,14 @@ import LazyLoad from "react-lazyload";
 import { base_url } from "../config";
 import axios from "axios";
 import baseURL from "../baseURL";
-import eliminated from "../images/Eliminated_marker.png";
-
+import eliminatedBg from "../images/EliminatedBg.png";
+import {
+  levelNumber as levelNumberEndpoint,
+  getPlayerTotalChips,
+  getLatestDealNumber,
+  getLastIngame,
+  getDeals
+} from "../server/Api";
 export default function CardDeal(props) {
   const [showLevelsIntro, setShowLevelsIntro] = useState(true);
   const [playerPosition, setPlayerPosition] = useState([]);
@@ -28,13 +34,129 @@ export default function CardDeal(props) {
   const [booster, setBooster] = useState(0);
   const [currentBoosterValue, setCurrentBoosterValue] = useState(0);
   const [playerIds, setPlayerIds] = useState([]);
+  const [data, setData] = useState([]);
   const [playerData, setPlayerData] = useState([]);
   const [playerStatus, setPlayerStatus] = useState("");
-
+  const [rankings, setRankings] = useState([]);
+  const [inGame, setInGame] = useState({});
   const boosterEndpoint = "http://192.168.9.245:8000/api/levels/boosters";
   const levelNumberEndpoint = "http://192.168.9.245:8000/api/levels/levelNumber";
   const dealNumberEndpoint = "http://192.168.9.245:8000/api/table/getLatestDealNumber";
+  const getDisplayLevel = (levelNumber, eliminationLevel) => {
+    const ranges = {
+      2: { 1: [1, 6], 2: [7, 12] },
+      3: { 1: [1, 4], 2: [5, 8], 3: [9, 12] },
+      4: { 1: [1, 3], 2: [4, 6], 3: [7, 9], 4: [10, 12] },
+      6: { 1: [1, 2], 2: [3, 4], 3: [5, 6], 4: [7, 8], 5: [9, 10], 6: [11, 12] },
+      12: { 1: [1], 2: [2], 3: [3], 4: [4], 5: [5], 6: [6], 7: [7], 8: [8], 9: [9], 10: [10], 11: [11], 12: [12] },
+    };
 
+    const levelRanges = ranges[levelNumber];
+    if (levelRanges) {
+      for (const [displayLevel, range] of Object.entries(levelRanges)) {
+        if (eliminationLevel >= range[0] && eliminationLevel <= range[range.length - 1]) {
+          return displayLevel;
+        }
+      }
+    }
+
+    return eliminationLevel;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch player data
+        const playerResponse = await fetch(getPlayerTotalChips());
+        const playerResult = await playerResponse.json();
+        setData(playerResult);
+
+        // Fetch level number
+        const levelResponse = await axios.get(levelNumberEndpoint());
+        setLevelNumber(levelResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Fetch data immediately on component mount
+    fetchData();
+  }, []); // Add socket as a dependency
+
+
+  useEffect(() => {
+    let localDealNo = localStorage.getItem("dealNumberCount");
+    if (localDealNo !== undefined && localDealNo !== null) {
+      setDealNumberCount(localDealNo);
+    } else {
+      setDealNumberCount(props.dealNumberCount);
+    }
+    // console.log("I am done");
+    let LocalInGame = JSON.parse(localStorage.getItem("InGame"));
+    if (LocalInGame !== undefined) {
+      setInGame(LocalInGame);
+    } else {
+      setInGame(props.inGame);
+    }
+
+  }, []);
+
+  useEffect(() => {
+    if (inGame && inGame.length > 0) {
+      // Sort players by elimination status and then by totalChips
+      const sortedPlayers = [...inGame].sort((a, b) => {
+        // First, compare by elimination status
+        if (a.playerStatus === "Eliminated" && b.playerStatus !== "Eliminated") {
+          return 1; // Move eliminated players down
+        }
+        if (a.playerStatus !== "Eliminated" && b.playerStatus === "Eliminated") {
+          return -1; // Move non-eliminated players up
+        }
+  
+        // If both players are eliminated, compare by eliminationPosition
+        if (a.playerStatus === "Eliminated" && b.playerStatus === "Eliminated") {
+          return b.playerId.eliminationPosition - a.playerId.eliminationPosition;
+        }
+  
+        // If neither is eliminated, compare by totalChips in descending order
+        return b.playerId.totalChips - a.playerId.totalChips;
+      });
+  
+      // Initialize an array to hold the rank assignments
+      let updatedRankings = [];
+      let currentRank = 1;
+  
+      for (let i = 0; i < sortedPlayers.length; i++) {
+        let player = sortedPlayers[i];
+  
+        // Check if it's the start of a tie (for non-eliminated players)
+        if (
+          i > 0 &&
+          player.playerStatus !== "Eliminated" &&
+          player.playerId.totalChips === sortedPlayers[i - 1].playerId.totalChips &&
+          sortedPlayers[i - 1].playerStatus !== "Eliminated"
+        ) {
+          // Assign the same rank as the previous player
+          updatedRankings.push({
+            ...player,
+            rank: updatedRankings[i - 1].rank
+          });
+        } else {
+          // Assign the current rank and update for the next unique totalChips or eliminationPosition
+          updatedRankings.push({
+            ...player,
+            rank: currentRank
+          });
+          currentRank++;
+        }
+      }
+  
+      // Set the rankings
+      setRankings(updatedRankings);
+    }
+  }, [inGame]);
+
+  
   useEffect(() => {
     const fetchPlayerData = async () => {
       try {
@@ -322,7 +444,19 @@ export default function CardDeal(props) {
                       </span>
                       {playerIds && playerIds.includes(value.playerId._id) ? (
                         <span className={`res-drop-text eliminated-drop-cd res-drop-text-${index + 1}`}>
-                          <img src={eliminated} className="eliminated-img" />
+                          <img src={eliminatedBg} className="eliminated-img" />
+                          {data.map(player => {
+        if (value && player._id === value.playerId._id && player.eliminationLevel > 0) {
+          const displayLevel = getDisplayLevel(levelNumber, player.eliminationLevel);
+
+          return (
+            <h3 key={player._id} className="eliminated-text">
+              Eliminated - lvl {displayLevel}
+            </h3>
+          );
+        }
+        return null;
+      })}
                         </span>
                       ) : null}
                     </div>

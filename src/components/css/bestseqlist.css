@@ -323,8 +323,8 @@ animation: flip-in-hor-top 0.5s ease-in 1s both; */
     display: flex;
     position: absolute;
     font-family: 'Roboto';
-    left: -102px;
-    top: 72px;
+    left: -99px;
+    top: 73px;
     font-size: 20px;
     font-weight: 900;
     color: #FFC961;
@@ -341,4 +341,13 @@ top: 40px;
 font-size: 22px;
 font-weight: bold;
 color: #FFC961; /* Or any color you prefer */
+}
+
+.eliminated-text{
+    display: flex;
+    position: absolute;
+    color: #fff;
+    font-weight: 500;
+    left: 267px;
+    top: 45px;
 }

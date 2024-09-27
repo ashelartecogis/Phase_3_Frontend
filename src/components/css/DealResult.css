@@ -1472,8 +1472,11 @@
 }
 
 .eliminated-img {
-    width: 185px;
-    height: auto;
+    left: 137px;
+    display: flex;
+    position: absolute;
+    width: 494px;
+    height: 67px;
 }
 
 .winnercup-dr {
