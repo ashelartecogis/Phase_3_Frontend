@@ -855,6 +855,20 @@
   }
 }
 
+/* For openCard - Static card */
+.static-card {
+  z-index: 1; /* Ensure it's behind curOpenCard */
+  position: absolute;
+  opacity: 1; /* Prevent any opacity changes */
+}     
+
+/* For curOpenCard - Animated card */
+.animated-card {
+  z-index: 10; /* Ensure it's on top */
+  position: absolute;
+}
+
+/* Animation styles */
 .oc6,
 .oc5,
 .oc4,
@@ -864,6 +878,17 @@
   animation: jump-open-6 1.3s ease-in both;
   z-index: 10000 !important;
 }
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fade-out {
+  animation: fadeOut 0.3s forwards; /* Adjust duration as needed */
+}
+
+/* Add more explicit animation properties if needed */
 
 /* @-webkit-keyframes jump-open-6 {
   0% {
@@ -2563,7 +2588,7 @@
 
   .best-points-deal {
     right: 91.9% !important;
-    bottom: 30.4% !important;
+    bottom: 31.2% !important;
     font-size: 45px;
     font-weight: 600;
     padding-right: 2px;
@@ -2580,7 +2605,7 @@
 
   .pstext {
     left: 2.9% !important;
-    bottom: 40.4% !important;
+    bottom: 41.4% !important;
     font-size: 24px;
     font-weight: 600;
   }
@@ -2796,8 +2821,8 @@
     animation: slide-in-left-perfect-sort 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     position: absolute;
     left: -1.4%;
-    top: 608px;
-    height: 220px;
+    top: 595px;
+    height: 235px;
     width: 1039.4px !important;
     z-index: -2;
   }
@@ -2866,7 +2891,7 @@
 /* players sort card height and width adjustment  */
   .usercarddeal {
     position: relative;
-    top: -243px;
+    top: -244px;
     left: -71px;
     height: 90px;
     width: 56.13px;
@@ -2907,7 +2932,15 @@
     font-size: 35px;
     line-height: 0px;
     left: 10% !important;
-    bottom: 249px !important;
+    bottom: 261px !important;
+    top: inherit !important;
+  }
+  
+  .tracking-in-contract-username-auto-winner {
+    font-size: 35px;
+    line-height: 0px;
+    left: 10% !important;
+    bottom: 250px !important;
     top: inherit !important;
   }
 
@@ -3270,10 +3303,10 @@ height: 70.09px;   */
 
   .slide-in-left-deal-bg-img-deal {
     width: 1361px !important;
-    height: 219px !important;
+    height: 235px !important;
     left: -20% !important;
     position: absolute;
-    bottom: 5px !important;
+    bottom: 2px !important;
   }
 
 
@@ -3314,11 +3347,11 @@ height: 70.09px;   */
 }
 
 .rpbg-deal {
-  width: 413px !important;
+  width: 347px !important;
   height: 58px !important;
   position: relative;
   top: 90px;
-  right: 91% !important;
+  right: 74% !important;
 }
 
 .bbg-deal {
@@ -3546,7 +3579,7 @@ height: 70.09px;   */
 .loader {
   display: flex;
   position: absolute;
-  left: -24px;
+  left: -28px;
   top: -25px;
   border: 4px solid #f3f3f3; /* Light grey background */
   border-top: 4px solid #837b7b; /* Blue top border to create a rotating effect */
@@ -3567,7 +3600,8 @@ height: 70.09px;   */
   animation: spin 1s linear infinite; /* Spin animation */
   position: relative;
   margin: 0 0 0 8px;
-
+  left: 14px;
+  top: -10px;
 }
 
 /* Define the spin animation */
@@ -3954,11 +3988,17 @@ height: 70.09px;   */
   animation: fade-in 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
 }
 
-/* .border-fluorescent {
-  border-radius: 8px; 
-} */
+.blue-highlight {
+  border: 12px solid #39ff14;
+  /* or any other blue-related styling you want */
+}
 
-/* @keyframes fluorescentshadow {
+
+ .border-fluorescent {
+  border-radius: 8px; 
+} 
+
+ @keyframes fluorescentshadow {
   0% {
     box-shadow: 0 0 50px #39ff14, 0 0 40px #39ff14, 0 0 40px #39ff14; 
     animation: fluorescentshadow 2s linear;
@@ -3971,7 +4011,7 @@ height: 70.09px;   */
   100% {
     box-shadow: none; 
   }
-} */
+} 
 
 @keyframes delayload {
   0% {
@@ -4009,9 +4049,19 @@ font-size: 80%;
 
 .mark-valid {
   position: relative;
-  top: 0px;
+  top: 8px;
 }
 
 .d-none {
   display: none;
+}
+
+.valdiation_under_progress{
+  display: flex;
+  top: 4px;
+  position: absolute;
+}
+
+.auto-winner {
+  bottom: 250px !important;
 }

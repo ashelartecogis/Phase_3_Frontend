@@ -170,7 +170,7 @@
     }
 
     .slide-in-left-deal-bg-img-deal {
-        display: none;
+        /* display: none;  */
     }
 
     .dealbg-res {
@@ -190,7 +190,7 @@
         width: auto !important;
     }
 
-    .usercarddeal {
+    .usercarddealPs {
         width: 58px;
         height: 84px;
     }
@@ -221,3 +221,4 @@
     }
 
 }
+
