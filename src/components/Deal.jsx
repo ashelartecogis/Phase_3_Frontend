@@ -3262,6 +3262,7 @@ export default function Deal(props) {
 
                 {(activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared" ||
+                activePlayerData.playerStatus === "validDeclaration" ||
                   activePlayerData.playerStatus === "Dropped") && (
                   <>
                     {activePlayerData.playerStatus !== "Dropped" && (
@@ -3298,8 +3299,7 @@ export default function Deal(props) {
                 {/* showing total points for hand sort */}
                 {!(showImage || dealShowImage) && 
                   (
-                    activePlayerData.playerStatus === "Winner" ||
-                    activePlayerData.playerStatus === "validDeclaration") && (
+                    activePlayerData.playerStatus === "Winner" ) && (
                     <>
                          <div className="tracking-in-contract-chips-deal">
                         {activePlayerData.totalPoints / currentBoosterValue}
@@ -4144,7 +4144,7 @@ export default function Deal(props) {
 
 {/* Pts (bestPoints and totalPoints )shown on right hand side  */}
                              <span className="userpointsdeal">
-            {activePlayerData.playerStatus === "Declared" ? (
+            {(activePlayerData.playerStatus === "Declared" || activePlayerData.playerStatus === "validDeclaration") ? (
               <>
                 {/* Conditionally render loader if the player is not Dropped or Eliminated */}
                 {value.playerStatus !== "Dropped" &&
@@ -4157,8 +4157,7 @@ export default function Deal(props) {
                   : value.bestPoints}{" "}
                 <span className="pts">Pts</span>
               </>
-            ) : activePlayerData.playerStatus === "validDeclaration" ||
-              activePlayerData.playerStatus === "Winner" ||
+            ) : activePlayerData.playerStatus === "Winner" ||
               activePlayerData.playerStatus === "autoWinner" ? (
               <>
                 {value.isActive
