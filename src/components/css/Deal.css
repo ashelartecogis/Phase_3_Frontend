@@ -869,14 +869,41 @@
 }
 
 /* Animation styles */
-.oc6,
-.oc5,
-.oc4,
-.oc3,
+
 .oc2 {
-  -webkit-animation: jump-open-6 1.3s ease-in both;
-  animation: jump-open-6 1.3s ease-in both;
-  z-index: 10000 !important;
+  -webkit-animation: jump-open-6 1s ease-in both; /* 1 second animation */
+  animation: jump-open-6 1s ease-in both;
+  z-index: 100000 !important;
+  opacity: 0.4 !important; /* Initial opacity */
+}
+
+
+.oc3 {
+  -webkit-animation: jump-open-6 0.3s ease-in both;
+  animation: jump-open-6 1s ease-in both;
+  z-index: 0 !important;
+  opacity: 0.2 !important ;
+}
+
+.oc4 {
+  -webkit-animation: jump-open-6 1s ease-in both;
+  animation: jump-open-6 1s ease-in both;
+  z-index: 0 !important;
+  opacity: 0.2 !important ;
+}
+
+.oc5 {
+  -webkit-animation: jump-open-6 1s ease-in both;
+  animation: jump-open-6 1s ease-in both;
+  z-index: 0 !important;
+  opacity: 0.2 !important ;
+}
+
+.oc6 {
+  -webkit-animation: jump-open-6 1s ease-in both;
+  animation: jump-open-6 1s ease-in both;
+  z-index: 0 !important;
+  opacity: 0.2 !important ;
 }
 
 @keyframes fadeOut {
@@ -992,13 +1019,13 @@
 
   90% {
     transform: translateX(-522px) translateY(0);
-    opacity: 1;
+    opacity: 0;
     box-shadow: none;
   }
 
   100% {
     transform: translateX(-580px) translateY(0);
-    opacity: 1;
+    opacity: 0;
     box-shadow: none;
   }
 }
@@ -3975,23 +4002,49 @@ height: 70.09px;   */
   z-index: 2;
 }
 
-.highlight-sets {
+.highlight-sets-ps {
   display: flex;
   position: absolute;
-  top: 99px;
-  left: 101px;
-  width: calc(100% - 12px);
-  height: 4px;
+  top: 138px;
+  left: 7px;
+  width: calc(100% - 11.5px);
+  height: 5px;
+  z-index: 1;
 }
 
 .delay-load {
   animation: fade-in 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) 2s both;
 }
 
+
+/* USED FOR OPEN CARD ANIMATION TESTING */
 .blue-highlight {
-  border: 12px solid #39ff14;
+  border: 12px solid #3714ff;
   /* or any other blue-related styling you want */
 }
+
+.green-highlight {
+  border: 12px solid #14ff33;
+  /* or any other blue-related styling you want */
+}
+
+.red-highlight {
+  border: 12px solid #ff1414;
+  /* or any other blue-related styling you want */
+}
+
+
+.yellow-highlight {
+  border: 12px solid #fffb14;
+  /* or any other blue-related styling you want */
+}
+
+
+.purple-highlight {
+  border: 12px solid #eb14ff;
+  /* or any other blue-related styling you want */
+}
+
 
 
  .border-fluorescent {
