@@ -1517,3 +1517,8 @@ display: flex;
     transition: 0.5s ease-in-out;
   }
   
+
+  .res-pts {
+    transition: opacity 0.5s ease-in-out;
+  }
+  

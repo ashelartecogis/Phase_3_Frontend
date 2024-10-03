@@ -84,7 +84,8 @@ export default function DealResult(props) {
   const [isScaling, setIsScaling] = useState(false);
   const [data, setData] = useState([]);
   const [levelNumber, setLevelNumber] = useState(null);
-  
+  const [animatedPoints, setAnimatedPoints] = useState(0); // Default animated points
+  const [initialPoints, setInitialPoints] = useState(0);
   const [rankings, setRankings] = useState([]);
   const [allPlayersPoints, setAllPlayersPoints] = useState([
     { totalPoints: playerPoint1, totalChips: playerChips1, isWinner: false },
@@ -116,6 +117,23 @@ export default function DealResult(props) {
 
     return eliminationLevel;
   };
+
+  useEffect(() => {
+    // Assuming totalPoints comes from allPlayersPoints
+    const totalPoints = allPlayersPoints.map(player => player.totalPoints); // Collect total points of all players
+
+    setInitialPoints(totalPoints); // Set the initial total points
+    setAnimatedPoints(totalPoints); // Initialize animated points to the total points
+
+    const decrementInterval = setInterval(() => {
+      setAnimatedPoints((prevPoints) =>
+        prevPoints > 0 ? prevPoints - 1 : 0 // Decrement points until it reaches 0
+      );
+    }, 1550); // Adjust the speed as needed
+
+    return () => clearInterval(decrementInterval); // Cleanup interval on unmount
+  }, [allPlayersPoints]); // Runs when allPlayersPoints updates
+
 
   useEffect(() => {
     if (inGame && inGame.length > 0) {
@@ -240,15 +258,18 @@ export default function DealResult(props) {
               );
               setLosingChips(losingArr);
   
-              // Start decrementing points and chips animation
+              // Start decrementing points and chips animation for losing players
               let windex = LocalInGame.findIndex(
                 (val) =>
                   val.playerStatus === "Winner" ||
                   val.playerStatus === "autoWinner"
               );
-              let incrementInterval = 10; // Milliseconds between each increment
+  
+              // Milliseconds between each increment for both winning and losing players
+              let incrementInterval = 10;
               let incrementAmount = Math.ceil(winnerChips / 1700); // Smaller amount to increment each time
   
+              // Decrement interval for losing players
               interval = setInterval(() => {
                 setAllPlayersPoints((prevData) => {
                   const newData = prevData.map((obj, ind) => {
@@ -260,10 +281,10 @@ export default function DealResult(props) {
                       // Decrement totalPoints and totalChips for non-winners who are not eliminated
                       return {
                         ...obj,
-                        totalPoints: obj.totalPoints - 1,
+                        totalPoints: Math.max(0, obj.totalPoints - 1), // Prevent negative totalPoints
                         totalChips:
                           obj.totalChips > losingArr[ind]
-                            ? obj.totalChips - 1
+                            ? Math.max(0, obj.totalChips - 1) // Prevent negative totalChips
                             : obj.totalChips,
                       };
                     } else {
@@ -277,6 +298,8 @@ export default function DealResult(props) {
   
                     setTimeout(() => {
                       let currentChips = newData[windex].totalChips;
+  
+                      // Increment interval for winning player
                       let chipsInterval = setInterval(() => {
                         currentChips += incrementAmount;
                         newData[windex].totalChips = currentChips;
@@ -301,7 +324,7 @@ export default function DealResult(props) {
                           }
                         }
   
-                        // Add the scaling animation class
+                        // Add the scaling animation class for winning player
                         document.querySelectorAll('.player-chip').forEach((el) => {
                           el.classList.add('scale-animation');
                         });
@@ -341,6 +364,7 @@ export default function DealResult(props) {
     },
     [scoreCount]
   );
+  
   
 
   useEffect(() => {
@@ -667,6 +691,7 @@ export default function DealResult(props) {
     setInGame(newInGame);
     localStorage.setItem("InGame", JSON.stringify(newInGame));
   };
+  
 
   return (
     <>
@@ -797,12 +822,22 @@ export default function DealResult(props) {
                   </>
                 )}
 
-                {!hideChips && value.playerStatus !== "Eliminated" && (
-                  <span className="res-pts">
-                    {value.totalPoints}
-                    <span className="res-pts-key"> &nbsp; Pts</span>
-                  </span>
-                )}
+ {/* Show initial total points */}
+         {/* Show initial total points */}
+         {!hideChips && value.playerStatus !== "Eliminated" && (
+              <span className="res-pts">
+                {initialPoints[index]} {/* Show initial total points */}
+                <span className="res-pts-key"> &nbsp; Pts</span>
+              </span>
+            )}
+
+            {/* Show decrementing points after they start decrementing */}
+            {!hideChips && value.playerStatus !== "Eliminated" && (
+              <span className="res-pts animated-points">
+                {animatedPoints[index]} {/* Show animated (decrementing) points */}
+                <span className="res-pts-key"> &nbsp; Pts</span>
+              </span>
+            )}
 
                 {/* <div className={`allcards`}> */}
                 {(value.playerStatus === "Dropped" ||
