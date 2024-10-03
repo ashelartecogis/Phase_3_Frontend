@@ -455,15 +455,15 @@ function Main() {
                       }
                     });
 
-                    // let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
-                    //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                    //   let isJoker = isJokerCard(pval.cardId);
-                    //   if (isJoker) {
-                    //     return { img: picked.imageURI2, cardId: pval.cardId };
-                    //   } else {
-                    //     return { img: picked.imageURI, cardId: pval.cardId };
-                    //   }
-                    // });
+                    let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
+                      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                      let isJoker = isJokerCard(pval.cardId);
+                      if (isJoker) {
+                        return { img: picked.imageURI2, cardId: pval.cardId };
+                      } else {
+                        return { img: picked.imageURI, cardId: pval.cardId };
+                      }
+                    });
 
                     // if(seq2.length === 0){
                     //   seq1.push(popped);
@@ -493,16 +493,16 @@ function Main() {
                       ...bseq3,
                       ...bseq4,
                       ...bseq5,
-                      // ...bseq6,
+                      ...bseq6,
                     ];
 
-                    let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
+                    let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
                     let isbestSeq1,
                       isbestSeq2,
                       isbestSeq3,
                       isbestSeq4,
-                      isbestSeq5;
-                      // isbestSeq6;
+                      isbestSeq5,
+                      isbestSeq6;
                     let bestPoints = 0;
                     if (val.bestSequence1.cards !== undefined) {
                       bestSeq1 = [...val.bestSequence1.cards];
@@ -526,20 +526,20 @@ function Main() {
 
                     if (val.bestSequence5.cards !== undefined) {
                       bestSeq5 = [...val.bestSequence5.cards];
-                      isbestSeq5 = val.bestSequence5.groupType;
+                      isbestSeq5  = val.bestSequence5.groupType;
                     }
 
-                    // if (val.bestSequence6.cards !== undefined) {
-                    //   bestSeq6 = [...val.bestSequence6.cards];
-                    //   isbestSeq6 = val.bestSequence6.groupType;
-                    // }
+                    if (val.bestSequence6.cards !== undefined) {
+                      bestSeq6 = [...val.bestSequence6.cards];
+                      isbestSeq6 = val.bestSequence6.groupType;
+                    }
                     let newBestSeq = [];
                     let newBestSeq1 = [];
                     let newBestSeq2 = [];
                     let newBestSeq3 = [];
                     let newBestSeq4 = [];
                     let newBestSeq5 = [];
-                    // let newBestSeq6 = [];
+                    let newBestSeq6 = [];
                     if (bestSeq1 !== undefined) {
                       newBestSeq.push(...bestSeq1);
                       newBestSeq1 = bestSeq1.map((val, index) => {
@@ -611,20 +611,20 @@ function Main() {
                       });
                     }
 
-                    // if (bestSeq6 !== undefined) {
-                    //   newBestSeq.push(...bestSeq6);
-                    //   newBestSeq6 = bestSeq6.map((val, index) => {
-                    //     let picked = Cards.find(
-                    //       (o) => o.cardUuid == val.cardId
-                    //     );
-                    //     let isJoker = isJokerCard(val.cardId);
-                    //     if (isJoker) {
-                    //       return picked.imageURI2;
-                    //     } else {
-                    //       return picked.imageURI;
-                    //     }
-                    //   });
-                    // }
+                    if (bestSeq6 !== undefined) {
+                      newBestSeq.push(...bestSeq6);
+                      newBestSeq6 = bestSeq6.map((val, index) => {
+                        let picked = Cards.find(
+                          (o) => o.cardUuid == val.cardId
+                        );
+                        let isJoker = isJokerCard(val.cardId);
+                        if (isJoker) {
+                          return picked.imageURI2;
+                        } else {
+                          return picked.imageURI;
+                        }
+                      });
+                    }
 
                     // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
                     let newBestCards = newBestSeq.map((val, index) => {
@@ -654,7 +654,7 @@ function Main() {
                         bseq3,
                         bseq4,
                         bseq5,
-                        // bseq6,
+                        bseq6,
                         newBSeq,
                         bestseq: newBestCards,
                         newBestSeq1,
@@ -662,13 +662,13 @@ function Main() {
                         newBestSeq3,
                         newBestSeq4,
                         newBestSeq5,
-                        // newBestSeq6,
+                        newBestSeq6,
                         isbestSeq1,
                         isbestSeq2,
                         isbestSeq3,
                         isbestSeq4,
-                        isbestSeq5,
-                        // isbestSeq6,
+                        isbestSeq5, 
+                        isbestSeq6,
                       });
                       localStorage.setItem(
                         "ActivePlayer",
@@ -689,7 +689,7 @@ function Main() {
                           bseq3,
                           bseq4,
                           bseq5,
-                          // bseq6,
+                          bseq6,
                           newBSeq,
                           bestseq: newBestCards,
                           newBestSeq1,
@@ -701,13 +701,13 @@ function Main() {
                           newBestSeq3,
                           newBestSeq4,
                           newBestSeq5,
-                          // newBestSeq6,
+                          newBestSeq6,
                           isbestSeq1,
                           isbestSeq2,
                           isbestSeq3,
                           isbestSeq4,
                           isbestSeq5,
-                          // isbestSeq6,
+                          isbestSeq6,
                         })
                       );
                       return {
@@ -789,8 +789,8 @@ function Main() {
           if (data !== undefined) {
             let oldInGame = JSON.parse(localStorage.getItem("InGame"));
             let ActivePlayer = JSON.parse(localStorage.getItem("ActivePlayer"));
-            let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-            let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+            let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
+            let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
             let scrNo = localStorage.getItem("screenNo");
             let bestPoints = 0;
             if (oldInGame !== null && oldInGame !== undefined) {
@@ -848,22 +848,22 @@ function Main() {
                         isbestSeq5 = data.InGameRes.bestSequence5.groupType;
                       }
 
-                      // if (data.InGameRes.bestSequence6.cards !== undefined) {
-                      //   bestSeq6 = [...data.InGameRes.bestSequence6.cards];
-                      //   setIsSeq6(data.InGameRes.bestSequence6.groupType);
-                      //   localStorage.setItem(
-                      //     "isSeq6",
-                      //     data.InGameRes.bestSequence6.groupType
-                      //   );
-                      //   isbestSeq6 = data.InGameRes.bestSequence6.groupType;
-                      // }
+                      if (data.InGameRes.bestSequence6.cards !== undefined) {
+                        bestSeq6 = [...data.InGameRes.bestSequence6.cards];
+                        setIsSeq6(data.InGameRes.bestSequence6.groupType);
+                        localStorage.setItem(
+                          "isSeq6",
+                          data.InGameRes.bestSequence6.groupType
+                        );
+                        isbestSeq6 = data.InGameRes.bestSequence6.groupType;
+                      }
                       let newBestSeq = [];
                       let newBestSeq1 = [];
                       let newBestSeq2 = [];
                       let newBestSeq3 = [];
                       let newBestSeq4 = [];
                       let newBestSeq5 = [];
-                      // let newBestSeq6 = [];
+                      let newBestSeq6 = [];
                       if (bestSeq1 !== undefined) {
                         newBestSeq.push(...bestSeq1);
                         newBestSeq1 = bestSeq1.map((val, index) => {
@@ -934,20 +934,20 @@ function Main() {
                           }
                         });
                       }
-                      // if (bestSeq6 !== undefined) {
-                      //   newBestSeq.push(...bestSeq6);
-                      //   newBestSeq6 = bestSeq6.map((val, index) => {
-                      //     let picked = Cards.find(
-                      //       (o) => o.cardUuid == val.cardId
-                      //     );
-                      //     let isJoker = isJokerCard(val.cardId);
-                      //     if (isJoker) {
-                      //       return picked.imageURI2;
-                      //     } else {
-                      //       return picked.imageURI;
-                      //     }
-                      //   });
-                      // }
+                      if (bestSeq6 !== undefined) {
+                        newBestSeq.push(...bestSeq6);
+                        newBestSeq6 = bestSeq6.map((val, index) => {
+                          let picked = Cards.find(
+                            (o) => o.cardUuid == val.cardId
+                          );
+                          let isJoker = isJokerCard(val.cardId);
+                          if (isJoker) {
+                            return picked.imageURI2;
+                          } else {
+                            return picked.imageURI;
+                          }
+                        });
+                      }
                       // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
                       let newBestCards = newBestSeq.map((val, index) => {
                         let picked = Cards.find(
@@ -970,13 +970,13 @@ function Main() {
                         newBestSeq3,
                         newBestSeq4,
                         newBestSeq5,
-                        // newBestSeq6,
+                        newBestSeq6,
                         isbestSeq1,
                         isbestSeq2,
                         isbestSeq3,
                         isbestSeq4,
                         isbestSeq5,
-                        // isbestSeq6,
+                        isbestSeq6,
                       });
                       localStorage.setItem(
                         "ActivePlayer",
@@ -989,13 +989,13 @@ function Main() {
                           newBestSeq3,
                           newBestSeq4,
                           newBestSeq5,
-                          // newBestSeq6,
+                          newBestSeq6,
                           isbestSeq1,
                           isbestSeq2,
                           isbestSeq3,
                           isbestSeq4,
                           isbestSeq5,
-                          // isbestSeq6,
+                          isbestSeq6,
                         })
                       );
                     }
@@ -1092,8 +1092,8 @@ function Main() {
                     return { img: picked.imageURI2, cardId: pval.cardId };
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
-                  }
-                });
+                  } 
+                }) || [];
 
                 let seq2 = val.cardSequence2.cards.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1103,7 +1103,7 @@ function Main() {
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
                   }
-                });
+                }) || [];
 
                 let seq3 = val.cardSequence3.cards.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1113,7 +1113,7 @@ function Main() {
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
                   }
-                });
+                }) || [];
 
                 let seq4 = val.cardSequence4.cards.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1123,7 +1123,7 @@ function Main() {
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
                   }
-                });
+                }) || [];
 
                 let seq5 = val.cardSequence5.cards.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1133,7 +1133,7 @@ function Main() {
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
                   }
-                });
+                }) || [];
 
                 let seq6 = val.cardSequence6.cards.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1143,7 +1143,7 @@ function Main() {
                   } else {
                     return { img: picked.imageURI, cardId: pval.cardId };
                   }
-                });
+                }) || [];
 
                 let bseq1 = val.bestSequence1?.cards?.map((pval, pin) => {
                   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
@@ -1195,15 +1195,15 @@ function Main() {
                   }
                 }) || [];
                 
-                // let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
-                //   let picked = Cards.find((o) => o.cardUuid == pval.cardId);
-                //   let isJoker = isJokerCard(pval.cardId);
-                //   if (isJoker) {
-                //     return { img: picked.imageURI2, cardId: pval.cardId };
-                //   } else {
-                //     return { img: picked.imageURI, cardId: pval.cardId };
-                //   }
-                // });
+                  let bseq6 = val.bestSequence6?.cards?.map((pval, pin) => {
+                  let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                  let isJoker = isJokerCard(pval.cardId);
+                  if (isJoker) {
+                    return { img: picked?.imageURI2, cardId: pval.cardId };
+                  } else {
+                    return { img: picked?.imageURI, cardId: pval.cardId };
+                  }
+                }) || [];
 
                 let newSeq = [
                   ...seq1,
@@ -1220,17 +1220,17 @@ function Main() {
                   ...bseq3,
                   ...bseq4,
                   ...bseq5,
-                  // ...bseq6,
+                  ...bseq6,
                 ];
 
                 if (index == data.currentScreenNo - 1) {
-                  let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
+                  let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
                   let isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
-                    isbestSeq5;
-                    // isbestSeq6;
+                    isbestSeq5,
+                    isbestSeq6;
                   let bestPoints = 0;
                   if (val.bestSequence1.cards !== undefined) {
                     bestSeq1 = [...val.bestSequence1.cards];
@@ -1266,19 +1266,19 @@ function Main() {
                     localStorage.setItem("isSeq5", val.bestSequence5.groupType);
                     isbestSeq5 = val.bestSequence5.groupType;
                   }
-                  // if (val.bestSequence6.cards !== undefined) {
-                  //   bestSeq6 = [...val.bestSequence6.cards];
-                  //   setIsSeq6(val.bestSequence6.groupType);
-                  //   localStorage.setItem("isSeq6", val.bestSequence6.groupType);
-                  //   isbestSeq6 = val.bestSequence6.groupType;
-                  // }
+                  if (val.bestSequence6.cards !== undefined) {
+                    bestSeq6 = [...val.bestSequence6.cards];
+                    setIsSeq6(val.bestSequence6.groupType);
+                    localStorage.setItem("isSeq6", val.bestSequence6.groupType);
+                    isbestSeq6 = val.bestSequence6.groupType;
+                  }
                   let newBestSeq = [];
                   let newBestSeq1 = [];
                   let newBestSeq2 = [];
                   let newBestSeq3 = [];
                   let newBestSeq4 = [];
                   let newBestSeq5 = [];
-                  // let newBestSeq6 = [];
+                  let newBestSeq6 = [];
                   if (bestSeq1 !== undefined) {
                     newBestSeq.push(...bestSeq1);
                     newBestSeq1 = bestSeq1.map((val, index) => {
@@ -1339,18 +1339,18 @@ function Main() {
                       }
                     });
                   }
-                  // if (bestSeq6 !== undefined) {
-                  //   newBestSeq.push(...bestSeq6);
-                  //   newBestSeq6 = bestSeq6.map((val, index) => {
-                  //     let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                  //     let isJoker = isJokerCard(val.cardId);
-                  //     if (isJoker) {
-                  //       return picked.imageURI2;
-                  //     } else {
-                  //       return picked.imageURI;
-                  //     }
-                  //   });
-                  // }
+                  if (bestSeq6 !== undefined) {
+                    newBestSeq.push(...bestSeq6);
+                    newBestSeq6 = bestSeq6.map((val, index) => {
+                      let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                      let isJoker = isJokerCard(val.cardId);
+                      if (isJoker) {
+                        return picked.imageURI2;
+                      } else {
+                        return picked.imageURI;
+                      }
+                    });
+                  }
 
                   // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
                   let newBestCards = newBestSeq.map((val, index) => {
@@ -1375,21 +1375,21 @@ function Main() {
                     bseq3,
                     bseq4,
                     bseq5,
-                    // bseq6,
+                    bseq6,
                     newBSeq,
                     newBestSeq1,
                     newBestSeq2,
                     newBestSeq3,
                     newBestSeq4,
                     newBestSeq5,
-                    // newBestSeq6,
+                    newBestSeq6,
                     bestseq: newBestCards,
                     isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
-                    // isbestSeq6
+                    isbestSeq6
                   });
                   localStorage.setItem(
                     "ActivePlayer",
@@ -1410,21 +1410,21 @@ function Main() {
                       bseq3,
                       bseq4,
                       bseq5,
-                      // bseq6,
+                      bseq6,
                       newBSeq,
                       newBestSeq1,
                       newBestSeq2,
                       newBestSeq3,
                       newBestSeq4,
                       newBestSeq5,
-                      // newBestSeq6,
+                      newBestSeq6,
                       bestseq: newBestCards,
                       isbestSeq1,
                       isbestSeq2,
                       isbestSeq3,
                       isbestSeq4,
                       isbestSeq5,
-                      // isbestSeq6,
+                      isbestSeq6,
                     })
                   );
                   return { ...val, isActive: 1, bestPoints: val.bestPoints };

@@ -352,15 +352,15 @@ export default function BestSeqList(props) {
               return picked.imageURI;
             }
           }),
-          // bestSeq6: val?.bestSequence6?.cards?.map((cval, cindex) => {
-          //   let picked = Cards.find((o) => o.cardUuid == cval.cardId);
-          //   let isJoker = isJokerCard(cval.cardId);
-          //   if (isJoker) {
-          //     return picked.imageURI2;
-          //   } else {
-          //     return picked.imageURI;
-          //   }
-          // }),
+          bestSeq6: val?.bestSequence6?.cards?.map((cval, cindex) => {
+            let picked = Cards.find((o) => o.cardUuid == cval.cardId);
+            let isJoker = isJokerCard(cval.cardId);
+            if (isJoker) {
+              return picked.imageURI2;
+            } else {
+              return picked.imageURI;
+            }
+          }),
         };
       } else {
         return {
@@ -457,7 +457,7 @@ export default function BestSeqList(props) {
                 />
                 {value.playerStatus !== "Eliminated" && (
                   <span className="res-pts">
-                    {value.totalPoints} <span className="res-pts-key">Pts</span>
+                    {value.bestPoints} <span className="res-pts-key">Pts</span>
                   </span>
                 )}
                 {(value.playerStatus === "Dropped" ||
@@ -481,7 +481,7 @@ export default function BestSeqList(props) {
 
           return (
             <h3 key={player._id} className="eliminated-text">
-              Eliminated - lvl {displayLevel}
+              Eliminated - Lvl {displayLevel}
             </h3>
           );
         }
@@ -617,7 +617,7 @@ export default function BestSeqList(props) {
                             </div>
                           ))}
                       </div>
-                      {/* <div className="col-auto no-gutters p-1 ps-card-position">
+                      <div className="col-auto no-gutters p-1 ps-card-position">
                         {value.bestSeq6 !== undefined &&
                           value.bestSeq6.length > 0 &&
                           value.bestSeq6.map((bval, bindex) => (
@@ -638,7 +638,7 @@ export default function BestSeqList(props) {
                               )}
                             </div>
                           ))}
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                 )}

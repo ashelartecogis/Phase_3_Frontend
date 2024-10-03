@@ -451,7 +451,7 @@ export default function CardDeal(props) {
 
           return (
             <h3 key={player._id} className="eliminated-text">
-              Eliminated - lvl {displayLevel}
+              Eliminated - Lvl {displayLevel}
             </h3>
           );
         }

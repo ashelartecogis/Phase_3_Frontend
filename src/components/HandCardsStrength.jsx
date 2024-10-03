@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./css/HandCardsStrength.css";
 import GRC from "../images/grc_logo_new.png";
@@ -28,6 +28,7 @@ import per100 from "../images/100per.png";
 import baseURL from "../baseURL";
 import UP from "../images/up.png";
 import DOWN from "../images/down.png";
+import { SocketContext } from "../services/socket";
 
 export default function HandCardsStrength(props) {
   const [dealNumberCount, setDealNumberCount] = useState(1);
@@ -35,50 +36,48 @@ export default function HandCardsStrength(props) {
   const [initialPosition, setInitialPosition] = useState(null);
   const [probability, setProbability] = useState({});
   const [oldProbability, setOldProbability] = useState({});
-
+  const socket = useContext(SocketContext); // Context for the socket
   const [levelNumber, setLevelNumber] = useState(null);
   const [mergedData, setMergedData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [inGameData, playersData, playerPositionsData] =
-          await Promise.all([
-            axios.get(`${baseURL}:8000/api/ingame/getTotalPoints`),
-            axios.get(`${baseURL}:8000/api/players/getPlayerTotalChips`),
-            axios.get(`${baseURL}:8000/api/table/getPlayerPosition`),
-          ]);
+  // Function to fetch the initial data from the server
+  const fetchData = async () => {
+    try {
+      const [inGameData, playersData, playerPositionsData] =
+        await Promise.all([
+          axios.get(`${baseURL}:8000/api/ingame/getTotalPoints`),
+          axios.get(`${baseURL}:8000/api/players/getPlayerTotalChips`),
+          axios.get(`${baseURL}:8000/api/table/getPlayerPosition`),
+        ]);
 
-        // Map playerId to player position
-        const playerPositions = {};
-        playerPositionsData.data.forEach((player) => {
-          playerPositions[player.playerId] = player.position;
-        });
+      // Map playerId to player position
+      const playerPositions = {};
+      playerPositionsData.data.forEach((player) => {
+        playerPositions[player.playerId] = player.position;
+      });
 
-        // Merge player data with position data
-        const mergedData = inGameData.data.map((inGameData) => {
-          const playerData = playersData.data.find(
-            (player) => player._id === inGameData.playerId
-          );
-          return {
-            ...inGameData,
-            ...playerData,
-            position: playerPositions[inGameData.playerId],
-          };
-        });
+      // Merge player data with position data
+      const mergedData = inGameData.data.map((inGameData) => {
+        const playerData = playersData.data.find(
+          (player) => player._id === inGameData.playerId
+        );
+        return {
+          ...inGameData,
+          ...playerData,
+          position: playerPositions[inGameData.playerId],
+        };
+      });
 
-        // Sort merged data by position
-        mergedData.sort((a, b) => a.position - b.position);
+      // Sort merged data by position
+      mergedData.sort((a, b) => a.position - b.position);
 
-        setMergedData(mergedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+      setMergedData(mergedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    fetchData();
-  }, []);
-
+  // Fetch level number
   useEffect(() => {
     const fetchLevelNumber = async () => {
       try {
@@ -90,39 +89,67 @@ export default function HandCardsStrength(props) {
         console.error("Error fetching level number:", error);
       }
     };
+    fetchLevelNumber();
   }, []);
+
+  // Fetch data on component mount and set up socket listeners
+ useEffect(() => {
+  fetchData(); // Initial fetch of data
+
+  // Setup socket listeners for various events
+  socket.on("setPickCard", fetchData);
+  socket.on("PickCard", fetchData);
+  socket.on("showOpenCard", fetchData);
+  socket.on("setCloseCard", fetchData);
+  socket.on("CloseCard", fetchData);
+  socket.on("PickStatus", fetchData);
+  socket.on("chance_count", fetchData);
+  socket.on("screenType", fetchData);
+  socket.on("setPlayerStatus", fetchData);
+  socket.on("dealingCard", fetchData);
+  socket.on("dealcard", fetchData);
+  socket.on("setCardSequence", fetchData);
+  socket.on("setBestSeq", fetchData);
+  socket.on("setScreenNo", fetchData);
+  socket.on("showJoker", fetchData);
+  socket.on("Joker", fetchData);
+  socket.on("Scanner", fetchData);
+
+  // Cleanup listeners on component unmount
+  return () => {
+    socket.off("setPickCard", fetchData);
+    socket.off("PickCard", fetchData);
+    socket.off("showOpenCard", fetchData);
+    socket.off("setCloseCard", fetchData);
+    socket.off("CloseCard", fetchData);
+    socket.off("PickStatus", fetchData);
+    socket.off("chance_count", fetchData);
+    socket.off("screenType", fetchData);
+    socket.off("setPlayerStatus", fetchData);
+    socket.off("dealingCard", fetchData);
+    socket.off("dealcard", fetchData);
+    socket.off("setCardSequence", fetchData);
+    socket.off("setBestSeq", fetchData);
+    socket.off("setScreenNo", fetchData);
+    socket.off("showJoker", fetchData);
+    socket.off("Joker", fetchData);
+    socket.off("Scanner", fetchData);
+  };
+}, [socket]); // Add socket as a dependency
 
   return (
     <>
       <div className="fade-in-intro">
         <div className="logodiv">
-          {/* <LazyLoad height={"100%"}>
-                        <img
-                            src={RC}
-                            alt=""
-                            className="rc"
-                        />
-                    </LazyLoad > */}
           <LazyLoad height={"100%"}>
             <img src={GRC} alt="" className="grc" />
           </LazyLoad>
         </div>
-        {/* <div className="titlebox">
-          <img src={TITLEBOX} alt="" className="titleboximg" />
-          <h4 className="psstitle mb-0">Deal {dealNumberCount}</h4>
-        </div> */}
       </div>
       <div className="psmaindiv">
         <div class="psp_out">
           <img src={PSP} alt="" className="psp-hc" />
         </div>
-        {/* <div className="dimg_out">
-                    <img
-                        src={DIMG}
-                        alt=""
-                        className="dmarker"
-                    />
-                </div> */}
         {mergedData &&
           mergedData.length > 0 &&
           mergedData.map((value, index) => (
@@ -138,39 +165,12 @@ export default function HandCardsStrength(props) {
                   alt=""
                   className={`ppn-hc ppn${index + 1}`}
                 />
-                {/* Add your probability logic here */}
                 <div className="row hcname-row">
                   <div className="col-12 mx-auto text-center">
                     <span className={`ppname-hc`}>
                       {value.name.split(" ")[0]}
                     </span>
-                    {/* Add the logic for rendering the dMarker */}
                     {index === 0 && value.dMarker === "true" && (
-                      <div className="dimg_out">
-                        <img src={DIMG} alt="" className="dmarker" />
-                      </div>
-                    )}
-                    {index === 1 && value.dMarker === "true" && (
-                      <div className="dimg_out">
-                        <img src={DIMG} alt="" className="dmarker" />
-                      </div>
-                    )}
-                    {index === 2 && value.dMarker === "true" && (
-                      <div className="dimg_out">
-                        <img src={DIMG} alt="" className="dmarker" />
-                      </div>
-                    )}
-                    {index === 3 && value.dMarker === "true" && (
-                      <div className="dimg_out">
-                        <img src={DIMG} alt="" className="dmarker" />
-                      </div>
-                    )}
-                    {index === 4 && value.dMarker === "true" && (
-                      <div className="dimg_out">
-                        <img src={DIMG} alt="" className="dmarker" />
-                      </div>
-                    )}
-                    {index === 5 && value.dMarker === "true" && (
                       <div className="dimg_out">
                         <img src={DIMG} alt="" className="dmarker" />
                       </div>
@@ -188,33 +188,32 @@ export default function HandCardsStrength(props) {
                     {value.probability}%
                   </span>
                 </span>
-                {/* Add the logic for rendering the probability image */}
                 {value.probability > 0 && (
                   <img
                     src={
                       value.probability >= 100
                         ? per100
-                        : value.probability >= 90 && value.probability <= 100
+                        : value.probability >= 90
                         ? per90
-                        : value.probability >= 80 && value.probability <= 90
+                        : value.probability >= 80
                         ? per80
-                        : value.probability >= 70 && value.probability <= 80
+                        : value.probability >= 70
                         ? per70
-                        : value.probability >= 60 && value.probability <= 70
+                        : value.probability >= 60
                         ? per60
-                        : value.probability >= 50 && value.probability <= 60
+                        : value.probability >= 50
                         ? per50
-                        : value.probability >= 40 && value.probability <= 50
+                        : value.probability >= 40
                         ? per40
-                        : value.probability >= 30 && value.probability <= 40
+                        : value.probability >= 30
                         ? per30
-                        : value.probability >= 20 && value.probability <= 30
+                        : value.probability >= 20
                         ? per20
-                        : value.probability >= 10 && value.probability <= 20
+                        : value.probability >= 10
                         ? per10
-                        : value.probability >= 5 && value.probability <= 10
+                        : value.probability >= 5
                         ? per5
-                        : value.probability >= 1 && value.probability <= 5
+                        : value.probability >= 1
                         ? per1
                         : ""
                     }
@@ -230,14 +229,6 @@ export default function HandCardsStrength(props) {
               </div>
             </>
           ))}
-
-        <div className="dblack_out">
-          {/* <img
-                        src={DBLACK}
-                        alt=""
-                        className="dblack-hc"
-                    /> */}
-        </div>
         <img src={GREENTABLE} alt="" className="greentable-hc" />
       </div>
     </>

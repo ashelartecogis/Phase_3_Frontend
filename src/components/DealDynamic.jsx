@@ -49,12 +49,14 @@ import tsdealbg from "../images/ts-deal-bg.png";
 import ts_deal_username from "../images/ts-deal-username.png";
 import ts_deal_bg_bg from "../images/ts-deal-bg-bg.png";
 import dropped_card from "../images/dropped-card.png";
-
-import prob_rect from "../images/prob_rect.png";
-import prob_active from "../images/prob_active.png";
 import { Cards, ipaddbackend, dockeripprob } from "../constants";
-import PERFECT_SORT_LIST from "../images/perfect_sort_list.png";
-import PERFECT_SORT from "../images/perfect_sort.png";
+import {
+  boosters as boosterEndpoint,
+  levelNumber as levelNumberEndpoint,
+  getTotalPoints,
+  getLatestDealNumber,
+  getDeals
+} from "../server/Api";
 
 import { base_url } from "../config";
 import { SocketContext } from "../services/socket";
@@ -95,20 +97,14 @@ export default function DealDynamic(props) {
   const [latestDealNumber, setLatestDealNumber] = useState("");
   const [currentBoosterValue, setCurrentBoosterValue] = useState(0);
 
-  const boosterEndpoint = "http://192.168.9.245:8000/api/levels/boosters";
-  const levelNumberEndpoint =
-    "http://192.168.9.245:8000/api/levels/levelNumber";
-  const dealNumberEndpoint =
-    "http://192.168.9.245:8000/api/table/getLatestDealNumber";
-
   // Function to perform the calculations
   async function calculateBoosterValue() {
     try {
       const [boostersResponse, levelNumberResponse, dealNumberResponse] =
         await Promise.all([
-          axios.get(boosterEndpoint),
-          axios.get(levelNumberEndpoint),
-          axios.get(dealNumberEndpoint),
+          axios.get(boosterEndpoint()),
+          axios.get(levelNumberEndpoint()),
+          axios.get(getLatestDealNumber()),
         ]);
 
       const boostersData = boostersResponse.data;
@@ -159,7 +155,7 @@ export default function DealDynamic(props) {
   useEffect(() => {
     const fetchLatestDealNumber = async () => {
       try {
-        const response = await axios.get(dealNumberEndpoint);
+        const response = await axios.get(getLatestDealNumber());
         setLatestDealNumber(response.data);
       } catch (error) {
         console.error("Error fetching latest deal number:", error);
@@ -172,7 +168,7 @@ export default function DealDynamic(props) {
   useEffect(() => {
     const fetchLevelNumber = async () => {
       try {
-        const levelResponse = await axios.get(levelNumberEndpoint);
+        const levelResponse = await axios.get(levelNumberEndpoint());
         setLevelNumber(levelResponse.data);
       } catch (error) {
         console.error("Error fetching level number:", error);
@@ -428,14 +424,24 @@ export default function DealDynamic(props) {
       }
     });
 
+    let bseq6 = reqdata.bestSequence6.cards.map((pval, pin) => {
+      let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+      let isJoker = isJokerCard(pval.cardId);
+      if (isJoker) {
+        return { img: picked.imageURI2, cardId: pval.cardId };
+      } else {
+        return { img: picked.imageURI, cardId: pval.cardId };
+      }
+    });
+
     
 
     let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
-    let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
+    let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5, ...bseq6];
 
 
-    let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-    let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+    let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
+    let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
 
     let bestPoints = 0;
     if (reqdata.bestSequence1.cards !== undefined) {
@@ -463,12 +469,19 @@ export default function DealDynamic(props) {
       isbestSeq5 = reqdata.bestSequence5.groupType;
     }
 
+    if (reqdata.bestSequence6.cards !== undefined) {
+      bestSeq6 = [...reqdata.bestSequence6.cards];
+      isbestSeq6 = reqdata.bestSequence6.groupType;
+    }
+
+
     let newBestSeq = [];
     let newBestSeq1 = [];
     let newBestSeq2 = [];
     let newBestSeq3 = [];
     let newBestSeq4 = [];
     let newBestSeq5 = [];
+    let newBestSeq6 = [];
     if (bestSeq1 !== undefined) {
       newBestSeq.push(...bestSeq1);
       newBestSeq1 = bestSeq1.map((val, index) => {
@@ -529,6 +542,19 @@ export default function DealDynamic(props) {
         }
       });
     }
+
+    if (bestSeq6 !== undefined) {
+      newBestSeq.push(...bestSeq6);
+      newBestSeq6 = bestSeq6.map((val, index) => {
+        let picked = Cards.find((o) => o.cardUuid == val.cardId);
+        let isJoker = isJokerCard(val.cardId);
+        if (isJoker) {
+          return picked.imageURI2;
+        } else {
+          return picked.imageURI;
+        }
+      });
+    }
     // console.log("best", newBestSeq1);
     // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
     let newBestCards = newBestSeq.map((val, index) => {
@@ -569,7 +595,7 @@ export default function DealDynamic(props) {
               bseq3,
               bseq4,
               bseq5,
-              // bseq6,
+              bseq6,
               newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
@@ -577,12 +603,14 @@ export default function DealDynamic(props) {
               newBestSeq3,
               newBestSeq4,
               newBestSeq5,
+              newBestSeq6,
               bestPoints: reqdata.bestPoints,
               isbestSeq1,
               isbestSeq2,
               isbestSeq3,
               isbestSeq4,
               isbestSeq5,
+              isbestSeq6,
             });
             localStorage.setItem(
               "ActivePlayer",
@@ -602,7 +630,7 @@ export default function DealDynamic(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-                // bseq6,
+                bseq6,
                 newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
@@ -610,12 +638,14 @@ export default function DealDynamic(props) {
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                newBestSeq6,
                 bestPoints: reqdata.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               })
             );
           }, 1000);
@@ -636,7 +666,7 @@ export default function DealDynamic(props) {
             bseq3,
             bseq4,
             bseq5,
-            // bseq6,
+            bseq6,
             newBSeq,
             bestseq: newBestCards,
             newBestSeq1,
@@ -644,12 +674,14 @@ export default function DealDynamic(props) {
             newBestSeq3,
             newBestSeq4,
             newBestSeq5,
+            newBestSeq6,
             bestPoints: reqdata.bestPoints,
             isbestSeq1,
             isbestSeq2,
             isbestSeq3,
             isbestSeq4,
             isbestSeq5,
+            isbestSeq6,
           });
           localStorage.setItem(
             "ActivePlayer",
@@ -669,7 +701,7 @@ export default function DealDynamic(props) {
               bseq3,
               bseq4,
               bseq5,
-              // bseq6,
+              bseq6,
               newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
@@ -677,12 +709,14 @@ export default function DealDynamic(props) {
               newBestSeq3,
               newBestSeq4,
               newBestSeq5,
+              newBestSeq6,
               bestPoints: reqdata.bestPoints,
               isbestSeq1,
               isbestSeq2,
               isbestSeq3,
               isbestSeq4,
               isbestSeq5,
+              isbestSeq6,
             })
           );
         }
@@ -858,7 +892,15 @@ export default function DealDynamic(props) {
             }
           });
 
-        
+          let bseq6 = data.bestSequence6.cards.map((pval, pin) => {
+            let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+            let isJoker = isJokerCard(pval.cardId);
+            if (isJoker) {
+              return { img: picked.imageURI2, cardId: pval.cardId };
+            } else {
+              return { img: picked.imageURI, cardId: pval.cardId };
+            }
+          });
 
           // if(seq2.length === 0){
           //   seq1.push(popped);
@@ -874,10 +916,10 @@ export default function DealDynamic(props) {
           // }
 
           let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
-          let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5];
+          let newBSeq = [...bseq1, ...bseq2, ...bseq3, ...bseq4, ...bseq5, ...bseq6];
           // newSeq.push(popped);
-          let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-          let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+          let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
+          let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
           let bestPoints = 0;
           if (data.bestSequence1.cards !== undefined) {
             bestSeq1 = [...data.bestSequence1.cards];
@@ -903,12 +945,19 @@ export default function DealDynamic(props) {
             bestSeq5 = [...data.bestSequence5.cards];
             isbestSeq5 = data.bestSequence5.groupType;
           }
+
+          if (data.bestSequence6.cards !== undefined) {
+            bestSeq6 = [...data.bestSequence6.cards];
+            isbestSeq6 = data.bestSequence6.groupType;
+          }
+
           let newBestSeq = [];
           let newBestSeq1 = [];
           let newBestSeq2 = [];
           let newBestSeq3 = [];
           let newBestSeq4 = [];
           let newBestSeq5 = [];
+          let newBestSeq6 = [];
           if (bestSeq1 !== undefined) {
             newBestSeq.push(...bestSeq1);
             newBestSeq1 = bestSeq1.map((val, index) => {
@@ -970,6 +1019,19 @@ export default function DealDynamic(props) {
             });
           }
 
+          if (bestSeq6 !== undefined) {
+            newBestSeq.push(...bestSeq6);
+            newBestSeq6 = bestSeq6.map((val, index) => {
+              let picked = Cards.find((o) => o.cardUuid == val.cardId);
+              let isJoker = isJokerCard(val.cardId);
+              if (isJoker) {
+                return picked.imageURI2;
+              } else {
+                return picked.imageURI;
+              }
+            });
+          }
+
           // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
           let newBestCards = newBestSeq.map((val, index) => {
             let picked = Cards.find((o) => o.cardUuid == val.cardId);
@@ -992,7 +1054,7 @@ export default function DealDynamic(props) {
               bseq3,
               bseq4,
               bseq5,
-              // bseq6,
+              bseq6,
               newBSeq,
               bestseq: newBestCards,
               newBestSeq1,
@@ -1000,12 +1062,14 @@ export default function DealDynamic(props) {
               newBestSeq3,
               newBestSeq4,
               newBestSeq5,
+              newBestSeq6,
               bestPoints: data.bestPoints,
               isbestSeq1,
               isbestSeq2,
               isbestSeq3,
               isbestSeq4,
               isbestSeq5,
+              isbestSeq6,
             });
             localStorage.setItem(
               "ActivePlayer",
@@ -1025,7 +1089,7 @@ export default function DealDynamic(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-                // bseq6,
+                bseq6,
                 newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
@@ -1033,12 +1097,14 @@ export default function DealDynamic(props) {
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                newBestSeq6,
                 bestPoints: data.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               })
             );
           }, 1000);
@@ -1300,6 +1366,16 @@ export default function DealDynamic(props) {
               }
             });
 
+            let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
+              let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+              let isJoker = isJokerCard(pval.cardId);
+              if (isJoker) {
+                return { img: picked.imageURI2, cardId: pval.cardId };
+              } else {
+                return { img: picked.imageURI, cardId: pval.cardId };
+              }
+            });
+
 
             let newSeq = [...seq1, ...seq2, ...seq3, ...seq4, ...seq5, ...seq6];
             let newBSeq = [
@@ -1308,10 +1384,10 @@ export default function DealDynamic(props) {
               ...bseq3,
               ...bseq4,
               ...bseq5,
-              // ...bseq6,
+              ...bseq6,
             ];
-            let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-            let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+            let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5,bestSeq6;
+            let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
             let bestPoints = 0;
             if (val.bestSequence1.cards !== undefined) {
               bestSeq1 = [...val.bestSequence1.cards];
@@ -1337,12 +1413,19 @@ export default function DealDynamic(props) {
               bestSeq5 = [...val.bestSequence5.cards];
               isbestSeq5 = val.bestSequence5.groupType;
             }
+
+            if (val.bestSequence6.cards !== undefined) {
+              bestSeq6 = [...val.bestSequence6.cards];
+              isbestSeq6 = val.bestSequence6.groupType;
+            }
+
             let newBestSeq = [];
             let newBestSeq1 = [];
             let newBestSeq2 = [];
             let newBestSeq3 = [];
             let newBestSeq4 = [];
             let newBestSeq5 = [];
+            let newBestSeq6 = [];
             if (bestSeq1 !== undefined) {
               newBestSeq.push(...bestSeq1);
               newBestSeq1 = bestSeq1.map((val, index) => {
@@ -1403,6 +1486,19 @@ export default function DealDynamic(props) {
                 }
               });
             }
+            if (bestSeq6 !== undefined) {
+              newBestSeq.push(...bestSeq6);
+              newBestSeq6 = bestSeq6.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
+
             let newBestCards = newBestSeq.map((val, index) => {
               let picked = Cards.find((o) => o.cardUuid == val.cardId);
               return picked.imageURI;
@@ -1425,7 +1521,7 @@ export default function DealDynamic(props) {
                 bseq3,
                 bseq4,
                 bseq5,
-                // bseq6,
+                bseq6,
                 newBSeq,
                 bestseq: newBestCards,
                 newBestSeq1,
@@ -1433,12 +1529,14 @@ export default function DealDynamic(props) {
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                newBestSeq6,
                 bestPoints: val.bestPoints,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               });
               localStorage.setItem(
                 "ActivePlayer",
@@ -1458,7 +1556,7 @@ export default function DealDynamic(props) {
                   bseq3,
                   bseq4,
                   bseq5,
-                  // bseq6,
+                  bseq6,
                   newBSeq,
                   bestseq: newBestCards,
                   newBestSeq1,
@@ -1466,12 +1564,14 @@ export default function DealDynamic(props) {
                   newBestSeq3,
                   newBestSeq4,
                   newBestSeq5,
+                  newBestSeq6,
                   bestPoints: val.bestPoints,
                   isbestSeq1,
                   isbestSeq2,
                   isbestSeq3,
                   isbestSeq4,
                   isbestSeq5,
+                  isbestSeq6,
                 })
               );
             }, 1000);
@@ -1878,8 +1978,8 @@ export default function DealDynamic(props) {
     if (data !== undefined) {
       let oldInGame = JSON.parse(localStorage.getItem("InGame"));
       let ActivePlayer = JSON.parse(localStorage.getItem("ActivePlayer"));
-      let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
-      let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5;
+      let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
+      let isbestSeq1, isbestSeq2, isbestSeq3, isbestSeq4, isbestSeq5, isbestSeq6;
       let scrNo = localStorage.getItem("screenNo");
       let bestPoints = 0;
       if (oldInGame !== null && oldInGame !== undefined) {
@@ -1909,12 +2009,18 @@ export default function DealDynamic(props) {
             bestSeq5 = [...data.InGameRes.bestSequence5.cards];
             isbestSeq5 = data.InGameRes.bestSequence5.groupType;
           }
+
+          if (data.InGameRes.bestSequence6.cards !== undefined) {
+            bestSeq6 = [...data.InGameRes.bestSequence6.cards];
+            isbestSeq6 = data.InGameRes.bestSequence6.groupType;
+          }
           let newBestSeq = [];
           let newBestSeq1 = [];
           let newBestSeq2 = [];
           let newBestSeq3 = [];
           let newBestSeq4 = [];
           let newBestSeq5 = [];
+          let newBestSeq6 = [];
           if (bestSeq1 !== undefined) {
             newBestSeq.push(...bestSeq1);
             newBestSeq1 = bestSeq1.map((val, index) => {
@@ -1975,6 +2081,18 @@ export default function DealDynamic(props) {
               }
             });
           }
+          if (bestSeq6 !== undefined) {
+            newBestSeq.push(...bestSeq6);
+            newBestSeq6 = bestSeq6.map((val, index) => {
+              let picked = Cards.find((o) => o.cardUuid == val.cardId);
+              let isJoker = isJokerCard(val.cardId);
+              if (isJoker) {
+                return picked.imageURI2;
+              } else {
+                return picked.imageURI;
+              }
+            });
+          }
           if (
             val.playerId._id.toString() === localsingleid.toString() &&
             data.playerId.toString() === localsingleid.toString()
@@ -1995,11 +2113,13 @@ export default function DealDynamic(props) {
               newBestSeq3,
               newBestSeq4,
               newBestSeq5,
+              newBestSeq6,
               isbestSeq1,
               isbestSeq2,
               isbestSeq3,
               isbestSeq4,
               isbestSeq5,
+              isbestSeq6,
             });
             localStorage.setItem(
               "ActivePlayer",
@@ -2012,11 +2132,13 @@ export default function DealDynamic(props) {
                 newBestSeq3,
                 newBestSeq4,
                 newBestSeq5,
+                newBestSeq6,
                 isbestSeq1,
                 isbestSeq2,
                 isbestSeq3,
                 isbestSeq4,
                 isbestSeq5,
+                isbestSeq6,
               })
             );
             return {
@@ -2251,6 +2373,16 @@ export default function DealDynamic(props) {
                     }
                   });
 
+                  let bseq6 = val.bestSequence6.cards.map((pval, pin) => {
+                    let picked = Cards.find((o) => o.cardUuid == pval.cardId);
+                    let isJoker = isJokerCard(pval.cardId);
+                    if (isJoker) {
+                      return { img: picked.imageURI2, cardId: pval.cardId };
+                    } else {
+                      return { img: picked.imageURI, cardId: pval.cardId };
+                    }
+                  });
+
                   let newSeq = [
                     ...seq1,
                     ...seq2,
@@ -2265,14 +2397,15 @@ export default function DealDynamic(props) {
                     ...bseq3,
                     ...bseq4,
                     ...bseq5,
-                    // ...bseq6,
+                    ...bseq6,
                   ];
-                  let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5;
+                  let bestSeq1, bestSeq2, bestSeq3, bestSeq4, bestSeq5, bestSeq6;
                   let isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
-                    isbestSeq5;
+                    isbestSeq5,
+                    isbestSeq6;
                   let bestPoints = 0;
                   if (val.bestSequence1.cards !== undefined) {
                     bestSeq1 = [...val.bestSequence1.cards];
@@ -2298,12 +2431,17 @@ export default function DealDynamic(props) {
                     bestSeq5 = [...val.bestSequence5.cards];
                     isbestSeq5 = val.bestSequence5.groupType;
                   }
+                  if (val.bestSequence6.cards !== undefined) {
+                    bestSeq6 = [...val.bestSequence6.cards];
+                    isbestSeq6 = val.bestSequence6.groupType;
+                  }
                   let newBestSeq = [];
                   let newBestSeq1 = [];
                   let newBestSeq2 = [];
                   let newBestSeq3 = [];
                   let newBestSeq4 = [];
                   let newBestSeq5 = [];
+                  let newBestSeq6 = [];
                   if (bestSeq1 !== undefined) {
                     newBestSeq.push(...bestSeq1);
                     newBestSeq1 = bestSeq1.map((val, index) => {
@@ -2364,6 +2502,18 @@ export default function DealDynamic(props) {
                       }
                     });
                   }
+                  if (bestSeq6 !== undefined) {
+                    newBestSeq.push(...bestSeq6);
+                    newBestSeq6 = bestSeq6.map((val, index) => {
+                      let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                      let isJoker = isJokerCard(val.cardId);
+                      if (isJoker) {
+                        return picked.imageURI2;
+                      } else {
+                        return picked.imageURI;
+                      }
+                    });
+                  }
                   let newBestCards = newBestSeq.map((val, index) => {
                     let picked = Cards.find((o) => o.cardUuid == val.cardId);
                     return picked.imageURI;
@@ -2386,7 +2536,7 @@ export default function DealDynamic(props) {
                     bseq3,
                     bseq4,
                     bseq5,
-                    // bseq6,
+                    bseq6,
                     newBSeq,
                     bestseq: newBestCards,
                     newBestSeq1,
@@ -2394,12 +2544,14 @@ export default function DealDynamic(props) {
                     newBestSeq3,
                     newBestSeq4,
                     newBestSeq5,
+                    newBestSeq6,
                     bestPoints: val.bestPoints,
                     isbestSeq1,
                     isbestSeq2,
                     isbestSeq3,
                     isbestSeq4,
                     isbestSeq5,
+                    isbestSeq6,
                   });
                   localStorage.setItem(
                     "ActivePlayer",
@@ -2420,7 +2572,7 @@ export default function DealDynamic(props) {
                       bseq3,
                       bseq4,
                       bseq5,
-                      // bseq6,
+                      bseq6,
                       newBSeq,
                       bestseq: newBestCards,
                       newBestSeq1,
@@ -2428,12 +2580,14 @@ export default function DealDynamic(props) {
                       newBestSeq3,
                       newBestSeq4,
                       newBestSeq5,
+                      newBestSeq6,
                       bestPoints: val.bestPoints,
                       isbestSeq1,
                       isbestSeq2,
                       isbestSeq3,
                       isbestSeq4,
                       isbestSeq5,
+                      isbestSeq6,
                     })
                   );
                   return { ...val, isActive: 0 };
@@ -2779,7 +2933,7 @@ export default function DealDynamic(props) {
                             alt=""
                             className="deal-user-img"
                         /> */}
-            {dealProb && (
+            {/* {dealProb && (
               <>
                 <img src={win_meter} alt="" className="win_meter" />
                 <img src={perbg} alt="" className="perbg" />
@@ -2823,7 +2977,7 @@ export default function DealDynamic(props) {
                   <span className="winpercount">{activeWinProb}</span>%
                 </span>
               </>
-            )}
+            )} */}
             {/* {{console.log(bestSeq.length)}} */}
 
             {bestSeq.length > 0 &&
@@ -2834,16 +2988,16 @@ export default function DealDynamic(props) {
                 ) && dealProb == true &&  
                  (
                   <>
-                    <span className="pstext">Hand Sort</span>
+                    {/* <span className="pstext">Hand Sort</span> */}
               
-                    <div className="best-points-deal hand-sort-point">
-                        {activePlayerData.totalPoints / currentBoosterValue}
                         {/* bottom left perfect sort points  */}
+                    {/* <div className="best-points-deal hand-sort-point">
+                        {activePlayerData.totalPoints / currentBoosterValue}
                         <span className="tracking-in-contract-chips-deal-pts points-new">
                          <span>Pts</span> <strong>({currentBoosterValue}x)</strong>
                         </span>
                        
-                      </div>
+                      </div> */}
                
                   </>
                 )}
@@ -3027,7 +3181,7 @@ export default function DealDynamic(props) {
                               fontWeight: "500",
                               color: "#FFC961",
                               fontWeight: "bold",
-                              top
+                              // top
                             }}
                           >
                             {" "}
@@ -3115,8 +3269,8 @@ export default function DealDynamic(props) {
 
                   {(
                     activePlayerData.playerStatus === "Winner" ||
-                    activePlayerData.playerStatus === "autoWinner" ||
-                    activePlayerData.playerStatus === "validDeclaration") && (
+                    activePlayerData.playerStatus === "autoWinner" 
+                    ) && (
                     <>
                          <div className="tracking-in-contract-chips-deal">
                         {activePlayerData.totalPoints / currentBoosterValue}
@@ -3133,6 +3287,7 @@ export default function DealDynamic(props) {
               {/* <span className="tracking-in-contract-chips-deal">{activePlayerData.bestPoints}</span> */}
               {(activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared" ||
+                activePlayerData.playerStatus === "validDeclaration" ||
                   activePlayerData.playerStatus === "Dropped") && (
                   <>
                     {activePlayerData.playerStatus !== "Dropped" && (
@@ -3399,6 +3554,15 @@ export default function DealDynamic(props) {
               } shadow usercarddeal1${index + 1}`}
             />
           )}
+            {(activePlayerData.isbestSeq1 === "1" ||
+                                activePlayerData.isbestSeq1 === "2" ||
+                                activePlayerData.isbestSeq1 ===  "3") && (
+                                <img
+                                  className="highlight-sets-ps"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
         </div>
       ))}
   </div>
@@ -3433,6 +3597,15 @@ export default function DealDynamic(props) {
               } shadow usercarddeal1${index + 1}`}
             />
           )}
+                  {(activePlayerData.isbestSeq2 === "1" ||
+                                activePlayerData.isbestSeq2 === "2" ||
+                                activePlayerData.isbestSeq2 ===  "3") && (
+                                <img
+                                  className="highlight-sets-ps"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
         </div>
       ))}
   </div>
@@ -3470,6 +3643,15 @@ export default function DealDynamic(props) {
               } shadow usercarddeal1${index + 1}`}
             />
           )}
+                 {(activePlayerData.isbestSeq3 === "1" ||
+                                activePlayerData.isbestSeq3 === "2" ||
+                                activePlayerData.isbestSeq3 ===  "3") && (
+                                <img
+                                  className="highlight-sets-ps"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
         </div>
       ))}
   </div>
@@ -3507,6 +3689,15 @@ export default function DealDynamic(props) {
               } shadow usercarddeal1${index + 1}`}
             />
           )}
+                  {(activePlayerData.isbestSeq4 === "1" ||
+                                activePlayerData.isbestSeq4 === "2" ||
+                                activePlayerData.isbestSeq4 ===  "3") && (
+                                <img
+                                  className="highlight-sets-ps"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
         </div>
       ))}
   </div>
@@ -3539,6 +3730,54 @@ export default function DealDynamic(props) {
                   activePlayerData.bseq2.length +
                   activePlayerData.bseq3.length +
                   activePlayerData.bseq4.length +
+                  index +
+                  1
+                }`
+              } shadow usercarddeal1${index + 1}`}
+            />
+          )}
+                     {(activePlayerData.isbestSeq5 === "1" ||
+                                activePlayerData.isbestSeq5 === "2" ||
+                                activePlayerData.isbestSeq5 ===  "3") && (
+                                <img
+                                  className="highlight-sets-ps"
+                                  src={highlightSets}
+                                  alt=""
+                                />
+                              )}
+        </div>
+      ))}
+  </div>
+  <div className="col-auto no-gutters p-1 ps-card-position">
+    {activePlayerData.bseq6.length > 0 &&
+      activePlayerData.bseq6.map((value, index) => (
+        <div className="ins-div">
+          {activePlayerData.newBSeq.length === 14 &&
+          activePlayerData.bseq6.length - 1 === index ? (
+            <div className="roll-in-last-card">
+              <img
+                src={value.img}
+                alt=""
+                className={`usercarddealPs ${
+                  isDropCard !== null &&
+                  isDropCard == value.cardId &&
+                  `discard14`
+                } usercard14 shadow usercarddeal1${index + 1}`}
+              />
+            </div>
+          ) : (
+            <img
+              src={value.img}
+              alt=""
+              className={`usercarddealPs ${
+                isDropCard !== null &&
+                isDropCard == value.cardId &&
+                `discard${
+                  activePlayerData.bseq1.length +
+                  activePlayerData.bseq2.length +
+                  activePlayerData.bseq3.length +
+                  activePlayerData.bseq4.length +
+                  activePlayerData.bseq5.length +
                   index +
                   1
                 }`
@@ -3673,7 +3912,8 @@ export default function DealDynamic(props) {
                     <div
                       className={`flip-open-inner ${
                         (activePlayerData.playerStatus === "Declared" ||
-                          activePlayerData.playerStatus === "Winner") &&
+                          activePlayerData.playerStatus === "Winner" ||
+                          activePlayerData.playerStatus === "autoWinner") &&
                         "flipo"
                       }`}
                     >
@@ -3690,15 +3930,15 @@ export default function DealDynamic(props) {
                           alt=""
                           className={`oc shadow ${
                             isOpenCard === true
-                              ? activePlayerData.seq2.length === 0
+                              ? activePlayerData.bseq2.length === 0
                                 ? "oc2"
-                                : activePlayerData.seq3.length === 0
+                                : activePlayerData.bseq3.length === 0
                                 ? "oc3"
-                                : activePlayerData.seq4.length === 0
+                                : activePlayerData.bseq4.length === 0
                                 ? "oc4"
-                                : activePlayerData.seq5.length === 0
+                                : activePlayerData.bseq5.length === 0
                                 ? "oc5"
-                                : activePlayerData.seq6.length === 0
+                                : activePlayerData.bseq6.length === 0
                                 ? "oc6"
                                 : "oc6"
                               : ""
@@ -3947,7 +4187,7 @@ export default function DealDynamic(props) {
                                         /> */}
                       {/* <span className={`userchips user${index+1}chips`}>960</span> */}
                       <span className="userpointsdeal">
-            {activePlayerData.playerStatus === "Declared" ? (
+            {(activePlayerData.playerStatus === "Declared" || activePlayerData.playerStatus === "validDeclaration")? (
               <>
                 {/* Conditionally render loader if the player is not Dropped or Eliminated */}
                 {value.playerStatus !== "Dropped" &&
@@ -3960,7 +4200,7 @@ export default function DealDynamic(props) {
                   : value.bestPoints}{" "}
                 <span className="pts">Pts</span>
               </>
-            ) : activePlayerData.playerStatus === "validDeclaration" ||
+            ) : 
               activePlayerData.playerStatus === "Winner" ||
               activePlayerData.playerStatus === "autoWinner" ? (
               <>

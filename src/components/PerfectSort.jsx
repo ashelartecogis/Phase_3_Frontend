@@ -354,6 +354,11 @@ export default function BestSeqList(props) {
             let isJoker = isJokerCard(cval.cardId);
             return isJoker ? picked.imageURI2 : picked.imageURI;
           }),
+          bestSeq6: val?.bestSequence6?.cards?.map((cval) => {
+            let picked = Cards.find((o) => o.cardUuid === cval.cardId);
+            let isJoker = isJokerCard(cval.cardId);
+            return isJoker ? picked.imageURI2 : picked.imageURI;
+          }),
               };
       } else {
         return { ...val };
@@ -429,317 +434,145 @@ export default function BestSeqList(props) {
         <img src={CARDDEALBGBLACK} alt="" className="carddealbgblack" />
         <span className="carddealtitleperfect"></span>
         {inGame !== undefined &&
-          inGame !== null &&
-          inGame.length > 0 &&
-          inGame.map((value, index) => (
-            <>
-              {(value.playerStatus === "Dropped" ||
-                value.playerStatus === "Eliminated") && (
-                <span
-                  className={`res-drop-text d-none res-drop-text-${index + 1}`}
-                >
-                  Dropped..
+  inGame !== null &&
+  inGame.length > 0 &&
+  (() => {
+    // Check if any player is the Winner
+    const hasWinner = inGame.some(player => player.playerStatus === "Winner");
+
+    return inGame.map((value, index) => (
+      <>
+        {(value.playerStatus === "Dropped" || value.playerStatus === "Eliminated") && (
+          <span className={`res-drop-text d-none res-drop-text-${index + 1}`}>
+            Dropped..
+          </span>
+        )}
+        <div className={`cardanres cardanres-pp cardanres${index + 1} ${ (value.playerStatus === "Dropped" || value.playerStatus === "Eliminated") && "dropped-cardanres dropped-cardanres" + index}`}>
+          <img src={`${base_url}${value.playerId.shortphoto}`} alt="" className="cduser-res" />
+          <span className="cdusername-res">
+            {value.playerId.name.split(" ")[0]}
+            {latestDealNumber !== 1 && (
+              <>
+                <img src={showRank} alt="" className="showRankBestSeq" />
+                <h3 className="showRankTextBestSeq">
+                  Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
+                </h3>
+              </>
+            )}
+          </span>
+          {value.playerStatus !== "Eliminated" ? (
+            <span className="cdchips-res">
+              <img src={CHIP} alt="" className="cdchip-res" />
+              {Math.max(0, value.playerId.totalChips)}
+            </span>
+          ) : (
+            <span className="cdchips-res">
+              <img src={CHIP} alt="" className="cdchip-res" />0
+            </span>
+          )}
+          <img src={CARDDEALBG} alt="" className="carddealbgimgres" style={{ marginLeft: "-190px", marginBottom: "20px" }} />
+          
+          {value.playerStatus !== "Eliminated" && value.playerStatus !== "Dropped" && (
+            <span className="res-pts">
+              {hasWinner ? value.totalPoints : value.bestPoints}{" "}
+              <span className="res-pts-key">Pts</span>
+            </span>
+          )}
+
+          {value.playerStatus === "Dropped" && (
+            <span className="res-pts">
+              {value.totalPoints} <span className="res-pts-key">Pts</span>
+            </span>
+          )}
+
+          {(value.playerStatus === "Dropped" || value.playerStatus === "Eliminated") && (
+            <div className="allcards ps-card-position-bs">
+              {value.playerStatus === "Dropped" && (
+                <span className={`res-drop-text res-drop-text-${index + 1}`}>
+                  Dropped
                 </span>
               )}
-              <div
-                className={`cardanres cardanres-pp cardanres${index + 1} ${
-                  (value.playerStatus === "Dropped" ||
-                    value.playerStatus === "Eliminated") &&
-                  "dropped-cardanres dropped-cardanres" + index
-                }`}
-              >
-                <img
-                  src={`${base_url}${value.playerId.shortphoto}`}
-                  alt=""
-                  className="cduser-res"
-                />
-                <span className="cdusername-res">
-                  {value.playerId.name.split(" ")[0]}
-                  {latestDealNumber !== 1 && (
-                    <>
-                      <img src={showRank} alt="" className="showRankBestSeq" />
-                      <h3 className="showRankTextBestSeq">
-                        Rank {rankings.find(r => r.playerId === value.playerId)?.rank || 'N/A'}
-                      </h3> 
-                    </>
-)}
+
+              {value.playerStatus === "Eliminated" && (
+                <span className={`res-drop-text res-drop-text-${index + 1}`}>
+                  <img src={eliminatedBg} className="eliminated-img" />
+                  {data.map(player => {
+                    if (value && player._id === value.playerId._id && player.eliminationLevel > 0) {
+                      const displayLevel = getDisplayLevel(levelNumber, player.eliminationLevel);
+                      return (
+                        <h3 key={player._id} className="eliminated-text">
+                          Eliminated - Lvl {displayLevel}
+                        </h3>
+                      );
+                    }
+                    return null;
+                  })}
                 </span>
-                {value.playerStatus !== "Eliminated" ? (
-                  <span className="cdchips-res">
-                    <img src={CHIP} alt="" className="cdchip-res" />
-                   {Math.max (0, value.playerId.totalChips)}
-         
-                  </span>
-                ) : (
-                  <span className="cdchips-res">
-                    <img src={CHIP} alt="" className="cdchip-res" />0
-                  </span>
-                )}
-                <img
-                  src={CARDDEALBG}
-                  alt=""
-                  className="carddealbgimgres"
-                  style={{
-                    marginLeft: "-190px",
-                    marginBottom: "20px",
-                  }}
-                />
-                {value.playerStatus !== "Eliminated" &&
-                  value.playerStatus !== "Dropped" && (
-                    <span className="res-pts">
-                      {value.bestPoints}{" "}
-                      <span className="res-pts-key">Pts</span>
-                    </span>
-                  )}
+              )}
+              {/* Additional card images */}
+              {[...Array(12)].map((_, i) => (
+                <img key={i} src={BCM} alt="" className={`bsc-card`} />
+              ))}
+            </div>
+          )}
 
-                {value.playerStatus === "Dropped" && (
-                  <span className="res-pts">
-                    {value.totalPoints} <span className="res-pts-key">Pts</span>
-                  </span>
-                )}
+          {(value.playerStatus === "Declared" || value.playerStatus === "Rejected" || value.playerStatus === "Winner" || value.playerStatus === "autoWinner" || value.playerStatus === "validDeclaration") && (
+            <div className="allcards ps-card-position-bs">
+              {value.playerStatus === "Winner" && (
+                <span className={`res-drop-text-pp res-Winner-text-${index + 1}`}>
+                  Winner
+                </span>
+              )}
+              {value.playerStatus === "autoWinner" && (
+                <span className={`res-drop-text-pp res-Winner-text-${index + 1}`}>
+                  Auto Winner
+                </span>
+              )}
+              {value.playerStatus === "validDeclaration" && (
+                <span className={`res-drop-text-pp res-Winner-text-${index + 1}`}>
+                  Winner
+                </span>
+              )}
+              {value.playerStatus === "Declared" && (
+                <span className={`res-drop-text-pp res-declared-text-${index + 1}`}>
+                  Declared
+                </span>
+              )}
+              {value.playerStatus === "Rejected" && (
+                <span className={`res-drop-text-pp res-declared-text-${index + 1}`}>
+                  Rejected
+                </span>
+              )}
+            </div>
+          )}
 
-                {(value.playerStatus === "Dropped" ||
-                  value.playerStatus === "Eliminated") && (
-                  <div className="allcards ps-card-position-bs">
-                    {value.playerStatus === "Dropped" && (
-                      <span
-                        className={`res-drop-text res-drop-text-${index + 1}`}
-                      >
-                        Dropped
-                      </span>
-                    )}
-
-                    {value.playerStatus === "Eliminated" && (
-                      <span
-                        className={`res-drop-text res-drop-text-${index + 1}`}
-                      >
-                       <img src={eliminatedBg} className="eliminated-img" />
-                        {data.map(player => {
-        if (value && player._id === value.playerId._id && player.eliminationLevel > 0) {
-          const displayLevel = getDisplayLevel(levelNumber, player.eliminationLevel);
-
-          return (
-            <h3 key={player._id} className="eliminated-text">
-              Eliminated - Lvl {displayLevel}
-            </h3>
-          );
-        }
-        return null;
-      })}
-                      </span>
-                    )}
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
-                    <img src={BCM} alt="" className={`bsc-card`} />
+          {value.playerStatus !== "Dropped" && (
+            <div className="allcardsbestseq">
+              <div className="row">
+                {Array.from({ length: 5 }, (_, seqIndex) => (
+                  <div key={seqIndex} className="col-auto no-gutters p-1 ps-card-position">
+                    {value[`bestSeq${seqIndex + 1}`] !== undefined &&
+                      value[`bestSeq${seqIndex + 1}`].length > 0 &&
+                      value[`bestSeq${seqIndex + 1}`].map((bval, bindex) => (
+                        <div className="ins-div" key={bindex}>
+                          <img src={bval} alt="" className={`bestlistimg shadow ${bindex + 1}`} />
+                          {(value[`bestSequence${seqIndex + 1}`].groupType === "1" ||
+                            value[`bestSequence${seqIndex + 1}`].groupType === "2" ||
+                            value[`bestSequence${seqIndex + 1}`].groupType === "3") && (
+                            <img className="highlight-sets-bs" src={highlightSets} alt="" />
+                          )}
+                        </div>
+                      ))}
                   </div>
-                )}
-
-                {(value.playerStatus === "Declared" ||
-                  value.playerStatus === "Rejected" ||
-                  value.playerStatus === "Winner" ||
-                  value.playerStatus === "autoWinner" ||
-                  value.playerStatus === "validDeclaration") && (
-                  <div className="allcards ps-card-position-bs">
-                    {value.playerStatus === "Winner" && (
-                      <span
-                        className={`res-drop-text-pp res-Winner-text-${
-                          index + 1
-                        }`}
-                      >
-                        Winner
-                      </span>
-                    )}
-                    {value.playerStatus === "autoWinner" && (
-                      <span
-                        className={`res-drop-text-pp res-Winner-text-${
-                          index + 1
-                        }`}
-                      >
-                        Auto Winner
-                      </span>
-                    )}
-                    {value.playerStatus === "validDeclaration" && (
-                      <span
-                        className={`res-drop-text-pp res-Winner-text-${
-                          index + 1
-                        }`}
-                      >
-                        Winner
-                      </span>
-                    )}
-                    {value.playerStatus === "Declared" && (
-                      <span
-                        className={`res-drop-text-pp res-declared-text-${
-                          index + 1
-                        }`}
-                      >
-                        Declared
-                      </span>
-                    )}
-
-                    {value.playerStatus === "Rejected" && (
-                      <span
-                        className={`res-drop-text-pp res-declared-text-${
-                          index + 1
-                        }`}
-                      >
-                        Rejected
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                {value.playerStatus !== "Dropped" && (
-                  <div className="allcardsbestseq">
-                    <div className="row">
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq1 !== undefined &&
-                          value.bestSeq1.length > 0 &&
-                          value.bestSeq1.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence1.groupType === "1" ||
-                                value.bestSequence1.groupType === "2" ||
-                                value.bestSequence1.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq2 !== undefined &&
-                          value.bestSeq2.length > 0 &&
-                          value.bestSeq2.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence2.groupType === "1" ||
-                                value.bestSequence2.groupType === "2" ||
-                                value.bestSequence2.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq3 !== undefined &&
-                          value.bestSeq3.length > 0 &&
-                          value.bestSeq3.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence3.groupType === "1" ||
-                                value.bestSequence3.groupType === "2" ||
-                                value.bestSequence3.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq4 !== undefined &&
-                          value.bestSeq4.length > 0 &&
-                          value.bestSeq4.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence4.groupType === "1" ||
-                                value.bestSequence4.groupType === "2" ||
-                                value.bestSequence4.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq5 !== undefined &&
-                          value.bestSeq5.length > 0 &&
-                          value.bestSeq5.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence5.groupType === "1" ||
-                                value.bestSequence5.groupType === "2" ||
-                                value.bestSequence5.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                      {/* <div className="col-auto no-gutters p-1 ps-card-position">
-                        {value.bestSeq6 !== undefined &&
-                          value.bestSeq6.length > 0 &&
-                          value.bestSeq6.map((bval, bindex) => (
-                            <div className="ins-div">
-                              <img
-                                src={bval}
-                                alt=""
-                                className={`bestlistimg shadow ${bindex + 1}`}
-                              />
-                              {(value.bestSequence6.groupType === "1" ||
-                                value.bestSequence6.groupType === "2" ||
-                                value.bestSequence6.groupType === "3") && (
-                                <img
-                                  className="highlight-sets-bs"
-                                  src={highlightSets}
-                                  alt=""
-                                />
-                              )}
-                            </div>
-                          ))}
-                      </div> */}
-                    </div>
-                  </div>
-                )}
+                ))}
               </div>
-            </>
-          ))}
+            </div>
+          )}
+        </div>
+      </>
+    ));
+  })()}
+
       </div>
     </>
   );
