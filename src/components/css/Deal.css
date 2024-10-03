@@ -874,7 +874,6 @@
   -webkit-animation: jump-open-6 1s ease-in both; /* 1 second animation */
   animation: jump-open-6 1s ease-in both;
   z-index: 100000 !important;
-  opacity: 0.4 !important; /* Initial opacity */
 }
 
 
@@ -882,28 +881,24 @@
   -webkit-animation: jump-open-6 0.3s ease-in both;
   animation: jump-open-6 1s ease-in both;
   z-index: 0 !important;
-  opacity: 0.2 !important ;
 }
 
 .oc4 {
   -webkit-animation: jump-open-6 1s ease-in both;
   animation: jump-open-6 1s ease-in both;
   z-index: 0 !important;
-  opacity: 0.2 !important ;
 }
 
 .oc5 {
   -webkit-animation: jump-open-6 1s ease-in both;
   animation: jump-open-6 1s ease-in both;
   z-index: 0 !important;
-  opacity: 0.2 !important ;
 }
 
 .oc6 {
   -webkit-animation: jump-open-6 1s ease-in both;
   animation: jump-open-6 1s ease-in both;
   z-index: 0 !important;
-  opacity: 0.2 !important ;
 }
 
 @keyframes fadeOut {
@@ -4006,7 +4001,7 @@ height: 70.09px;   */
   display: flex;
   position: absolute;
   top: 138px;
-  left: 7px;
+  left: 7.4px;
   width: calc(100% - 11.5px);
   height: 5px;
   z-index: 1;
