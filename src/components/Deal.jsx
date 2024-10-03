@@ -2660,140 +2660,121 @@ export default function Deal(props) {
             isbestSeq1 = data.InGameRes.bestSequence1.groupType;
           }
 
-          if (data.InGameRes.bestSequence2.cards !== undefined) {
-            bestSeq2 = [...data.InGameRes.bestSequence2.cards];
-            isbestSeq2 = data.InGameRes.bestSequence2.groupType;
-          }
+            if (data.InGameRes.bestSequence2.cards !== undefined) {
+              bestSeq2 = [...data.InGameRes.bestSequence2.cards];
+              isbestSeq2 = data.InGameRes.bestSequence2.groupType;
+            }
 
-          if (data.InGameRes.bestSequence3.cards !== undefined) {
-            bestSeq3 = [...data.InGameRes.bestSequence3.cards];
-            isbestSeq3 = data.InGameRes.bestSequence3.groupType;
-          }
+            if (data.InGameRes.bestSequence3.cards !== undefined) {
+              bestSeq3 = [...data.InGameRes.bestSequence3.cards];
+              isbestSeq3 = data.InGameRes.bestSequence3.groupType;
+            }
 
-          if (data.InGameRes.bestSequence4.cards !== undefined) {
-            bestSeq4 = [...data.InGameRes.bestSequence4.cards];
-            isbestSeq4 = data.InGameRes.bestSequence4.groupType;
-          }
+            if (data.InGameRes.bestSequence4.cards !== undefined) {
+              bestSeq4 = [...data.InGameRes.bestSequence4.cards];
+              isbestSeq4 = data.InGameRes.bestSequence4.groupType;
+            }
 
-          if (data.InGameRes.bestSequence5.cards !== undefined) {
-            bestSeq5 = [...data.InGameRes.bestSequence5.cards];
-            isbestSeq5 = data.InGameRes.bestSequence5.groupType;
-          }
+            if (data.InGameRes.bestSequence5.cards !== undefined) {
+              bestSeq5 = [...data.InGameRes.bestSequence5.cards];
+              isbestSeq5 = data.InGameRes.bestSequence5.groupType;
+            }
 
-          if (data.InGameRes.bestSequence6.cards !== undefined) {
-            bestSeq6 = [...data.InGameRes.bestSequence6.cards];
-            isbestSeq6 = data.InGameRes.bestSequence6.groupType;
-          }
-          let newBestSeq = [];
-          let newBestSeq1 = [];
-          let newBestSeq2 = [];
-          let newBestSeq3 = [];
-          let newBestSeq4 = [];
-          let newBestSeq5 = [];
-          let newBestSeq6 = [];
-          if (bestSeq1 !== undefined) {
-            newBestSeq.push(...bestSeq1);
-            newBestSeq1 = bestSeq1.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-          if (bestSeq2 !== undefined) {
-            newBestSeq.push(...bestSeq2);
-            newBestSeq2 = bestSeq2.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-          if (bestSeq3 !== undefined) {
-            newBestSeq.push(...bestSeq3);
-            newBestSeq3 = bestSeq3.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-          if (bestSeq4 !== undefined) {
-            newBestSeq.push(...bestSeq4);
-            newBestSeq4 = bestSeq4.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-          if (bestSeq5 !== undefined) {
-            newBestSeq.push(...bestSeq5);
-            newBestSeq5 = bestSeq5.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-          if (bestSeq6 !== undefined) {
-            newBestSeq.push(...bestSeq6);
-            newBestSeq6 = bestSeq6.map((val, index) => {
-              let picked = Cards.find((o) => o.cardUuid == val.cardId);
-              let isJoker = isJokerCard(val.cardId);
-              if (isJoker) {
-                return picked.imageURI2;
-              } else {
-                return picked.imageURI;
-              }
-            });
-          }
-
-          if (val._id === data.InGameRes._id) {
-            // console.log("id:", data.InGameRes._id, val._id)
-            if (scrNo >= 1 && scrNo <= 6) {
-              // console.log("best seq ui:", scrNo)
-              // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
-              let newBestCards = newBestSeq.map((val, index) => {
+            if (data.InGameRes.bestSequence6.cards !== undefined) {
+              bestSeq6 = [...data.InGameRes.bestSequence6.cards];
+              isbestSeq6 = data.InGameRes.bestSequence6.groupType;
+            }
+            let newBestSeq = [];
+            let newBestSeq1 = [];
+            let newBestSeq2 = [];
+            let newBestSeq3 = [];
+            let newBestSeq4 = [];
+            let newBestSeq5 = [];
+            let newBestSeq6 = [];
+            if (bestSeq1 !== undefined) {
+              newBestSeq.push(...bestSeq1);
+              newBestSeq1 = bestSeq1.map((val, index) => {
                 let picked = Cards.find((o) => o.cardUuid == val.cardId);
-                return picked.imageURI;
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
               });
+            }
+            if (bestSeq2 !== undefined) {
+              newBestSeq.push(...bestSeq2);
+              newBestSeq2 = bestSeq2.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
+            if (bestSeq3 !== undefined) {
+              newBestSeq.push(...bestSeq3);
+              newBestSeq3 = bestSeq3.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
+            if (bestSeq4 !== undefined) {
+              newBestSeq.push(...bestSeq4);
+              newBestSeq4 = bestSeq4.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
+            if (bestSeq5 !== undefined) {
+              newBestSeq.push(...bestSeq5);
+              newBestSeq5 = bestSeq5.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
+            if (bestSeq6 !== undefined) {
+              newBestSeq.push(...bestSeq6);
+              newBestSeq6 = bestSeq6.map((val, index) => {
+                let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                let isJoker = isJokerCard(val.cardId);
+                if (isJoker) {
+                  return picked.imageURI2;
+                } else {
+                  return picked.imageURI;
+                }
+              });
+            }
 
-              setActivePlayerData({
-                ...ActivePlayer,
-                bestPoints: data.InGameRes.bestPoints,
-                bestseq: newBestCards,
-                newBestSeq1,
-                newBestSeq2,
-                newBestSeq3,
-                newBestSeq4,
-                newBestSeq5,
-                newBestSeq6,
-                isbestSeq1,
-                isbestSeq2,
-                isbestSeq3,
-                isbestSeq4,
-                isbestSeq5,
-                isbestSeq6,
-              });
-              localStorage.setItem(
-                "ActivePlayer",
-                JSON.stringify({
+            if (val._id === data.InGameRes._id) {
+              // console.log("id:", data.InGameRes._id, val._id)
+              if (scrNo >= 1 && scrNo <= 6) {
+                // console.log("best seq ui:", scrNo)
+                // newBestSeq = bestSeq1 !== undefined || bestSeq2 !== undefined || bestSeq3 !== undefined || bestSeq4!== undefined ? [...bestSeq1, ...bestSeq2, ...bestSeq3, ...bestSeq4] : []
+                let newBestCards = newBestSeq.map((val, index) => {
+                  let picked = Cards.find((o) => o.cardUuid == val.cardId);
+                  return picked.imageURI;
+                });
+
+                setActivePlayerData({
                   ...ActivePlayer,
                   bestPoints: data.InGameRes.bestPoints,
                   bestseq: newBestCards,
@@ -2809,25 +2790,44 @@ export default function Deal(props) {
                   isbestSeq4,
                   isbestSeq5,
                   isbestSeq6,
-                })
-              );
+                });
+                localStorage.setItem(
+                  "ActivePlayer",
+                  JSON.stringify({
+                    ...ActivePlayer,
+                    bestPoints: data.InGameRes.bestPoints,
+                    bestseq: newBestCards,
+                    newBestSeq1,
+                    newBestSeq2,
+                    newBestSeq3,
+                    newBestSeq4,
+                    newBestSeq5,
+                    newBestSeq6,
+                    isbestSeq1,
+                    isbestSeq2,
+                    isbestSeq3,
+                    isbestSeq4,
+                    isbestSeq5,
+                    isbestSeq6,
+                  })
+                );
+                return {
+                  ...data.InGameRes,
+                };
+              }
               return {
-                ...data.InGameRes,
+                ...val,
               };
+            } else {
+              return { ...val };
             }
-            return {
-              ...val,
-            };
-          } else {
-            return { ...val };
-          }
-        });
-        //   console.log("new best:", newInGame);
-        setInGame(newInGame);
-        localStorage.setItem("InGame", JSON.stringify(newInGame));
+          });
+          //   console.log("new best:", newInGame);
+          setInGame(newInGame);
+          localStorage.setItem("InGame", JSON.stringify(newInGame));
+        }
       }
-    }
-  }, []);
+    }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -3111,7 +3111,10 @@ export default function Deal(props) {
                
                   </>
                 )}
-                    {(activePlayerData.playerStatus === "Active" ||
+
+
+                    {(!(showImage || dealShowImage) &&  
+                    activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared" ||
                 activePlayerData.playerStatus === "Winner" ||
                
@@ -3135,6 +3138,8 @@ export default function Deal(props) {
                     )}
                   </>
                 )}
+
+                
               {(activePlayerData.playerStatus === "Active" ||
                 activePlayerData.playerStatus === "Declared") && (
                 <span className="plstext d-none">Player's Sort</span>
